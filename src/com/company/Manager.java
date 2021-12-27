@@ -1,6 +1,7 @@
 package com.company;
+import Allimplement.*;
+import Services.*;
 import Tools.AccountChecker;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 /**
@@ -10,10 +11,10 @@ import java.security.NoSuchAlgorithmException;
  * @since 12.7.2021
  * */
 public class Manager {
-    AuthenticationService authenticationService=new AuthenticationService();
-    TweetingService tweetingService=new TweetingService();
-    ObserverService observerService=new ObserverService();
-    TimeLineService timeLineService=new TimeLineService();
+    AuthenticationServiceImp authenticationService=new AuthenticationServiceImp();
+    TweetingServiceImp tweetingService=new TweetingServiceImp();
+    ObserverServiceImp observerService=new ObserverServiceImp();
+    TimeLineServiceImp timeLineService=new TimeLineServiceImp();
     /**
      *
      * @throws AuthenticationService.InvalidChoiceException check
@@ -25,7 +26,7 @@ public class Manager {
     public void start() throws AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, IOException, AccountChecker.IdException {
         if(authenticationService.begin()==1)
         {
-            tweetingService.addAcount(authenticationService.connectASTS());
+            tweetingService.addAccount(authenticationService.connectASTS());
             go();
         }
     }
@@ -40,7 +41,7 @@ public class Manager {
        {
            case 6:
            {
-               timeLineService.addAcount(authenticationService.connectASTS());
+               timeLineService.addAccount(authenticationService.connectASTS());
                int nxt= timeLineService.begin();
                if(nxt==-1)
                    go();
@@ -48,7 +49,7 @@ public class Manager {
            }
            case 7:
            {
-               observerService.addAcount(authenticationService.connectASTS());
+               observerService.addAccount(authenticationService.connectASTS());
                int nxt=observerService.begin();
                if(nxt==4)
                    go();

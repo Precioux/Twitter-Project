@@ -12,25 +12,15 @@ import java.security.NoSuchAlgorithmException;
  * @since 12.7.2021
  * */
 public class Service {
+    /*
     Account account=new Account();
 
     /**
      *
      * @param account data
      */
-    protected void addAcount(Account account)
-    {
-        this.account=account;
-    }
-
-    /**
-     *
-     * @return next choice
-     * @throws IOException check
-     * @throws AuthenticationService.InvalidChoiceException check
-     * @throws AccountChecker.BioException check
-     * @throws NoSuchAlgorithmException check
-     * @throws AccountChecker.IdException check
-     */
-     protected int begin() throws IOException, AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, AccountChecker.IdException, AccountChecker.BioException { return 1 ;};
+   // protected void addAcount(Account account)
+   // {
+      //  this.account=account;
+   // }
 }

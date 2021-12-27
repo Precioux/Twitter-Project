@@ -1,5 +1,6 @@
-package com.company;
+package Allimplement;
 import Tools.TweetTool;
+import Services.*;
 import materials.Account;
 
 import java.io.IOException;
@@ -11,14 +12,19 @@ import java.util.Scanner;
  * @version 1.0
  * @since 12.7.2021
  * */
-public class TweetingService extends Service {
+public class TweetingServiceImp implements TweetingService {
+    Account account=new Account();
     private int next=0;
+    public void addAccount(Account account) {
+        this.account=account;
+    }
+
     /**
      *
      * @return reflex to manager
      * @throws IOException check
      */
-    protected int begin() throws IOException {
+    public int begin() throws IOException {
 
         TweetTool tweetTool=new TweetTool();
         tweetTool.addAccount(account);
@@ -80,7 +86,7 @@ public class TweetingService extends Service {
                                 else
                                 {
                                     if(choice==8)
-                                       changeNext(8);
+                                        changeNext(8);
                                 }
                             }
                         }
@@ -88,22 +94,22 @@ public class TweetingService extends Service {
                 }
             }
         }
-    return next;
+        return next;
     }
 
     /**
      *
      * @param next next
      */
-    private void changeNext(int next){
+    public void changeNext(int next){
         this.next=next;
     }
     /**
      *
      * @return account ID
      */
-   protected Account connectTSOS()
-   {
-       return account;
-   }
+    public Account connectTSOS()
+    {
+        return account;
+    }
 }
