@@ -1,5 +1,8 @@
 package com.company;
 
+import Tools.AccountChecker;
+import materials.Account;
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 /**
@@ -29,5 +32,5 @@ public class Service {
      * @throws NoSuchAlgorithmException check
      * @throws AccountChecker.IdException check
      */
-     protected int begin() throws IOException, AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, AccountChecker.IdException { return 1 ;};
+     protected int begin() throws IOException, AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, AccountChecker.IdException, AccountChecker.BioException { return 1 ;};
 }

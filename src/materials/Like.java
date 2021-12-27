@@ -1,4 +1,4 @@
-package com.company;
+package materials;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,7 +14,7 @@ public class Like extends TweetMaterial{
      *
      * @param str data
      */
-    protected void makeDDU(String str)
+    public void makeDDU(String str)
     {
        File f=new File("./likes/" + publisher.ID + "/" + str+"/ddu");
        try {

@@ -1,4 +1,6 @@
-package com.company;
+package Tools;
+import materials.Retweet;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,15 +9,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 /**
- * This class defines coomment Tool
+ * This class defines Retweet Tool
  * @author Samin Mahdipour
  * @version 1.0
  * @since 12.7.2021
  * */
-public class CommentTool extends Tool{
+public class RetweetTool extends Tool{
     /**
      *
-     * @param str addres
+     * @param str address
      * @return code
      */
     private String giveT(String str) {
@@ -36,23 +38,23 @@ public class CommentTool extends Tool{
 
     /**
      *
-     * @param Tweet data
+     * @param likedTweet data
      */
-    public void add(String Tweet) {
+    public void add(String likedTweet) {
         try {
             LocalDateTime n = LocalDateTime.now();
             String strl = n.toString();
             String str= giveT(strl);
-            String Name = "./comments/" + account.ID + "/" + str;
+            String Name = "./retweets/" + account.ID + "/" + str;
             Path path1 = Paths.get(Name);
             Files.createDirectories(path1);
-            Comment comment = new Comment();
-            comment.addPublisher(account);
+            Retweet retweeT = new Retweet();
+            retweeT.addPublisher(account);
             LocalDate now = LocalDate.now();
-            comment.addDate(now);
-            comment.addData(Tweet);
-            comment.makeDDU(str);
-            System.out.println("Commented Successfully!");
+            retweeT.addDate(now);
+            retweeT.addData(likedTweet);
+            retweeT.makeDDU(str);
+            System.out.println("Retweeted Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package com.company;
+package Tools;
 
 import java.io.*;
 import java.util.Scanner;
@@ -50,7 +50,7 @@ public class ObserverTool extends Tool {
     /**
      * profile
      */
-    protected void profile()
+    public void profile()
     {
         System.out.println("Enter ID of user you want to view his/her profile:");
         Scanner scanner=new Scanner(System.in);
@@ -165,7 +165,7 @@ public class ObserverTool extends Tool {
     /**
      * unfollow
      */
-    protected void unfollow()
+    public void unfollow()
     {
         boolean check=false;
         while (!check) {
@@ -204,7 +204,7 @@ public class ObserverTool extends Tool {
     /**
      * follow
      */
-    protected void follow(){
+    public void follow(){
         boolean check=false;
         while (!check) {
             try {

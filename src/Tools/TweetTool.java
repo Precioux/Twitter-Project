@@ -1,4 +1,6 @@
-package com.company;
+package Tools;
+import materials.Tweet;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -119,7 +121,7 @@ public class TweetTool extends Tool {
      *
      * @throws IOException check
      */
-    protected void ret() throws IOException {
+    public void ret() throws IOException {
         boolean check = false;
         File folder = null;
         while (!check) {
@@ -174,7 +176,7 @@ public class TweetTool extends Tool {
     /**
      * add a comment
      */
-    protected void comment()
+    public void comment()
     {
         boolean check = false;
         File folder = null;
@@ -234,7 +236,7 @@ public class TweetTool extends Tool {
      * lika a tweet
      * @throws IOException check
      */
-    protected void like() throws IOException {
+    public void like() throws IOException {
         boolean check = false;
         File folder = null;
         while (!check) {
@@ -289,7 +291,7 @@ public class TweetTool extends Tool {
     /**
      * remove a tweet
      */
-  protected void remove()
+    public void remove()
   {
       boolean check=false;
       File folder=null;

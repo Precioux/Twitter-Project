@@ -1,7 +1,9 @@
 package com.company;
+import Tools.AccountChecker;
+import materials.Account;
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.MissingFormatArgumentException;
 import java.util.Scanner;

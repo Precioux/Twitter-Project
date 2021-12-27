@@ -1,5 +1,7 @@
 package com.company;
 
+import Tools.AccountChecker;
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 /**
@@ -10,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  * */
 public class Main {
 
-    public static void main(String[] args) throws AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, IOException, AccountChecker.IdException {
+    public static void main(String[] args) throws AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, IOException, AccountChecker.IdException, AccountChecker.BioException {
       Twitter twitter=new Twitter();
       twitter.manager.start();
 

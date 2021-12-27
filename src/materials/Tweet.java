@@ -1,4 +1,4 @@
-package com.company;
+package materials;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,7 +18,7 @@ public class Tweet extends TweetMaterial{
      * @param str data
      * @throws IOException check
      */
-    protected void makeDDU(String str) throws IOException {
+    public void makeDDU(String str) throws IOException {
         path=str;
         File ddu=new File(path+"\\ddu");
         FileWriter fw=null;

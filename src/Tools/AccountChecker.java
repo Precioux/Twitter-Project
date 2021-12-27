@@ -1,4 +1,6 @@
-package com.company;
+package Tools;
+import materials.Account;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -204,6 +206,7 @@ public class AccountChecker {
     }
     /**
      * check account data
+     * @return
      */
     public Account checkInfo()
     {

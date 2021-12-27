@@ -1,4 +1,4 @@
-package com.company;
+package materials;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +16,7 @@ public class Comment extends TweetMaterial{
      *
      * @param str address
      */
-    protected void makeDDU(String str)
+    public void makeDDU(String str)
     {
         File f=new File("./comments/" + publisher.ID + "/" + str+"/ddu");
         try {

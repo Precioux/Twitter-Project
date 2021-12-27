@@ -1,4 +1,4 @@
-package com.company;
+package materials;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,12 +16,12 @@ import java.util.Scanner;
  * @since 12.7.2021
  * */
 public class Account {
-    protected String fname;
-    protected String lname;
-    protected String ID;
-    private String password;
-    protected LocalDate birthdate;
-    protected LocalDate joindate;
+    public String fname;
+    public String lname;
+    public String ID;
+    public String password;
+    public LocalDate birthdate;
+    public LocalDate joindate;
     public String bio;
     /**
      *

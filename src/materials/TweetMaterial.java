@@ -1,5 +1,4 @@
-package com.company;
-
+package materials;
 import java.io.IOException;
 import java.time.LocalDate;
 /**
@@ -19,7 +18,7 @@ public class TweetMaterial {
      *
      * @param publisher data
      */
-    protected void addPublisher(Account publisher)
+    public void addPublisher(Account publisher)
     {
         this.publisher=publisher;
     }
@@ -28,7 +27,7 @@ public class TweetMaterial {
      * @throws Tweet.OFException checker
      * @param data adder
      */
-    protected void addData(String data)
+    public void addData(String data)
     {
         try {
             if(data.length()<=256)
@@ -44,7 +43,7 @@ public class TweetMaterial {
      *
      * @param date adder
      */
-    protected void addDate(LocalDate date)
+    public void addDate(LocalDate date)
     {
         this.date=date;
     }

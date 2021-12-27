@@ -1,4 +1,7 @@
-package com.company;
+package Tools;
+
+import materials.Account;
+
 /**
  * This class defines tool
  * @author Samin Mahdipour
@@ -15,7 +18,7 @@ public class Tool {
      *
      * @param account data
      */
-    protected void addAccount(Account account)
+    public void addAccount(Account account)
     {
         this.account=account;
     }

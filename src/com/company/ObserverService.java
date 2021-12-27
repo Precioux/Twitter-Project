@@ -1,4 +1,7 @@
 package com.company;
+import Tools.ObserverTool;
+import Tools.Tool;
+
 import java.util.Scanner;
 /**
  * This class defines Observer Service
