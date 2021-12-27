@@ -45,7 +45,7 @@ public class CommentTool extends Tool{
             LocalDateTime n = LocalDateTime.now();
             String strl = n.toString();
             String str= giveT(strl);
-            String Name = "./comments/" + account.ID + "/" + str;
+            String Name = "./Data/comments/" + account.ID + "/" + str;
             Path path1 = Paths.get(Name);
             Files.createDirectories(path1);
             Comment comment = new Comment();

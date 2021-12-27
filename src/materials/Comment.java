@@ -18,7 +18,7 @@ public class Comment extends TweetMaterial{
      */
     public void makeDDU(String str)
     {
-        File f=new File("./comments/" + publisher.ID + "/" + str+"/ddu");
+        File f=new File("./Data/comments/" + publisher.ID + "/" + str+"/ddu");
         try {
                 System.out.println("Enter you comment: ");
                 Scanner scanner=new Scanner(System.in).useDelimiter("\n");

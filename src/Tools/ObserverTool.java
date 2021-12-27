@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ObserverTool extends Tool {
     public class userNotFoundException extends Exception {}
     public class noFollowingException extends Exception{}
-    File folder = new File("./Users/");
+    File folder = new File("./Data/Users/");
     protected String[] users = folder.list();
 
     /**
@@ -60,7 +60,7 @@ public class ObserverTool extends Tool {
             if(!c)
                 throw new userNotFoundException();
             else {
-                File userfolder = new File("./Tweets/" + u + "/");
+                File userfolder = new File("./Data/Tweets/" + u + "/");
                 if (!userfolder.exists())
                     throw new FileNotFoundException();
                 else {
@@ -115,7 +115,7 @@ public class ObserverTool extends Tool {
         FileReader fr=null;
         String twt="";
         try {
-            fr=new FileReader("./Tweets/" + u + "/"+d+"/ddu");
+            fr=new FileReader("./Data/Tweets/" + u + "/"+d+"/ddu");
             Scanner scanner=new Scanner(fr).useDelimiter("\n");
             twt+=scanner.next();
             twt+="  @";
@@ -144,7 +144,7 @@ public class ObserverTool extends Tool {
         FileReader fr=null;
         String twt="";
         try {
-            fr=new FileReader("./Tweets/" + u + "/"+d+"/ddu");
+            fr=new FileReader("./Data/Tweets/" + u + "/"+d+"/ddu");
             Scanner scanner=new Scanner(fr).useDelimiter("\n");
             String rubbish=scanner.next();
             twt+="@";
@@ -177,7 +177,7 @@ public class ObserverTool extends Tool {
                 if (!c)
                     throw new userNotFoundException();
                 else {
-                    File you = new File("./Users/" + account.ID + "/following");
+                    File you = new File("./Data/Users/" + account.ID + "/following");
                     if (you.length() == 0)
                         throw new noFollowingException();
                     else {
@@ -215,8 +215,8 @@ public class ObserverTool extends Tool {
                 if(!c)
                     throw new userNotFoundException();
                 else {
-                    File you = new File("./Users/" + account.ID + "/following");
-                    File tofollow = new File("./Users/" + user + "/followers");
+                    File you = new File("./Data/Users/" + account.ID + "/following");
+                    File tofollow = new File("./Data/Users/" + user + "/followers");
                     if(!you.exists() || !tofollow.exists())
                         throw new FileNotFoundException();
                     else

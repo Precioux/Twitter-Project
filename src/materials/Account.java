@@ -101,11 +101,11 @@ public class Account {
     public void createDirectory()
     {
         try {
-            String d = "./Tweets/" + ID;
-            String d2 = "./Users/" + ID;
-            String d3 = "./comments/" + ID+"/";
-            String d4 = "./likes/" + ID+"/";
-            String d5 = "./retweets/" + ID+"/";
+            String d = "./Data/Tweets/" + ID;
+            String d2 = "./Data/Users/" + ID;
+            String d3 = "./Data/comments/" + ID+"/";
+            String d4 = "./Data/likes/" + ID+"/";
+            String d5 = "./Data/retweets/" + ID+"/";
             Path path4 = Paths.get(d4);
             Files.createDirectories(path4);
             Path path5 = Paths.get(d5);
@@ -130,8 +130,8 @@ public class Account {
     {
 
         try {
-            File followers = new File("./Users/" + ID + "/followers");
-            File following = new File("./Users/" + ID + "/following");
+            File followers = new File("./Data/Users/" + ID + "/followers");
+            File following = new File("./Data/Users/" + ID + "/following");
             FileWriter fw1=new FileWriter(followers);
             fw1.write("");
             FileWriter fw2=new FileWriter(following);

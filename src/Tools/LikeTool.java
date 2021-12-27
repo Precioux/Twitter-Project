@@ -46,7 +46,7 @@ public class LikeTool extends Tool{
             LocalDateTime n = LocalDateTime.now();
             String strl = n.toString();
             String str= giveT(strl);
-            String Name = "./likes/" + account.ID + "/" + str;
+            String Name = "./Data/likes/" + account.ID + "/" + str;
             Path path1 = Paths.get(Name);
             Files.createDirectories(path1);
             Like like = new Like();

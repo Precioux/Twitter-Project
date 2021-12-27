@@ -32,7 +32,7 @@ public class FollowEditor {
     private void unfollowed(String user)
     {
         try {
-         File tounfollow = new File("./Users/" + user + "/followers");
+         File tounfollow = new File("./Data/Users/" + user + "/followers");
         if(!tounfollow.exists())
             throw new FileNotFoundException();
         else
@@ -70,7 +70,7 @@ public class FollowEditor {
     {
         boolean check=false;
       try{
-                    File you = new File("./Users/" + account+ "/following");
+                    File you = new File("./Data/Users/" + account+ "/following");
                     if(!you.exists())
                         throw new FileNotFoundException();
                     else
@@ -107,8 +107,8 @@ public class FollowEditor {
      */
     private void collectData()
         {
-            File dataFollowing=new File("./Users/"+account+"/following");
-            File dataFollowers=new File("./Users/"+account+"/followers");
+            File dataFollowing=new File("./Data/Users/"+account+"/following");
+            File dataFollowers=new File("./Data/Users/"+account+"/followers");
             try {
                 FileReader followers = new FileReader(dataFollowers);
                 FileReader followings = new FileReader(dataFollowing);
@@ -135,8 +135,8 @@ public class FollowEditor {
      */
     private void collectData2(String user)
     {
-        File dataFollowing=new File("./Users/"+user+"/following");
-        File dataFollowers=new File("./Users/"+user+"/followers");
+        File dataFollowing=new File("./Data/Users/"+user+"/following");
+        File dataFollowers=new File("./Data/Users/"+user+"/followers");
         try {
             FileReader followers = new FileReader(dataFollowers);
             FileReader followings = new FileReader(dataFollowing);

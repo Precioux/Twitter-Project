@@ -48,7 +48,7 @@ public class TweetTool extends Tool {
             LocalDateTime n = LocalDateTime.now();
             String strl = n.toString();
             String str= giveT(strl);
-            String Name = "./Tweets/" + account.ID + "/" + str;
+            String Name = "./Data/Tweets/" + account.ID + "/" + str;
             Path path1 = Paths.get(Name);
             Files.createDirectories(path1);
             Scanner scanner = new Scanner(System.in).useDelimiter("\n");
@@ -76,7 +76,7 @@ public class TweetTool extends Tool {
       FileReader fr=null;
       String twt="";
       try {
-          fr=new FileReader("./Tweets/" + account.ID + "/"+d+"/ddu");
+          fr=new FileReader("./Data/Tweets/" + account.ID + "/"+d+"/ddu");
           Scanner scanner=new Scanner(fr).useDelimiter("\n");
           String rubbbish=scanner.next();
           rubbbish+=scanner.next();
@@ -126,7 +126,7 @@ public class TweetTool extends Tool {
         File folder = null;
         while (!check) {
             try {
-                folder = new File("./retweets/" + account.ID + "/");
+                folder = new File("./Data/retweets/" + account.ID + "/");
                 if (!folder.exists())
                     throw new FileNotFoundException();
                 else {
@@ -140,7 +140,7 @@ public class TweetTool extends Tool {
                         if (choice > tf.length)
                             throw new InvalidChoiceException();
                         else {
-                            File l = new File("./Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
+                            File l = new File("./Data/Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
                             FileReader fr = new FileReader(l);
                             if (!l.exists())
                                 throw new FileNotFoundException();
@@ -182,7 +182,7 @@ public class TweetTool extends Tool {
         File folder = null;
         while (!check) {
             try {
-                folder = new File("./Tweets/" + account.ID + "/");
+                folder = new File("./Data/Tweets/" + account.ID + "/");
                 if (!folder.exists())
                     throw new FileNotFoundException();
                 else {
@@ -196,7 +196,7 @@ public class TweetTool extends Tool {
                         if (choice > tf.length)
                             throw new InvalidChoiceException();
                         else {
-                            File l = new File("./Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
+                            File l = new File("./Data/Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
                             FileReader fr = new FileReader(l);
                             if (!l.exists())
                                 throw new FileNotFoundException();
@@ -241,7 +241,7 @@ public class TweetTool extends Tool {
         File folder = null;
         while (!check) {
             try {
-                folder = new File("./Tweets/" + account.ID + "/");
+                folder = new File("./Data/Tweets/" + account.ID + "/");
                 if (!folder.exists())
                     throw new FileNotFoundException();
                 else {
@@ -255,7 +255,7 @@ public class TweetTool extends Tool {
                         if (choice > tf.length)
                             throw new InvalidChoiceException();
                         else {
-                            File l = new File("./Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
+                            File l = new File("./Data/Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
                             FileReader fr = new FileReader(l);
                             if (!l.exists())
                                 throw new FileNotFoundException();
@@ -297,7 +297,7 @@ public class TweetTool extends Tool {
       File folder=null;
       while(!check) {
           try {
-              folder=new File("./Tweets/" + account.ID + "/");
+              folder=new File("./Data/Tweets/" + account.ID + "/");
               if (!folder.exists())
                   throw new FileNotFoundException();
               else {
@@ -314,7 +314,7 @@ public class TweetTool extends Tool {
                       if (choice > nn)
                           throw new InvalidChoiceException();
                       else {
-                          File rmv = new File("./Tweets/" + account.ID + "/" + tf[choice - 1]);
+                          File rmv = new File("./Data/Tweets/" + account.ID + "/" + tf[choice - 1]);
                           if (!rmv.exists())
                               throw new FileNotFoundException();
                           else {
@@ -348,7 +348,7 @@ public class TweetTool extends Tool {
     protected void profile(){
         File folder=null;
         try {
-            folder=new File("./Tweets/" + account.ID + "/");
+            folder=new File("./Data/Tweets/" + account.ID + "/");
             if (!folder.exists())
                 throw new FileNotFoundException();
             else {

@@ -20,7 +20,7 @@ public class AccountChecker {
     public class IdException extends Exception {}
     public class BioException extends Exception {}
     public class WrongPasswordException extends Exception {}
-    private File folder=new File("./Users/");
+    private File folder=new File("./Data/Users/");
     private String[] users=folder.list();
 
     /**
@@ -31,7 +31,7 @@ public class AccountChecker {
     public void addData(Account account,String id)
     {
         try {
-            File f = new File("./Users/" + id+"/accountData");
+            File f = new File("./Data/Users/" + id+"/accountData");
             FileReader fr = new FileReader(f);
             account.addID(id);
             Scanner scanner = new Scanner(fr).useDelimiter("\n");
@@ -177,7 +177,7 @@ public class AccountChecker {
         boolean ans=false;
         try {
 
-            chp=new File("./Users/"+id+"/accountData");
+            chp=new File("./Data/Users/"+id+"/accountData");
             fileReader=new FileReader(chp);
             if(!chp.exists())
                 throw new FileNotFoundException();
@@ -251,7 +251,7 @@ public class AccountChecker {
      * @throws IOException check
      */
     private boolean toFile(Account account) throws IOException {
-        File user = new File("./Users/" + account.ID+"/accountData");
+        File user = new File("./Data/Users/" + account.ID+"/accountData");
         FileWriter fw=null;
         try {
             fw = new FileWriter(user);

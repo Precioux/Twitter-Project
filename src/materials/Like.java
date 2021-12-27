@@ -16,7 +16,7 @@ public class Like extends TweetMaterial{
      */
     public void makeDDU(String str)
     {
-       File f=new File("./likes/" + publisher.ID + "/" + str+"/ddu");
+       File f=new File("./Data/likes/" + publisher.ID + "/" + str+"/ddu");
        try {
                FileWriter fileWriter = new FileWriter(f);
                fileWriter.write(toString());

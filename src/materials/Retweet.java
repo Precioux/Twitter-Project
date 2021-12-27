@@ -16,7 +16,7 @@ public class Retweet extends TweetMaterial{
      */
     public void makeDDU(String str)
     {
-        File f=new File("./retweets/" + publisher.ID + "/" + str+"/ddu");
+        File f=new File("./Data/retweets/" + publisher.ID + "/" + str+"/ddu");
         try {
                 FileWriter fileWriter = new FileWriter(f);
                 fileWriter.write(toString());

@@ -119,11 +119,11 @@ public class TimeLineServiceImp implements TimeLineService {
      */
     public void getTweets(String follower)
     {
-        File folder=new File("./Tweets/"+follower+"/");
+        File folder=new File("./Data/Tweets/"+follower+"/");
         try {
             String[] twts = folder.list();
             for (String t : twts) {
-                File twt = new File("./Tweets/" + follower + "/" + t + "/ddu");
+                File twt = new File("./Data/Tweets/" + follower + "/" + t + "/ddu");
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 String twet =scanner.next();
@@ -149,11 +149,11 @@ public class TimeLineServiceImp implements TimeLineService {
      */
     public void getComments(String follower)
     {
-        File folder=new File("./comments/"+follower+"/");
+        File folder=new File("./Data/comments/"+follower+"/");
         try {
             String[] twts = folder.list();
             for (String t : twts) {
-                File twt = new File("./comments/" + follower + "/" + t + "/ddu");
+                File twt = new File("./Data/comments/" + follower + "/" + t + "/ddu");
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 String twet =scanner.next();
@@ -175,11 +175,11 @@ public class TimeLineServiceImp implements TimeLineService {
      */
     public void getRetweets(String follower)
     {
-        File folder=new File("./retweets/"+follower+"/");
+        File folder=new File("./Data/retweets/"+follower+"/");
         try {
             String[] twts = folder.list();
             for (String t : twts) {
-                File twt = new File("./retweets/" + follower + "/" + t + "/ddu");
+                File twt = new File("./Data/retweets/" + follower + "/" + t + "/ddu");
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 String twet =scanner.next();
@@ -201,11 +201,11 @@ public class TimeLineServiceImp implements TimeLineService {
      */
     public void getLikes(String follower)
     {
-        File folder=new File("./likes/"+follower+"/");
+        File folder=new File("./Data/likes/"+follower+"/");
         try {
             String[] twts = folder.list();
             for (String t : twts) {
-                File twt = new File("./likes/" + follower + "/" + t + "/ddu");
+                File twt = new File("./Data/likes/" + follower + "/" + t + "/ddu");
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 String twet =scanner.next();
@@ -226,7 +226,7 @@ public class TimeLineServiceImp implements TimeLineService {
      */
     public void findFollowings()
     {
-        File dataFollowings=new File("./Users/"+account.ID+"/following");
+        File dataFollowings=new File("./Data/Users/"+account.ID+"/following");
         try {
             FileReader followings = new FileReader(dataFollowings);
             Scanner sfollowings = new Scanner(followings);
