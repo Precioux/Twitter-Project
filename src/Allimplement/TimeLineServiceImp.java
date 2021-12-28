@@ -9,10 +9,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 /**
- * This class defines TimeLine Service
+ * This class defines TimeLine Service Imp
  * @author Samin Mahdipour
- * @version 1.0
- * @since 12.7.2021
+ * @version 3.0
+ * @since 12.28.2021
  * */
 public class TimeLineServiceImp implements TimeLineService {
     public class noFollowerException  extends Exception {}

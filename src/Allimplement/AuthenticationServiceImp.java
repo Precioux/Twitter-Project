@@ -10,10 +10,10 @@ import java.util.MissingFormatArgumentException;
 import java.util.Scanner;
 
 /**
- * This class defines AuthenticationService
+ * This class defines AuthenticationServiceImp
  * @author Samin Mahdipour
- * @version 1.0
- * @since 12.7.2021
+ * @version 3.0
+ * @since 12.28.2021
  * */
 public class AuthenticationServiceImp implements AuthenticationService {
     private int choice;

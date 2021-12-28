@@ -3,8 +3,13 @@ package com.company;
 import Services.*;
 import Tools.AccountChecker;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
+import java.util.Properties;
+
 /**
  *  Twitter
  * @author Samin Mahdipour
@@ -14,8 +19,7 @@ import java.security.NoSuchAlgorithmException;
 public class Main {
 
     public static void main(String[] args) throws AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, IOException, AccountChecker.IdException, AccountChecker.BioException {
-      Twitter twitter=new Twitter();
-      twitter.manager.start();
-
+        Twitter twitter = new Twitter();
+        twitter.manager.start();
     }
 }

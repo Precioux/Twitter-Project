@@ -7,10 +7,10 @@ import materials.Account;
 
 import java.util.Scanner;
 /**
- * This class defines Observer Service
+ * This class defines Observer Service Imp
  * @author Samin Mahdipour
- * @version 1.0
- * @since 12.7.2021
+ * @version 3.0
+ * @since 12.28.2021
  * */
 public class ObserverServiceImp implements ObserverService {
     Account account=new Account();

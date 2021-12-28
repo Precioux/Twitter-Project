@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 /**
- * This class defines Tweeting Service
+ * This class defines Tweeting Service Imp
  * @author Samin Mahdipour
- * @version 1.0
- * @since 12.7.2021
+ * @version 3.0
+ * @since 12.28.2021
  * */
 public class TweetingServiceImp implements TweetingService {
     Account account=new Account();
