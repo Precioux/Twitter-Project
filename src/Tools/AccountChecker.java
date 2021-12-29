@@ -1,5 +1,7 @@
 package Tools;
-import materials.Account;
+import com.google.gson.Gson;
+import entity.Account;
+import requestsFormats.LogIn;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -16,6 +18,7 @@ import java.util.Scanner;
  * @since 12.7.2021
  * */
 public class AccountChecker {
+    public boolean rslt=false;
     private Account account=new Account();
     public class IdException extends Exception {}
     public class BioException extends Exception {}
@@ -73,6 +76,7 @@ public class AccountChecker {
      * @throws NoSuchAlgorithmException for checking algorithm
      */
     public Account getInfo() throws NoSuchAlgorithmException, IdException, BioException, IOException {
+
         Scanner input=new Scanner(System.in);
         System.out.println("First Name: ");
         String fname = input.next();
@@ -126,8 +130,10 @@ public class AccountChecker {
         }
         account.addBio(bio);
         account.createDirectory();
-        if(toFile(account))
-              System.out.println("Your account created successfully!\nWelcome to the Twitter "+account.fname+"!");
+        if(toFile(account)) {
+            System.out.println("Your account created successfully!\nWelcome to the Twitter " + account.fname + "!");
+            rslt=true;
+        }
         else System.out.println("There is something wrong!");
 
         return connectAAC();
@@ -208,20 +214,14 @@ public class AccountChecker {
      * check account data
      * @return
      */
-    public Account checkInfo()
+    public Account checkInfo(String jData)
     {
-        Scanner scanner=new Scanner(System.in);
-        String id="";
-        String p="";
-        boolean check=false;
-        while (!check) {
+        Gson gson=new Gson();
+        LogIn logIn=gson.fromJson(jData,LogIn.class);
+        String id=logIn.getId();
+        String p=logIn.getPassword();
+        System.out.println("CheckInfo: "+id+" "+p);
             try {
-               id="";
-               p="";
-               System.out.println("Enter ID: ");
-                id += scanner.next();
-                System.out.println("Enter Password: ");
-                p += scanner.next();
                 if (!idFinder(id)) {
                     throw new FileNotFoundException();
                 }
@@ -229,7 +229,7 @@ public class AccountChecker {
                     if (!checkPass(id,p))
                     throw new WrongPasswordException();
                     else {
-                        check=true;
+                        rslt=true;
                         System.out.println("Welcome back!");
                     }
                 }
@@ -240,7 +240,6 @@ public class AccountChecker {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
         addData(account,id);
         return connectAAC();
     }

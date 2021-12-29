@@ -17,7 +17,7 @@ public class PropertyTool {
      */
     public void add(String string,String num) {
         try {
-            File file = new File("./Config/P.properties");
+            File file = new File("./Config/propertyClient.properties");
             InputStream inputStream = new FileInputStream(file);
             Properties properties = new Properties();
             properties.load(inputStream);

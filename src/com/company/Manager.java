@@ -1,16 +1,12 @@
 package com.company;
-import Allimplement.*;
-import Services.*;
-import Tools.AccountChecker;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
+
 /**
  * This class defines manager
  * @author Samin Mahdipour
  * @version 1.0
  * @since 12.7.2021
  * */
-public class Manager {
+public class Manager {/*
     AuthenticationServiceImp authenticationService=new AuthenticationServiceImp();
     TweetingServiceImp tweetingService=new TweetingServiceImp();
     ObserverServiceImp observerService=new ObserverServiceImp();
@@ -23,7 +19,7 @@ public class Manager {
      * @throws IOException check
      * @throws AccountChecker.IdException check
      */
-    public void start() throws AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, IOException, AccountChecker.IdException {
+   /* public void start() throws AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, IOException, AccountChecker.IdException {
         if(authenticationService.begin()==1)
         {
             tweetingService.addAccount(authenticationService.connectASTS());
@@ -35,7 +31,7 @@ public class Manager {
      *
      * @throws IOException check
      */
-   public void go() throws IOException {
+  /* public void go() throws IOException {
        int next=tweetingService.begin();
        switch (next)
        {
@@ -62,3 +58,4 @@ public class Manager {
        }
    }
 }
+*/}

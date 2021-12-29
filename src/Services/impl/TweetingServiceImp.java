@@ -1,10 +1,9 @@
-package Allimplement;
+package Services.impl;
 import Tools.TweetTool;
 import Services.*;
-import materials.Account;
+import entity.Account;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Scanner;
 /**
  * This class defines Tweeting Service Imp

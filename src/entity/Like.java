@@ -1,4 +1,4 @@
-package materials;
+package entity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,7 +9,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 12.7.2021
  * */
-public class Like extends TweetMaterial{
+public class Like extends TweetEntity {
     /**
      *
      * @param str data

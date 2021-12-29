@@ -1,5 +1,5 @@
 package Tools;
-import materials.Retweet;
+import entity.Retweet;
 
 import java.io.IOException;
 import java.nio.file.Files;

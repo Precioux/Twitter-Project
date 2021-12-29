@@ -1,5 +1,5 @@
 package Tools;
-import materials.Comment;
+import entity.Comment;
 
 import java.io.IOException;
 import java.nio.file.Files;

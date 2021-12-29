@@ -1,10 +1,5 @@
 package com.company;
 
-import Tools.AccountChecker;
-import materials.Account;
-
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 /**
  * This class defines service
  * @author Samin Mahdipour

@@ -1,6 +1,6 @@
 package Tools;
 
-import materials.Like;
+import entity.Like;
 
 import java.io.IOException;
 import java.nio.file.Files;

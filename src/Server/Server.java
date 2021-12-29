@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.io.*;
 import java.net.*;
 import java.time.LocalDate;
+import java.util.Properties;
 import java.util.Scanner;
 import static java.lang.System.*;
 
@@ -17,7 +18,8 @@ import static java.lang.System.*;
  */
 public class Server {
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(1000);
+        ServerSocket serverSocket = new ServerSocket(getPort());
+
 
         while (true)
         {
@@ -30,7 +32,8 @@ public class Server {
                 PrintStream printStream=new PrintStream(socket.getOutputStream());
 
                 out.println("attaching client handler");
-                Thread thread=new ClientHandler(socket,bufferedReader,printStream);
+                ClientHandler clientHandler=new ClientHandler(socket,bufferedReader,printStream);
+                Thread thread=new Thread(clientHandler);
                 thread.start();
             }
             catch (Exception e){
@@ -39,5 +42,19 @@ public class Server {
             }
         }
     }
-
+    public static int getPort()
+    {
+        String port="";
+        try {
+            InputStream inputStream=new FileInputStream("./Config/propertyServer.properties");
+            Properties properties=new Properties();
+            properties.load(inputStream);
+            port= properties.getProperty("port");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Integer.parseInt(port);
+    }
 }

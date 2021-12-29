@@ -1,6 +1,6 @@
 package Tools;
 
-import materials.Account;
+import entity.Account;
 
 /**
  * This class defines tool

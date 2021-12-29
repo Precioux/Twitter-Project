@@ -1,4 +1,4 @@
-package materials;
+package entity;
 import java.io.IOException;
 import java.time.LocalDate;
 /**
@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * @version 1.0
  * @since 12.7.2021
  * */
-public class TweetMaterial {
+public class TweetEntity {
     public Account publisher=new Account();
     protected String path="";
     protected String data="";

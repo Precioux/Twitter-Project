@@ -1,0 +1,51 @@
+package Services.impl;
+import Services.*;
+import Tools.AccountChecker;
+import entity.Account;
+
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.InputMismatchException;
+
+/**
+ * This class defines AuthenticationServiceImp
+ * @author Samin Mahdipour
+ * @version 3.0
+ * @since 12.28.2021
+ * */
+public class AuthenticationServiceImp implements AuthenticationService {
+    private int choice;
+    public class InvalidChoiceException extends Exception {}
+    private AccountChecker accountChecker=new AccountChecker();
+    Account account=new Account();
+
+    /**
+     * add account
+     * @param account data
+     */
+    public void addAccount(Account account) {
+        this.account=account;
+    }
+    public int begin(int choice,String jData) throws InputMismatchException, Services.AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, AccountChecker.IdException, IOException {
+        int next=0;
+        if(choice==2) {
+            addAccount(accountChecker.getInfo());
+
+        }
+        else {
+            addAccount(accountChecker.checkInfo(jData));
+        }
+      if(accountChecker.rslt)
+          next=1;
+      else next=-1;
+      return next;
+    }
+    /**
+     *
+     * @return account
+     */
+    public Account connectASTS()
+    {
+        return account;
+    }
+}

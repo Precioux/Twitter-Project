@@ -1,10 +1,8 @@
 package Services;
-import Tools.TweetTool;
-import materials.Account;
+import entity.Account;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Scanner;
+
 /**
  * This class defines Tweeting Service
  * @author Samin Mahdipour

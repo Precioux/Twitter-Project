@@ -1,18 +1,15 @@
-package materials;
+package entity;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
+
 /**
  * This class defines Tweet
  * @author Samin Mahdipour
  * @version 1.0
  * @since 12.7.2021
  * */
-public class Tweet extends TweetMaterial{
+public class Tweet extends TweetEntity {
     /**
      *
      * @param str data

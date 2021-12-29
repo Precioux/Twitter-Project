@@ -1,12 +1,11 @@
 package Services;
 import Tools.AccountChecker;
-import materials.Account;
+import entity.Account;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.InputMismatchException;
-import java.util.MissingFormatArgumentException;
-import java.util.Scanner;
+
 /**
  * This class defines AuthenticationService
  * @author Samin Mahdipour
@@ -27,7 +26,7 @@ public interface AuthenticationService {
      * @throws InputMismatchException check choice(Integer)
      * @throws InvalidChoiceException check choice(1 or 2)
      */
-    public int begin() throws InputMismatchException, InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, AccountChecker.IdException, IOException ;
+    public int begin(int choice,String jData) throws InputMismatchException, InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, AccountChecker.IdException, IOException ;
     /**
      *
      * @return account

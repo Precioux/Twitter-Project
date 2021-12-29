@@ -20,6 +20,6 @@ public class Main {
 
     public static void main(String[] args) throws AuthenticationService.InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, IOException, AccountChecker.IdException, AccountChecker.BioException {
         Twitter twitter = new Twitter();
-        twitter.manager.start();
+       // twitter.manager.start();
     }
 }
