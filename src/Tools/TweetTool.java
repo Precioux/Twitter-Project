@@ -2,7 +2,6 @@ package Tools;
 import com.google.gson.Gson;
 import entity.Tweet;
 import requestsFormats.Comment;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +12,7 @@ import java.util.Scanner;
 /**
  * This class defines Tweet Tool
  * @author Samin Mahdipour
- * @version 1.0
+ * @version 3.0
  * @since 12.7.2021
  * */
 public class TweetTool extends Tool {
@@ -52,16 +51,12 @@ public class TweetTool extends Tool {
             String Name = "./Data/Tweets/" + account.ID + "/" + str;
             Path path1 = Paths.get(Name);
             Files.createDirectories(path1);
-          //  Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-       //     System.out.println("Go On:");
-         //   String t = scanner.next();
             Tweet tweet = new Tweet();
             tweet.addPublisher(account);
             LocalDate now = LocalDate.now();
             tweet.addDate(now);
             tweet.addData(t);
             tweet.makeDDU(Name);
-           // System.out.println("Tweeted Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,7 +114,7 @@ public class TweetTool extends Tool {
       return action;
     }
     /**
-     *
+     *@return result
      * @throws IOException check
      */
     public int ret(String t) throws IOException {
@@ -167,6 +162,7 @@ public class TweetTool extends Tool {
     }
 
     /**
+     * @return result
      * add a comment
      */
     public int comment(String jData)
@@ -222,6 +218,7 @@ public class TweetTool extends Tool {
     }
 
     /**
+     * @return result
      * lika a tweet
      * @throws IOException check
      */
@@ -237,12 +234,6 @@ public class TweetTool extends Tool {
                     if (tf.length == 0)
                         throw new noTweetException();
                     else {
-//                        System.out.println("Enter index of tweet you want to like: ");
-//                        Scanner scanner = new Scanner(System.in);
-//                        int choice = scanner.nextInt();
-//                        if (choice > tf.length)
-//                            throw new InvalidChoiceException();
-//                        else {
                         int choice = findTweet(t);
                         if (choice == -1) {
                               type=998;
@@ -266,7 +257,6 @@ public class TweetTool extends Tool {
                             type=0;
                         }
                         fr.close();
-                        //  }
                     }
                     }
                 }
@@ -291,6 +281,7 @@ return type;
        return ans;
    }
     /**
+     * @return result
      * remove a tweet
      */
     public int remove(String t)
@@ -309,13 +300,7 @@ return type;
                       throw new noTweetException();
                   }
                  else {
-                      // System.out.println("Enter index of tweet you want to remove: ");
-                      //Scanner scanner = new Scanner(System.in);
-                      //int choice = scanner.nextInt();
 
-//                      if (choice > nn)
-//                          throw new InvalidChoiceException();
-//                      else {
                       int choice = findTweet(t);
                       if (choice == -1)
                           type = 998;
@@ -328,18 +313,15 @@ return type;
                           if (check)
                               type=0;
                       }
-                      // }
                   }
                   }
               }
           } catch (FileNotFoundException e) {
-              //System.out.println("File does not found");
             type=999;
           }
          catch (IOException e) {
               e.printStackTrace();
           } catch (noTweetException e) {
-          //    System.out.println("No tweet to remove!");
               type=5;
           }
           return type;
@@ -364,10 +346,6 @@ return type;
                 for (int i = 0; i < n; i++)
                     twts[i] = readTweet(tf[i]);
                 int i=1;
-//                    for (String t:twts) {
-//                        System.out.println(i+"- "+t);
-//                        i++;
-//                    }
                 }
             }
         } catch (FileNotFoundException e) {
