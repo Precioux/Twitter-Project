@@ -10,7 +10,7 @@ public class ConsoleViewServiceImp implements ConsoleViewService {
     public void print( String Response)
     {
 
-        System.out.println(Response);
+        System.out.println("ConsolseView: "+Response);
 
     }
 }

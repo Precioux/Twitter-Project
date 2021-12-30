@@ -24,6 +24,7 @@ import java.security.NoSuchAlgorithmException;
  * This class defines clientHandler
  */
 public class ClientHandler implements Runnable {
+    boolean logFlag=false;
     final BufferedReader bufferedReader;
     final PrintStream printStream;
     final Socket socket;
@@ -43,8 +44,9 @@ public class ClientHandler implements Runnable {
         String response="";
         while (true) {
             try {
-
+                System.out.println("Got to clientHandler");
                 String str = bufferedReader.readLine();
+                System.out.println("clh rqst: "+str);
                 System.out.println("clienthandler reads: "+str);
                 Request clientRequest=toRequest(str);
                 System.out.println("client sent "+clientRequest.method+" "+clientRequest.ParameterValue);
@@ -56,28 +58,67 @@ public class ClientHandler implements Runnable {
                     break;
                 }
                 else {
-                    if(clientRequest.method.equals("logIn"))
+                    if(clientRequest.method.equals("logIn") && logFlag==false)
                     {
+                        response="";
                         Response response1=new Response();
                         System.out.println("clh: "+clientRequest.ParameterValue);
                         int rslt=authenticationServiceImp.begin(1,clientRequest.ParameterValue);
-                        if(rslt==1) {
+                        System.out.println("clh :"+rslt);
+                        if(rslt==0) {
                             response1.addResult("LoggedIn successfully!");
                             response1.setTik();
+                            logFlag=true;
                             response += jsoNtool.toJSON(response1);
                         }
                         else
                         {
-                            if(rslt==-1)
+                            if(rslt==1 || rslt==2)
                             {
+                                response="";
+                                System.out.println("Wrong result: "+rslt);
                                 Response response2=new Response();
                                 response2.addResult("LogIn Failed!");
-                                Error error=new Error("LogIn Failure","0");
+                                Error error=new Error();
+                                error.errorSearch(rslt);
                                 response2.addError(error);
                                 response += jsoNtool.toJSON(response2);
                             }
                         }
-                        System.out.println(response);
+                        System.out.println("ClientHandler final res: "+response);
+                    }
+                    else
+                    {
+                        if(clientRequest.method.equals("signUp") && logFlag==false)
+                        {
+                            response="";
+                            Response response1=new Response();
+                            System.out.println("clh: "+clientRequest.ParameterValue);
+                            int rslt=authenticationServiceImp.begin(2,clientRequest.ParameterValue);
+                            System.out.println("clh :"+rslt);
+                            if(rslt==0)
+                            {
+                                response1.addResult("Your Account Successfully created!");
+                                response1.setTik();
+                                logFlag=true;
+                                response+=jsoNtool.toJSON(response1);
+                            }
+                            else
+                            {
+                                if(rslt==3 || rslt==4)
+                                {
+                                    response="";
+                                    System.out.println("Wrong result: "+rslt);
+                                    Response response2=new Response();
+                                    response2.addResult("SignUp Failed!");
+                                    Error error=new Error();
+                                    error.errorSearch(rslt);
+                                    response2.addError(error);
+                                    response += jsoNtool.toJSON(response2);
+                                }
+                            }
+                            System.out.println("ClientHandler final res: "+response);
+                        }
                     }
                 }
 

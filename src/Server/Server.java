@@ -37,7 +37,7 @@ public class Server {
                 thread.start();
             }
             catch (Exception e){
-                socket.close();
+              //  socket.close();
                 e.printStackTrace();
             }
         }

@@ -9,10 +9,17 @@ import Services.impl.CommandPerserServiceImp;
 import Services.impl.ConnectionServiceImp;
 import Services.impl.ConsoleViewServiceImp;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import entity.Account;
 import entity.Response;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -32,6 +39,7 @@ public class Client {
 
             while (true)
             {
+                System.out.println("logFlag: "+logFlag);
                 if(logFlag) {
                     System.out.println("\nAvailable choices: logOut, exit");
                     clientRequest = scanner.next();
@@ -47,20 +55,43 @@ public class Client {
                 }
                 else
                 {
-                    System.out.println("Log in first!");
-                    String request=CommandPerserServiceImp.logIn();
+                    System.out.println("1-SignIn\n2-SignUp");
+                    int s=scanner.nextInt();
+                    if(s==1)
+                    {
+                    String request=commandPerserService.logIn();
+                    System.out.println("req: "+request);
                     String response=connectionService.send(request);
+                    System.out.println("res: "+response);
                     consoleView.print(response);
                     Gson gson=new Gson();
                     Response response1=gson.fromJson(response,Response.class);
                     if(response1.validity)
                         logFlag=true;
-                }
-            }
+                    }
+                    else
+                    {
+                        if(s==2)
+                        {
+                            String request=commandPerserService.SignUp();
+                            System.out.println("req: "+request);
+                            String response=connectionService.send(request);
+                            System.out.println("res: "+response);
+                            consoleView.print(response);
+                            Gson gson=new Gson();
+                            Response response1=gson.fromJson(response,Response.class);
+                            if(response1.validity)
+                                logFlag=true;
+                        }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+                        }
+                    }
+                }
+            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            noSuchAlgorithmException.printStackTrace();
         }
+
+
     }
     public static int getPort()
     {

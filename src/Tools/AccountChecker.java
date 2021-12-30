@@ -2,6 +2,7 @@ package Tools;
 import com.google.gson.Gson;
 import entity.Account;
 import requestsFormats.LogIn;
+import resultFormats.Result;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -75,68 +76,40 @@ public class AccountChecker {
      * @throws BioException check bio
      * @throws NoSuchAlgorithmException for checking algorithm
      */
-    public Account getInfo() throws NoSuchAlgorithmException, IdException, BioException, IOException {
+    public String getInfo(String jData) throws NoSuchAlgorithmException, IdException, BioException, IOException {
+        String ans="";
+        int type=0;
+        Gson gson=new Gson();
+        System.out.println("Gotten account : "+jData);
+        Account sentAccount = gson.fromJson(jData,Account.class);
+        try {
 
-        Scanner input=new Scanner(System.in);
-        System.out.println("First Name: ");
-        String fname = input.next();
-        account.addFirstName(fname);
-        System.out.println("Last Name: ");
-        String lname = input.next();
-        account.addLastName(lname);
-        System.out.println("ID: ");
-        String ID="";
-        int flag=0;
-        while(flag==0) {
-            try {
-                ID="";
-                ID += input.next();
-                if (checkID(ID))
-                    flag = 1;
-                else throw new IdException();
-            } catch (IdException e) {
-                System.err.println("This ID is taken, Choose another one!");
+            if(!checkID(sentAccount.ID))
+            {
+                throw new IdException();
             }
-        }
-        account.addID(ID);
-        System.out.println("Birthdate:  (yyyy-mm-dd)" );
-        int y,d,m;
-        y=input.nextInt();
-        m=input.nextInt();
-        d=input.nextInt();
-        LocalDate bd= LocalDate.of(y,m,d);
-        account.addBdate(bd);
-        System.out.println("Password: ");
-        String password= input.next();
-        account.addPassword(toHash(password));
-        LocalDate l=LocalDate.now();
-        account.addjDate(l);
-        System.out.println("Bio: (256 characters only!)");
-        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-        String bio="";
-        int flagb=0;
-        while (flagb==0)
+            else {
+                System.out.println("Gotten bio : "+sentAccount.bio);
+                if (!checkBio(sentAccount.bio))
+                    throw new BioException();
+            }
+
+        } catch (IdException e) {
+           ans+="This ID is taken,Choose another one!";
+           type=3;
+        }catch (BioException e)
         {
-            try {
-                bio="";
-               bio += scanner.next();
-                if (checkBio(bio))
-                    flagb = 1;
-                else throw new BioException();
-            }
-            catch (BioException e){
-                System.err.println("More than 256 characters!");
-            }
+            ans+="bio problem: More than 256 characters!";
+            type=4;
         }
-        account.addBio(bio);
-        account.createDirectory();
-        if(toFile(account)) {
-            System.out.println("Your account created successfully!\nWelcome to the Twitter " + account.fname + "!");
+        if(type==0) {
+            sentAccount.createDirectory();
             rslt=true;
+            toFile(sentAccount);
+            ans+=gson.toJson(sentAccount);
         }
-        else System.out.println("There is something wrong!");
-
-        return connectAAC();
+        Result result=new Result(type,ans);
+        return gson.toJson(result);
 
     }
 
@@ -214,8 +187,11 @@ public class AccountChecker {
      * check account data
      * @return
      */
-    public Account checkInfo(String jData)
+    public String checkInfo(String jData)
     {
+        String ans="";
+        String total="";
+        int type=0;
         Gson gson=new Gson();
         LogIn logIn=gson.fromJson(jData,LogIn.class);
         String id=logIn.getId();
@@ -230,18 +206,34 @@ public class AccountChecker {
                     throw new WrongPasswordException();
                     else {
                         rslt=true;
-                        System.out.println("Welcome back!");
                     }
                 }
             } catch (FileNotFoundException e) {
-                System.out.println("No user with given ID,try again");
+                ans+="No user with given ID,try again";
+                type=1;
             } catch (WrongPasswordException e) {
-                System.out.println("Username and Password don't match!,try again");
+                ans+="Username and Password don't match!,try again";
+                type=2;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        addData(account,id);
-        return connectAAC();
+            if(type==0)
+            {
+                addData(account,id);
+                ans+=gson.toJson(account);
+                Result logInResult = new Result(type, ans);
+                total+=gson.toJson(logInResult);
+            }
+            else
+            {
+                if(type==1 || type==2) {
+                    Result logInResult = new Result(type, ans);
+                    total+=gson.toJson(logInResult);
+                }
+            }
+            System.out.println("AC type: "+type);
+        return total;
+
     }
 
     /**
@@ -290,12 +282,10 @@ public class AccountChecker {
      */
     private boolean checkBio(String bio)
     {
-
         if(bio.length()<=256)
             return true;
         else return false;
     }
-
     /**
      *
      * @param password data
@@ -312,31 +302,32 @@ public class AccountChecker {
      * @return bytes
      * @throws NoSuchAlgorithmException for checking algorithm
      */
-        public static byte[] getSHA(String input) throws NoSuchAlgorithmException
-        {
-            // Static getInstance method is called with hashing SHA
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            return md.digest(input.getBytes(StandardCharsets.UTF_8));
-        }
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
+    {
+        // Static getInstance method is called with hashing SHA
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        return md.digest(input.getBytes(StandardCharsets.UTF_8));
+    }
 
     /**
      *
      * @param hash bytes
      * @return string
      */
-        public static String toHexString(byte[] hash)
+    public static String toHexString(byte[] hash)
+    {
+
+        BigInteger number = new BigInteger(1, hash);
+
+        StringBuilder hexString = new StringBuilder(number.toString(16));
+
+        while (hexString.length() < 32)
         {
-
-            BigInteger number = new BigInteger(1, hash);
-
-            StringBuilder hexString = new StringBuilder(number.toString(16));
-
-            while (hexString.length() < 32)
-            {
-                hexString.insert(0, '0');
-            }
-
-            return hexString.toString();
+            hexString.insert(0, '0');
         }
+
+        return hexString.toString();
+    }
+
 
 }
