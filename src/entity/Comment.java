@@ -8,21 +8,18 @@ import java.util.Scanner;
 /**
  * This class defines comment
  * @author Samin Mahdipour
- * @version 1.0
+ * @version 3.0
  * @since 12.7.2021
  * */
 public class Comment extends TweetEntity {
     /**
-     *
+     * @param cmt comment
      * @param str address
      */
     public void makeDDU(String str,String cmt)
     {
         File f=new File("./Data/comments/" + publisher.ID + "/" + str+"/ddu");
         try {
-              //  System.out.println("Enter you comment: ");
-                //Scanner scanner=new Scanner(System.in).useDelimiter("\n");
-              //  String cmt=scanner.next();
                 FileWriter fileWriter = new FileWriter(f);
                 fileWriter.write(toString()+cmt+"  on  " +data);
                 fileWriter.close();
