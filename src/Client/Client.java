@@ -41,7 +41,7 @@ public class Client {
             {
                 System.out.println("logFlag: "+logFlag);
                 if(logFlag) {
-                    System.out.println("\nAvailable choices: tweet, removeTweet, like, socialize, logOut, exit");
+                    System.out.println("\nAvailable choices: tweet, removeTweet, comment, like, socialize, logOut, exit");
                     clientRequest = scanner.next();
                     if (clientRequest.equals("exit")) {
                         System.out.println("Closing this connection : " + socket);

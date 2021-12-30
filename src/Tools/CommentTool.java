@@ -40,7 +40,7 @@ public class CommentTool extends Tool{
      *
      * @param Tweet data
      */
-    public void add(String Tweet) {
+    public void add(String Tweet,String com) {
         try {
             LocalDateTime n = LocalDateTime.now();
             String strl = n.toString();
@@ -53,7 +53,7 @@ public class CommentTool extends Tool{
             LocalDate now = LocalDate.now();
             comment.addDate(now);
             comment.addData(Tweet);
-            comment.makeDDU(str);
+            comment.makeDDU(str,com);
             System.out.println("Commented Successfully!");
         } catch (IOException e) {
             e.printStackTrace();

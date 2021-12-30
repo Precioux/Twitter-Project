@@ -201,7 +201,7 @@ public class TweetTool extends Tool {
                                 twt+=scanner1.next();
                                 CommentTool commentTool=new CommentTool();
                                 commentTool.addAccount(account);
-                                commentTool.add(twt);
+                                commentTool.add(twt,c.comment);
                                 type=0;
                             }
                             fr.close();

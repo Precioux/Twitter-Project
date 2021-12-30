@@ -33,7 +33,7 @@ public class ObserverTool extends Tool {
     {
         CommentTool commentTool=new CommentTool();
         commentTool.addAccount(account);
-        commentTool.add(Tweet);
+        //commentTool.add(Tweet);
     }
 
     /**

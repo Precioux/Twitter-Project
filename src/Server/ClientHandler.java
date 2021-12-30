@@ -273,7 +273,38 @@ public class ClientHandler implements Runnable {
                                 {
                                     ForTweetingService forTweetingService=new ForTweetingService(5,clientRequest.ParameterValue);
                                     int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
-
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult("Commented SuccessFully!");
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+                                    }
+                                    else
+                                    {
+                                        if(rslt==-1)
+                                        {
+                                            response="";
+                                            Response response1=new Response();
+                                            response1.addResult("Failed to comment!");
+                                            response+=jsoNtool.toJSON(response1);
+                                        }
+                                        else
+                                        {
+                                            if(rslt==8 || rslt==999 || rslt==998)
+                                            {
+                                                response="";
+                                                System.out.println("Wrong result: "+rslt);
+                                                Response response2=new Response();
+                                                response2.addResult("commenting Failed!");
+                                                Error error=new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                    }
                                     break;
                                 }
                             }
