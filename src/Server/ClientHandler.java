@@ -515,7 +515,6 @@ public class ClientHandler implements Runnable {
                                         } else {
                                             if (rslt == 11) {
                                                 response = "";
-                                                System.out.println("Wrong result: " + rslt);
                                                 Response response2 = new Response();
                                                 response2.addResult("TimeLine loading Failed!");
                                                 Error error = new Error();

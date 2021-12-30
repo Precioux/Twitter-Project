@@ -1,5 +1,4 @@
 package Services.impl;
-
 import Services.CommandPerserService;
 import Tools.JSONtool;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,23 +8,38 @@ import entity.Request;
 import requestsFormats.Comment;
 import requestsFormats.ForOther;
 import requestsFormats.LogIn;
-
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.Scanner;
-
+/**
+ * This class defines command perser service
+ * @author Samin Mahdipour
+ * @version 3.0
+ * @since 12.30.2021
+ * */
 public class CommandPerserServiceImp implements CommandPerserService {
     static Scanner scanner=new Scanner(System.in);
     static Scanner scanner1=new Scanner(System.in).useDelimiter("\n");
     static JSONtool jsonTool=new JSONtool();
+
+    /**
+     * timeline request
+     * @return request
+     */
     public static String timeLine()
     {
         Request request=new Request("timeLine","timeline","");
         return jsonTool.toJSON(request);
     }
+
+    /**
+     *
+     * @param who data
+     * @return request
+     */
     public static String action(String who)
     {
         String f="";
@@ -43,19 +57,16 @@ public class CommandPerserServiceImp implements CommandPerserService {
                 {
                     System.out.println("Enter your comment ");
                     String comment=scanner1.next();
-                    System.out.println("You have chosen to comment "+comment+" on "+c+"th tweet of "+who);
                     forOther=new ForOther(c,who,2,comment);
                     break;
                 }
                 case "Like":
                 {
-                    System.out.println("You have chosen to like"+c+"th tweet of "+who);
                     forOther=new ForOther(c,who,1,"");
                     break;
                 }
                 case "Retweet":
                 {
-                    System.out.println("You have chosen to ret" +c+"th tweet of "+who);
                     forOther=new ForOther(c,who,3,"");
                     break;
                 }
@@ -66,6 +77,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
         else f+="";
         return f;
     }
+
+    /**
+     * request for profile
+     * @return request
+     */
     public static String profile()
     {
         System.out.println("Enter ID of user you intend to view: ");
@@ -73,6 +89,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("profile","view "+fid,fid);
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for unfollow
+     * @return request
+     */
     public static String unfollow()
     {
         System.out.println("Enter ID of user you intend to unfollow: ");
@@ -80,6 +101,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("unfollow","unfollowing "+fid,fid);
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for follow
+     * @return request
+     */
     public static String follow()
     {
         System.out.println("Enter ID of user you intend to follow: ");
@@ -87,6 +113,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("follow","following "+fid,fid);
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for comment
+     * @return request
+     */
     public static String comment()
     {
         System.out.println("Enter tweet you intend to comment: ");
@@ -97,6 +128,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("comment","to comment",jsonTool.toJSON(comment1));
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for retweet
+     * @return request
+     */
     public static String retweet()
     {
         System.out.println("Enter tweet you intend to retweet: ");
@@ -104,6 +140,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("retweet","to retweet",tweet);
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for like
+     * @return request
+     */
     public static String like()
     {
         System.out.println("Enter tweet you intend to like: ");
@@ -111,6 +152,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("like","to like",tweet);
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for remove
+     * @return request
+     */
     public static String remove()
     {
         System.out.println("Enter tweet you intend to remove: ");
@@ -118,6 +164,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("remove","removing",tweet);
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for tweet
+     * @return request
+     */
     public static String tweet()
     {
         System.out.println("Enter tweet: ");
@@ -126,10 +177,21 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("tweet","tweeting",tweet);
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for logOut
+     * @return request
+     */
     public static String logOut(){
         Request request=new Request("logOut","loggingOut","");
         return jsonTool.toJSON(request);
     }
+
+    /**
+     * request for logIn
+     * @return request
+     * @throws JsonProcessingException exception
+     */
     public static String logIn() throws JsonProcessingException {
         System.out.println("ID: ");
         String id=scanner.next();
@@ -139,6 +201,12 @@ public class CommandPerserServiceImp implements CommandPerserService {
         Request request=new Request("logIn","logging In",jsonTool.toJSON(login));
         return jsonTool.toJSON(request);
     }
+
+    /**
+     *
+     * @return request for sign up
+     * @throws NoSuchAlgorithmException
+     */
    public static String SignUp() throws NoSuchAlgorithmException {
        Account account=new Account();
        System.out.println("First Name: ");
@@ -168,7 +236,6 @@ public class CommandPerserServiceImp implements CommandPerserService {
        account.addBio(bio);
        Gson gson=new Gson();
        Request request=new Request("signUp","to Sign up",gson.toJson(account));
-       System.out.println("CPS 2 : "+gson.toJson(request));
   return gson.toJson(request);
    }
     /**
