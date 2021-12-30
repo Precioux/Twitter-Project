@@ -59,7 +59,6 @@ public class ObserverTool extends Tool {
     public int profileForAction(String jData)
     {
         ForOther forOther=gson.fromJson(jData,ForOther.class);
-        System.out.println("This is profileA : "+forOther);
         int type=-1;
         String u=forOther.owner;
         try {
@@ -247,26 +246,30 @@ public class ObserverTool extends Tool {
     public int follow(String who){
        int type=-1;
             try {
-                String user =who;
-                boolean c=isUser(user);
-                if(!c)
+                String user = who;
+                boolean c = isUser(user);
+                if (!c)
                     throw new userNotFoundException();
                 else {
-                    File you = new File("./Data/Users/" + account.ID + "/following");
-                    File tofollow = new File("./Data/Users/" + user + "/followers");
-                    if(!you.exists() || !tofollow.exists())
+                    boolean isFollowing = searchFF(user, 0, account.ID);
+                    boolean isFollower = searchFF(account.ID, 1, user);
+                    if ((isFollower == false && isFollowing == false) || (isFollowing==false && isFollower==true)){
+                        File you = new File("./Data/Users/" + account.ID + "/following");
+                        File tofollow = new File("./Data/Users/" + user + "/followers");
+                    if (!you.exists() || !tofollow.exists())
                         throw new FileNotFoundException();
-                    else
-                    {
-                        FileWriter fw1=new FileWriter(you,true);
-                        FileWriter fw2=new FileWriter(tofollow,true);
-                        fw1.write(user+"\n");
-                        fw2.write(account.ID+"\n");
+                    else {
+                        FileWriter fw1 = new FileWriter(you, true);
+                        FileWriter fw2 = new FileWriter(tofollow, true);
+                        fw1.write(user + "\n");
+                        fw2.write(account.ID + "\n");
                         fw1.close();
                         fw2.close();
-                        type=0;
+                        type = 0;
                     }
                 }
+                    else type=12;
+            }
             }  catch (userNotFoundException e) {
                 type=9;
             } catch (FileNotFoundException e) {
@@ -276,6 +279,44 @@ public class ObserverTool extends Tool {
             }
         return type;
     }
+
+    /**
+     * check
+     * @param id data
+     * @param f data
+     * @param user data
+     * @return data
+     * @throws FileNotFoundException exception
+     */
+     private boolean searchFF(String id,int f,String user) throws FileNotFoundException {
+         boolean flag=false;
+         if(f==0)
+         {
+             File following = new File("./Data/Users/" + user + "/following");
+             Scanner sc2 = new Scanner(following);
+             while(sc2.hasNextLine()) {
+                 String line = sc2.nextLine();
+                 if(line.equals(id)) {
+                     flag=true;
+                 }
+                 }
+         }
+         else
+         {
+             if(f==1)
+             {
+                 File followers = new File("./Data/Users/" + user + "/followers");
+                 Scanner sc2 = new Scanner(followers);
+                 while(sc2.hasNextLine()) {
+                     String line = sc2.nextLine();
+                     if(line.equals(id)) {
+                         flag=true;
+                     }
+                 }
+             }
+         }
+         return flag;
+     }
 
     /**
      *

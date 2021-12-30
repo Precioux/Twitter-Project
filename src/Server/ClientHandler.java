@@ -9,11 +9,14 @@ import entity.Account;
 import entity.Error;
 import entity.Request;
 import entity.Response;
+import requestsFormats.ForOther;
 import requestsFormats.ForServices;
 
 import java.io.*;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * AP-Project-Phase 3
@@ -78,7 +81,9 @@ public class ClientHandler implements Runnable {
                             logFlag=true;
                             response += jsoNtool.toJSON(response1);
                             account= authenticationServiceImp.connect();
-                            System.out.println("Account is set by log in "+account.ID);
+                            LocalDate localDate=LocalDate.now();
+                            LocalTime localTime=LocalTime.now();
+                            submitLog(localDate,localTime,"logIn","SuccessFul",0);
                             setAccount();
                         }
                         else
@@ -92,6 +97,9 @@ public class ClientHandler implements Runnable {
                                 error.errorSearch(rslt);
                                 response2.addError(error);
                                 response += jsoNtool.toJSON(response2);
+                                LocalDate localDate=LocalDate.now();
+                                LocalTime localTime=LocalTime.now();
+                                submitLog(localDate,localTime,"logIn","Failed",rslt);
                             }
                         }
                     }
@@ -109,6 +117,9 @@ public class ClientHandler implements Runnable {
                                 logFlag=true;
                                 response+=jsoNtool.toJSON(response1);
                                 account= authenticationServiceImp.connect();
+                                LocalDate localDate=LocalDate.now();
+                                LocalTime localTime=LocalTime.now();
+                                submitLog(localDate,localTime,"SignUp","SuccessFul",0);
                                 setAccount();
                             }
                             else
@@ -122,6 +133,9 @@ public class ClientHandler implements Runnable {
                                     error.errorSearch(rslt);
                                     response2.addError(error);
                                     response += jsoNtool.toJSON(response2);
+                                    LocalDate localDate=LocalDate.now();
+                                    LocalTime localTime=LocalTime.now();
+                                    submitLog(localDate,localTime,"SignUp","Failed",rslt);
                                 }
                             }
                         }
@@ -136,6 +150,9 @@ public class ClientHandler implements Runnable {
                                     response1.addResult("bye!");
                                     response1.setTik();
                                     response+=jsoNtool.toJSON(response1);
+                                    LocalDate localDate=LocalDate.now();
+                                    LocalTime localTime=LocalTime.now();
+                                    submitLog(localDate,localTime,"logOut","SuccessFul",0);
                                     logFlag=false;
                                     break;
                                 }
@@ -149,6 +166,9 @@ public class ClientHandler implements Runnable {
                                     String str1="Your Tweet sent successfully!";
                                     response1.addResult(str1);
                                     response+=jsoNtool.toJSON(response1);
+                                    LocalDate localDate=LocalDate.now();
+                                    LocalTime localTime=LocalTime.now();
+                                    submitLog(localDate,localTime,"tweet","SuccessFul",0);
                                     break;
                                 }
                                 case "remove":
@@ -163,6 +183,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult("Removed SuccessFully!");
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,"remove","SuccessFul",0);
                                     }
                                     else
                                     {
@@ -175,6 +198,9 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,"remove","Failed",1000);
                                         }
                                         else
                                         {
@@ -187,6 +213,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,"remove","Failed",rslt);
                                             }
                                         }
                                     }
@@ -204,6 +233,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult("liked SuccessFully!");
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,"like","SuccessFul",0);
                                     }
                                     else
                                     {
@@ -216,6 +248,9 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,"like","Failed",1000);
                                         }
                                         else
                                         {
@@ -229,6 +264,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,"like","Failed",rslt);
                                             }
                                         }
                                     }
@@ -246,6 +284,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult("Retweeted SuccessFully!");
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,"retweet","SuccessFul",0);
                                     }
                                     else
                                     {
@@ -258,6 +299,9 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,"retweet","Failed",1000);
                                         }
                                         else
                                         {
@@ -270,6 +314,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,"retweet","Failed",rslt);
                                             }
                                         }
                                     }
@@ -286,6 +333,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult("Commented SuccessFully!");
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,"comment","SuccessFul",0);
                                     }
                                     else
                                     {
@@ -298,6 +348,9 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,"comment","Failed",1000);
                                         }
                                         else
                                         {
@@ -310,6 +363,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,"comment","Failed",rslt);
                                             }
                                         }
                                     }
@@ -326,6 +382,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult(clientRequest.ParameterValue+" followed SuccessFully!");
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,"follow","SuccessFul",0);
                                     }
                                     else
                                     {
@@ -338,10 +397,13 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,"follow","Failed",1000);
                                         }
                                         else
                                         {
-                                            if(rslt==9 || rslt==999)
+                                            if(rslt==9 || rslt==999 || rslt==12)
                                             {
                                                 response="";
                                                 Response response2=new Response();
@@ -350,6 +412,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,"follow","Failed",rslt);
                                             }
                                         }
                                     }
@@ -367,6 +432,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult(clientRequest.ParameterValue+" unfollowed SuccessFully!");
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,"unfollow","SuccessFul",0);
                                     }
                                     else
                                     {
@@ -379,6 +447,9 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,"unfollow","Failed",1000);
                                         }
                                         else
                                         {
@@ -391,6 +462,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,"unfollow","Failed",rslt);
                                             }
                                         }
                                     }
@@ -409,6 +483,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult(observerServiceImp.sendProfile());
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,"profile","SuccessFul",0);
                                     }
                                     else
                                     {
@@ -421,6 +498,9 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,"profile","Failed",1000);
                                         }
                                         else
                                         {
@@ -433,6 +513,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,"profile","Failed",rslt);
                                             }
                                         }
                                     }
@@ -441,7 +524,24 @@ public class ClientHandler implements Runnable {
                                 case "action":
                                 {
                                     response="";
+                                    Gson gson=new Gson();
                                     ForServices forServices=new ForServices(4,clientRequest.ParameterValue);
+                                    ForOther forOther=gson.fromJson(clientRequest.ParameterValue,ForOther.class);
+                                    String act="";
+                                    if(forOther.action==1)
+                                    {
+                                        act+="like";
+                                    }
+                                    else
+                                    {
+                                        if(forOther.action==2)
+                                            act+="comment";
+                                        else
+                                        {
+                                            if(forOther.action==3)
+                                                act+="retweet";
+                                        }
+                                    }
                                     int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
                                     if(rslt==0)
                                     {
@@ -450,6 +550,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult("reacted SuccessFully!");
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,act,"SuccessFul",0);
                                     }
                                     else
                                     {
@@ -462,6 +565,9 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,act,"Failed",1000);
                                         }
                                         else
                                         {
@@ -474,6 +580,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,act,"Failed",rslt);
                                             }
                                         }
                                     }
@@ -490,6 +599,9 @@ public class ClientHandler implements Runnable {
                                         response1.addResult(timeLineServiceImp.timeLine);
                                         response1.setTik();
                                         response+=jsoNtool.toJSON(response1);
+                                        LocalDate localDate=LocalDate.now();
+                                        LocalTime localTime=LocalTime.now();
+                                        submitLog(localDate,localTime,"timeLine","SuccessFul",0);
 
                                     }
                                     else {
@@ -501,6 +613,9 @@ public class ClientHandler implements Runnable {
                                             error.errorSearch(1000);
                                             response1.addError(error);
                                             response += jsoNtool.toJSON(response1);
+                                            LocalDate localDate=LocalDate.now();
+                                            LocalTime localTime=LocalTime.now();
+                                            submitLog(localDate,localTime,"timeLine","Failed",1000);
                                         } else {
                                             if (rslt == 11) {
                                                 response = "";
@@ -510,6 +625,9 @@ public class ClientHandler implements Runnable {
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
                                                 response += jsoNtool.toJSON(response2);
+                                                LocalDate localDate=LocalDate.now();
+                                                LocalTime localTime=LocalTime.now();
+                                                submitLog(localDate,localTime,"timeLine","Failed",rslt);
                                             }
                                         }
                                         break;
@@ -567,5 +685,37 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
         }
         return request;
+    }
+
+    /**
+     * submit log
+     * @param localDate data
+     * @param request data
+     * @param result data
+     * @param ErrorCode data
+     */
+    public void submitLog(LocalDate localDate, LocalTime localTime,String request, String result, int ErrorCode)
+    {
+        File file=new File("./files/log.txt");
+        String log="";
+        FileWriter fileWriter=null;
+        try {
+            fileWriter = new FileWriter(file,true);
+            if (ErrorCode==0) {
+                 log+= localDate+" "+localTime+ "  @" + account.ID + "  : " + request + " => " + result+"\n";
+            }
+            else
+            {
+                Error error=new Error();
+                error.errorSearch(ErrorCode);
+                log+=localDate +" "+localTime+ "  @" + account.ID + "  : " + request + " => " + result+" > "+error.getErrorType()+"\n";
+            }
+            fileWriter.write(log);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
