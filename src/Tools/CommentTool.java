@@ -9,15 +9,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 /**
- * This class defines coomment Tool
+ * This class defines comment Tool
  * @author Samin Mahdipour
- * @version 1.0
+ * @version 3.0
  * @since 12.7.2021
  * */
 public class CommentTool extends Tool{
     /**
      *
-     * @param str addres
+     * @param str address
      * @return code
      */
     private String giveT(String str) {
@@ -54,7 +54,6 @@ public class CommentTool extends Tool{
             comment.addDate(now);
             comment.addData(Tweet);
             comment.makeDDU(str,com);
-       //     System.out.println("Commented Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

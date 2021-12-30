@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * This class defines follow editor
  * @author Samin Mahdipour
- * @version 1.0
+ * @version 3.0
  * @since 12.7.2021
  * */
 public class FollowEditor {

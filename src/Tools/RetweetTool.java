@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * This class defines Retweet Tool
  * @author Samin Mahdipour
- * @version 1.0
+ * @version 3.0
  * @since 12.7.2021
  * */
 public class RetweetTool extends Tool{
@@ -54,7 +54,6 @@ public class RetweetTool extends Tool{
             retweeT.addDate(now);
             retweeT.addData(likedTweet);
             retweeT.makeDDU(str);
-        //    System.out.println("Retweeted Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

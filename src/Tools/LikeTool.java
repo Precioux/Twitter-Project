@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * This class defines like Tool
  * @author Samin Mahdipour
- * @version 1.0
+ * @version 3.0
  * @since 12.7.2021
  * */
 public class LikeTool extends Tool{
@@ -55,7 +55,6 @@ public class LikeTool extends Tool{
             like.addDate(now);
             like.addData(likedTweet);
             like.makeDDU(str);
-            //System.out.println("liked Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

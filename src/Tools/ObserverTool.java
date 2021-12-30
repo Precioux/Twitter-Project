@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * This class defines observer tool
  * @author Samin Mahdipour
- * @version 1.0
+ * @version 3.0
  * @since 12.7.2021
  * */
 public class ObserverTool extends Tool {
@@ -53,6 +53,7 @@ public class ObserverTool extends Tool {
         retweetTool.add(tweet);
     }
     /**
+     * @return result
      * profileForAction
      */
     public int profileForAction(String jData)
@@ -71,21 +72,9 @@ public class ObserverTool extends Tool {
                     throw new FileNotFoundException();
                 else {
                     String[] tweets = userfolder.list();
-                    //    System.out.println(tweets.length);
-//                    p="";
-//                    int i=0;
-//                    for (String tweet : tweets) {
-//                        p+="___________________________________________________________________________\n";
-//                        p+=i+1+"-  " +readTweet(u,tweet)+"\n";
-//                        p+="___________________________________________________________________________";
-//                        i++;
-//                    }
-//                    System.out.println("p:\n"+p);
-//                    type=0;
                     int choice=forOther.index;
                     if(choice!=-1)
                     {
-                      //  System.out.println("1-Like\n2-Comment\n3-Retweet");
                         int r=forOther.action;
                         if(r==1)
                         {
@@ -113,11 +102,11 @@ public class ObserverTool extends Tool {
         } catch (userNotFoundException e) {
             type=9;
         }
-      //  Result result=new Result(type,p);
         return type;
     }
 
     /**
+     * @return profile
      * profile
      */
     public String profile(String who)
@@ -146,26 +135,6 @@ public class ObserverTool extends Tool {
                     }
                     System.out.println("p:\n"+p);
                     type=0;
-                  //  System.out.println("Do you want to react to any tweet?\nif answer is yes enter tweet's index\notherwise enter -1");
-                    //int choice=scanner.nextInt();
-//                    if(choice!=-1)
-//                    {
-//                        System.out.println("1-Like\n2-Comment\n3-Retweet");
-//                        int r=scanner.nextInt();
-//                        if(r==1)
-//                        {
-//                            likeIt(readTweetw(u,tweets[choice-1]));
-//                        }
-//                        else{
-//                            if(r==2)
-//                                commentIt(readTweetw(u,tweets[choice-1]));
-//                            else
-//                            {
-//                                if(r==3)
-//                                    retweetIt(readTweetw(u,tweets[choice-1]));
-//                            }
-//                        }
-//                    }
                 }
             }
         } catch (FileNotFoundException e) {
@@ -243,10 +212,8 @@ public class ObserverTool extends Tool {
     public int unfollow(String who)
     {
         int type=-1;
-        //while (!check) {
             try {
-          //      System.out.println("Enter id of user you want to unfollow: ");
-            //    Scanner scanner = new Scanner(System.in);
+
                 String user = who;
                 boolean c = isUser(user);
                 if (!c)
@@ -265,16 +232,13 @@ public class ObserverTool extends Tool {
                     }
                 }
             }  catch (userNotFoundException e) {
-               // System.out.println("No User with given ID,try again");
                 type=9;
             } catch (FileNotFoundException e) {
                type=999;
             } catch (noFollowingException e) {
-               // System.out.println("You follow no one!");
                 type=10;
             }
              return  type;
-      //  }
     }
 
     /**
@@ -282,7 +246,6 @@ public class ObserverTool extends Tool {
      */
     public int follow(String who){
        int type=-1;
-//        while (!check) {
             try {
                 String user =who;
                 boolean c=isUser(user);
@@ -301,20 +264,16 @@ public class ObserverTool extends Tool {
                         fw2.write(account.ID+"\n");
                         fw1.close();
                         fw2.close();
-                   //     System.out.println(account.fname+",you followed "+user+" successfully!");
-                    //    check=true;
                         type=0;
                     }
                 }
             }  catch (userNotFoundException e) {
-                //System.out.println("No User with given ID,try again");
                 type=9;
             } catch (FileNotFoundException e) {
                type=999;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        //  }
         return type;
     }
 

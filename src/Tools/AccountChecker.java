@@ -3,7 +3,6 @@ import com.google.gson.Gson;
 import entity.Account;
 import requestsFormats.LogIn;
 import resultFormats.Result;
-
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +14,7 @@ import java.util.Scanner;
 /**
  * This class defines AccountChecker
  * @author Samin Mahdipour
- * @version 1.0
+ * @version 3.0
  * @since 12.7.2021
  * */
 public class AccountChecker {
@@ -72,6 +71,7 @@ public class AccountChecker {
     }
     /**
      * new account
+     * @return result
      * @throws IdException check ID
      * @throws BioException check bio
      * @throws NoSuchAlgorithmException for checking algorithm
@@ -185,7 +185,7 @@ public class AccountChecker {
     }
     /**
      * check account data
-     * @return
+     * @return result
      */
     public String checkInfo(String jData)
     {
