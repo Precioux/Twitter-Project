@@ -1,10 +1,12 @@
 package Services.impl;
 import Tools.TweetTool;
 import Services.*;
+import com.google.gson.Gson;
 import entity.Account;
+import requestsFormats.ForTweetingService;
 
 import java.io.IOException;
-import java.util.Scanner;
+
 /**
  * This class defines Tweeting Service Imp
  * @author Samin Mahdipour
@@ -19,40 +21,43 @@ public class TweetingServiceImp implements TweetingService {
     }
 
     /**
-     *
+     * @param jData data
      * @return reflex to manager
      * @throws IOException check
      */
-    public int begin() throws IOException {
-
+    public int begin(String jData) throws IOException {
+        Gson gson=new Gson();
+        ForTweetingService forTweetingService=gson.fromJson(jData, ForTweetingService.class);
+        int choice=forTweetingService.choice;
         TweetTool tweetTool=new TweetTool();
         tweetTool.addAccount(account);
-        System.out.println("\n");
-        int choice=0;
-        Scanner scanner=new Scanner(System.in);
-        System.out.println(account.fname+",What do you intend to do?\n1-add a new Tweet\n2-Remove Previous Tweets\n3-Like Previous Tweets\n4-Retweet Previous Tweets\n5-add a comment to Previous Tweets\n6-Timeline\n7-Let's Socialize!\n8-Exit");
-        System.out.println("Please notice that each operation can be done after a minute!\n(if you add a tweet at 6:46 you cannot tweet until 6.47!)");
-        choice=scanner.nextInt();
+//        System.out.println("\n");
+//        int choice=0;
+//        Scanner scanner=new Scanner(System.in);
+//        System.out.println(account.fname+",What do you intend to do?\n1-add a new Tweet\n2-Remove Previous Tweets\n3-Like Previous Tweets\n4-Retweet Previous Tweets\n5-add a comment to Previous Tweets\n6-Timeline\n7-Let's Socialize!\n8-Exit");
+//        System.out.println("Please notice that each operation can be done after a minute!\n(if you add a tweet at 6:46 you cannot tweet until 6.47!)");
+//        choice=scanner.nextInt();
         if(choice==1)
         {
-            tweetTool.add();
-            System.out.println("\n");
-            begin();
+            tweetTool.add(forTweetingService.data);
+          //  System.out.println("\n");
+           // begin();
         }
         else
         {
             if(choice==2)
             {
-                tweetTool.remove();
-                System.out.println("\n");
-                begin();
+                int rslt=tweetTool.remove(forTweetingService.data);
+                changeNext(rslt);
+              //  System.out.println("\n");
+               // begin();
             }
             else
             {
                 if(choice==3) {
                     tweetTool.like();
                     System.out.println("\n");
-                    begin();
+                   // begin();
                 }
                 else
                 {
@@ -60,7 +65,7 @@ public class TweetingServiceImp implements TweetingService {
                     {
                         tweetTool.ret();
                         System.out.println("\n");
-                        begin();
+                     //   begin();
                     }
                     else
                     {
@@ -68,7 +73,7 @@ public class TweetingServiceImp implements TweetingService {
                         {
                             tweetTool.comment();
                             System.out.println("\n");
-                            begin();
+                       //     begin();
                         }
                         else
                         {

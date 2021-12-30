@@ -31,5 +31,5 @@ public interface AuthenticationService {
      *
      * @return account
      */
-    public Account connectASTS();
+    public Account connect();
 }

@@ -3,14 +3,13 @@ import Services.AuthenticationService;
 import Services.impl.*;
 import Tools.AccountChecker;
 import Tools.JSONtool;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import entity.Account;
 import entity.Error;
 import entity.Request;
 import entity.Response;
+import requestsFormats.ForTweetingService;
 
 import java.io.*;
 import java.net.Socket;
@@ -24,11 +23,13 @@ import java.security.NoSuchAlgorithmException;
  * This class defines clientHandler
  */
 public class ClientHandler implements Runnable {
+    Account account=new Account();
     boolean logFlag=false;
     final BufferedReader bufferedReader;
     final PrintStream printStream;
     final Socket socket;
     AuthenticationServiceImp authenticationServiceImp=new AuthenticationServiceImp();
+    TweetingServiceImp tweetingServiceImp=new TweetingServiceImp();
     CommandPerserServiceImp commandPerserService=new CommandPerserServiceImp();
     ConnectionServiceImp connectionService=null;
     JSONtool jsoNtool=new JSONtool();
@@ -70,6 +71,9 @@ public class ClientHandler implements Runnable {
                             response1.setTik();
                             logFlag=true;
                             response += jsoNtool.toJSON(response1);
+                            account= authenticationServiceImp.connect();
+                            System.out.println("Account is set by log in "+account.ID);
+                            setAccount();
                         }
                         else
                         {
@@ -102,6 +106,9 @@ public class ClientHandler implements Runnable {
                                 response1.setTik();
                                 logFlag=true;
                                 response+=jsoNtool.toJSON(response1);
+                                account= authenticationServiceImp.connect();
+                                System.out.println("Account is set by Sign up "+account.ID);
+                                setAccount();
                             }
                             else
                             {
@@ -126,11 +133,62 @@ public class ClientHandler implements Runnable {
                                 case "logOut":
                                 {
                                     response="";
-                                    response+="Bye!";
                                     Response response1=new Response();
-                                    response1.addResult(response);
+                                    response1.addResult("bye!");
                                     response1.setTik();
+                                    response+=jsoNtool.toJSON(response1);
                                     logFlag=false;
+                                    break;
+                                }
+                                case "tweet":
+                                {
+                                    response="";
+                                    ForTweetingService forTweetingService=new ForTweetingService(1,clientRequest.ParameterValue);
+                                    tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    Response response1=new Response();
+                                    response1.setTik();
+                                    String str1="Your Tweet sent successfully!";
+                                    response1.addResult(str1);
+                                    response+=jsoNtool.toJSON(response1);
+                                    break;
+                                }
+                                case "remove":
+                                {
+                                    response="";
+                                    ForTweetingService forTweetingService=new ForTweetingService(2,clientRequest.ParameterValue);
+                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult("Removed SuccessFully!");
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+                                    }
+                                    else
+                                    {
+                                        if(rslt==-1)
+                                        {
+                                            response="";
+                                            Response response1=new Response();
+                                            response1.addResult("Failed to Remove!");
+                                            response+=jsoNtool.toJSON(response1);
+                                        }
+                                        else
+                                        {
+                                            if(rslt==5 || rslt==999 || rslt==998)
+                                            {
+                                                response="";
+                                                System.out.println("Wrong result: "+rslt);
+                                                Response response2=new Response();
+                                                response2.addResult("Removing Failed!");
+                                                Error error=new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -159,7 +217,10 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
         }
     }
-
+    public void setAccount()
+    {
+        tweetingServiceImp.addAccount(account);
+    }
     public Request toRequest(String json)
     {
         Request request = null;

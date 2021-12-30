@@ -39,9 +39,10 @@ public class TweetTool extends Tool {
     }
 
     /**
+     * @param t data
      * add a new tweet
      */
-    public void add() {
+    public void add(String t) {
         try {
             LocalDateTime n = LocalDateTime.now();
             String strl = n.toString();
@@ -49,16 +50,16 @@ public class TweetTool extends Tool {
             String Name = "./Data/Tweets/" + account.ID + "/" + str;
             Path path1 = Paths.get(Name);
             Files.createDirectories(path1);
-            Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-            System.out.println("Go On:");
-            String t = scanner.next();
+          //  Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+       //     System.out.println("Go On:");
+         //   String t = scanner.next();
             Tweet tweet = new Tweet();
             tweet.addPublisher(account);
             LocalDate now = LocalDate.now();
             tweet.addDate(now);
             tweet.addData(t);
             tweet.makeDDU(Name);
-            System.out.println("Tweeted Successfully!");
+           // System.out.println("Tweeted Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -285,59 +286,70 @@ public class TweetTool extends Tool {
             }
         }
     }
-
+   private int findTweet(String t)
+   {
+       int ans=-1;
+       int i=0;
+       for (String s:twts) {
+           if(s.equals(t))
+               ans=i;
+           i++;
+       }
+       return ans;
+   }
     /**
      * remove a tweet
      */
-    public void remove()
+    public int remove(String t)
   {
+      int type=-1;
       boolean check=false;
       File folder=null;
-      while(!check) {
           try {
               folder=new File("./Data/Tweets/" + account.ID + "/");
               if (!folder.exists())
                   throw new FileNotFoundException();
               else {
-                  profile();
+                   profile();
                   int nn = tf.length;
                   if (nn <=0) {
                       throw new noTweetException();
                   }
-                 else  {
-                      System.out.println("Enter index of tweet you want to remove: ");
-                      Scanner scanner = new Scanner(System.in);
-                      int choice = scanner.nextInt();
+                 else {
+                      // System.out.println("Enter index of tweet you want to remove: ");
+                      //Scanner scanner = new Scanner(System.in);
+                      //int choice = scanner.nextInt();
 
-                      if (choice > nn)
-                          throw new InvalidChoiceException();
+//                      if (choice > nn)
+//                          throw new InvalidChoiceException();
+//                      else {
+                      int choice = findTweet(t);
+                      if (choice == -1)
+                          type = 998;
+                      else{
+                          File rmv = new File("./Data/Tweets/" + account.ID + "/" + tf[choice ]);
+                      if (!rmv.exists())
+                          throw new FileNotFoundException();
                       else {
-                          File rmv = new File("./Data/Tweets/" + account.ID + "/" + tf[choice - 1]);
-                          if (!rmv.exists())
-                              throw new FileNotFoundException();
-                          else {
-                              check=deleteDirectoryRecursionJava6(rmv);
-                              if(check)
-                                  System.out.println("Deleted Successfully!");
-                          }
+                          check = deleteDirectoryRecursionJava6(rmv);
+                          if (check)
+                              type=0;
                       }
+                      // }
+                  }
                   }
               }
           } catch (FileNotFoundException e) {
-              System.out.println("File does not found");
-              e.printStackTrace();
-              check=true;
+              //System.out.println("File does not found");
+            type=999;
           }
-          catch (InvalidChoiceException e)
-          {
-              System.out.println("Invalid choice,try again");
-          } catch (IOException e) {
+         catch (IOException e) {
               e.printStackTrace();
           } catch (noTweetException e) {
-              System.out.println("No tweet to remove!");
-              check=true;
+          //    System.out.println("No tweet to remove!");
+              type=5;
           }
-      }
+          return type;
   }
 
     /**
@@ -359,10 +371,10 @@ public class TweetTool extends Tool {
                 for (int i = 0; i < n; i++)
                     twts[i] = readTweet(tf[i]);
                 int i=1;
-                    for (String t:twts) {
-                        System.out.println(i+"- "+t);
-                        i++;
-                    }
+//                    for (String t:twts) {
+//                        System.out.println(i+"- "+t);
+//                        i++;
+//                    }
                 }
             }
         } catch (FileNotFoundException e) {

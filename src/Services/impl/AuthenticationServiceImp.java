@@ -85,7 +85,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
      *
      * @return account
      */
-    public Account connectASTS()
+    public Account connect()
     {
         return account;
     }

@@ -41,7 +41,7 @@ public class Client {
             {
                 System.out.println("logFlag: "+logFlag);
                 if(logFlag) {
-                    System.out.println("\nAvailable choices: logOut, exit");
+                    System.out.println("\nAvailable choices: tweet, removeTweet , logOut, exit");
                     clientRequest = scanner.next();
                     if (clientRequest.equals("exit")) {
                         System.out.println("Closing this connection : " + socket);
@@ -59,6 +59,20 @@ public class Client {
                                 String response=connectionService.send(request);
                                 consoleView.print(response);
                                 logFlag=false;
+                                break;
+                            }
+                            case "tweet":
+                            {
+                                String request=commandPerserService.tweet();
+                                String response=connectionService.send(request);
+                                consoleView.print(response);
+                                break;
+                            }
+                            case "removeTweet":
+                            {
+                                String request=commandPerserService.remove();
+                                String response=connectionService.send(request);
+                                consoleView.print(response);
                                 break;
                             }
                         }
@@ -82,6 +96,7 @@ public class Client {
                     Response response1=gson.fromJson(response,Response.class);
                     if(response1.validity)
                         logFlag=true;
+
                     }
                     else
                     {

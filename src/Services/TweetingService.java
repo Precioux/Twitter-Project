@@ -15,7 +15,7 @@ public interface TweetingService  {
      * @return reflex to manager
      * @throws IOException check
      */
-    public int begin() throws IOException;
+    public int begin(String jData) throws IOException;
 
     /**
      *

@@ -17,7 +17,23 @@ import java.util.Scanner;
 
 public class CommandPerserServiceImp implements CommandPerserService {
     static Scanner scanner=new Scanner(System.in);
+    static Scanner scanner1=new Scanner(System.in).useDelimiter("\n");
     static JSONtool jsonTool=new JSONtool();
+    public static String remove()
+    {
+        System.out.println("Enter tweet you intend to remove: ");
+        String tweet=scanner1.next();
+        Request request=new Request("remove","removing",tweet);
+        return jsonTool.toJSON(request);
+    }
+    public static String tweet()
+    {
+        System.out.println("Enter tweet: ");
+
+        String tweet=scanner1.next();
+        Request request=new Request("tweet","tweeting",tweet);
+        return jsonTool.toJSON(request);
+    }
     public static String logOut(){
         Request request=new Request("logOut","loggingOut","");
         return jsonTool.toJSON(request);
