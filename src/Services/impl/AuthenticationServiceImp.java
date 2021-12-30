@@ -4,7 +4,6 @@ import Tools.AccountChecker;
 import com.google.gson.Gson;
 import entity.Account;
 import resultFormats.Result;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.InputMismatchException;
@@ -82,7 +81,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
       return next;
     }
     /**
-     *
+     *add account
      * @return account
      */
     public Account connect()

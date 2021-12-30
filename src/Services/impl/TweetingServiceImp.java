@@ -16,6 +16,11 @@ import java.io.IOException;
 public class TweetingServiceImp implements TweetingService {
     Account account=new Account();
     private int next=0;
+
+    /**
+     * add acount
+     * @param account data
+     */
     public void addAccount(Account account) {
         this.account=account;
     }
@@ -31,17 +36,9 @@ public class TweetingServiceImp implements TweetingService {
         int choice= forServices.choice;
         TweetTool tweetTool=new TweetTool();
         tweetTool.addAccount(account);
-//        System.out.println("\n");
-//        int choice=0;
-//        Scanner scanner=new Scanner(System.in);
-//        System.out.println(account.fname+",What do you intend to do?\n1-add a new Tweet\n2-Remove Previous Tweets\n3-Like Previous Tweets\n4-Retweet Previous Tweets\n5-add a comment to Previous Tweets\n6-Timeline\n7-Let's Socialize!\n8-Exit");
-//        System.out.println("Please notice that each operation can be done after a minute!\n(if you add a tweet at 6:46 you cannot tweet until 6.47!)");
-//        choice=scanner.nextInt();
         if(choice==1)
         {
             tweetTool.add(forServices.data);
-          //  System.out.println("\n");
-           // begin();
         }
         else
         {
@@ -49,16 +46,12 @@ public class TweetingServiceImp implements TweetingService {
             {
                 int rslt=tweetTool.remove(forServices.data);
                 changeNext(rslt);
-              //  System.out.println("\n");
-               // begin();
             }
             else
             {
                 if(choice==3) {
                    int rslt=tweetTool.like(forServices.data);
                    changeNext(rslt);
-                 //   System.out.println("\n");
-                   // begin();
                 }
                 else
                 {
@@ -66,8 +59,6 @@ public class TweetingServiceImp implements TweetingService {
                     {
                       int rslt=tweetTool.ret(forServices.data);
                       changeNext(rslt);
-                      //  System.out.println("\n");
-                     //   begin();
                     }
                     else
                     {
@@ -75,28 +66,7 @@ public class TweetingServiceImp implements TweetingService {
                         {
                             int rslt=tweetTool.comment(forServices.data);
                             changeNext(rslt);
-                            //System.out.println("\n");
-                       //     begin();
                         }
-//                        else
-//                        {
-//                            if(choice==6)
-//                            {
-//                                changeNext(6);
-//                            }
-//                            else
-//                            {
-//                                if(choice==7)
-//                                {
-//                                    changeNext(7);
-//                                }
-//                                else
-//                                {
-//                                    if(choice==8)
-//                                        changeNext(8);
-//                                }
-//                            }
-//                        }
                     }
                 }
             }

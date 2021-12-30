@@ -18,6 +18,11 @@ public class ObserverServiceImp implements ObserverService {
     Account account=new Account();
     int next=0;
     String profileShortCut="";
+
+    /**
+     * add account
+     * @param account data
+     */
     public void addAccount(Account account) {
         this.account=account;
     }
@@ -31,15 +36,7 @@ public class ObserverServiceImp implements ObserverService {
         ForServices forServices=gson.fromJson(jdata,ForServices.class);
         ObserverTool observerTool = new ObserverTool();
         observerTool.addAccount(account);
-       // boolean check=false;
-  //      while (!check) {
-        //    System.out.println("1-Follow\n2-Unfollow\n3-View profile\n4-back");
-        //  Scanner scanner = new Scanner(System.in);
         int choice = forServices.choice;
-//                if (choice < 1 || choice > 4)
-//                    throw new Tool.InvalidChoiceException();
-//                else
-//                {
         switch (choice)
         {
             case 1:
@@ -73,19 +70,32 @@ public class ObserverServiceImp implements ObserverService {
                 break;
             }
         }
-        //   }
-        //  }
         return next;
     }
+
+    /**
+     * set profile
+     * @param p data
+     */
     public void recieveProfile(String p)
     {
         this.profileShortCut="";
         this.profileShortCut+=p;
     }
+
+    /**
+     * send profile
+     * @return data
+     */
     public String sendProfile()
     {
         return profileShortCut;
     }
+
+    /**
+     * change next
+     * @param next next
+     */
     @Override
     public void changeNext(int next) {
         this.next=next;
