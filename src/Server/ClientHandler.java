@@ -16,10 +16,10 @@ import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * AP-Project-Phase 2
+ * AP-Project-Phase 3
  * @author Samin Mahdipour
  * @since 12.22.2021
- * @version 2.0
+ * @version 3.0
  * This class defines clientHandler
  */
 public class ClientHandler implements Runnable {
@@ -32,9 +32,15 @@ public class ClientHandler implements Runnable {
     TweetingServiceImp tweetingServiceImp=new TweetingServiceImp();
     ObserverServiceImp observerServiceImp=new ObserverServiceImp();
     TimeLineServiceImp timeLineServiceImp=new TimeLineServiceImp();
-    CommandPerserServiceImp commandPerserService=new CommandPerserServiceImp();
     ConnectionServiceImp connectionService=null;
     JSONtool jsoNtool=new JSONtool();
+
+    /**
+     * constructor
+     * @param socket data
+     * @param bufferedReader data
+     * @param printStream data
+     */
     public ClientHandler(Socket socket, BufferedReader bufferedReader, PrintStream printStream)
     {
         this.bufferedReader=bufferedReader;
@@ -42,17 +48,17 @@ public class ClientHandler implements Runnable {
         this.socket=socket;
         connectionService =  new ConnectionServiceImp(socket,bufferedReader,printStream);
     }
+
+    /**
+     * run
+     */
     public void run()
     {
         String response="";
         while (true) {
             try {
-                System.out.println("Got to clientHandler");
                 String str = bufferedReader.readLine();
-                System.out.println("clh rqst: "+str);
-                System.out.println("clienthandler reads: "+str);
                 Request clientRequest=toRequest(str);
-                System.out.println("client sent "+clientRequest.method+" "+clientRequest.ParameterValue);
                 if (clientRequest.method.equals("exit")) {
                     System.out.println("Client " + this.socket + " sends exit...");
                     System.out.println("Closing this connection.");
@@ -65,9 +71,7 @@ public class ClientHandler implements Runnable {
                     {
                         response="";
                         Response response1=new Response();
-                        System.out.println("clh: "+clientRequest.ParameterValue);
                         int rslt=authenticationServiceImp.begin(1,clientRequest.ParameterValue);
-                        System.out.println("clh :"+rslt);
                         if(rslt==0) {
                             response1.addResult("LoggedIn successfully!");
                             response1.setTik();
@@ -82,7 +86,6 @@ public class ClientHandler implements Runnable {
                             if(rslt==1 || rslt==2)
                             {
                                 response="";
-                                System.out.println("Wrong result: "+rslt);
                                 Response response2=new Response();
                                 response2.addResult("LogIn Failed!");
                                 Error error=new Error();
@@ -91,7 +94,6 @@ public class ClientHandler implements Runnable {
                                 response += jsoNtool.toJSON(response2);
                             }
                         }
-                        System.out.println("ClientHandler final res: "+response);
                     }
                     else
                     {
@@ -99,9 +101,7 @@ public class ClientHandler implements Runnable {
                         {
                             response="";
                             Response response1=new Response();
-                            System.out.println("clh: "+clientRequest.ParameterValue);
                             int rslt=authenticationServiceImp.begin(2,clientRequest.ParameterValue);
-                            System.out.println("clh :"+rslt);
                             if(rslt==0)
                             {
                                 response1.addResult("Your Account Successfully created!");
@@ -109,7 +109,6 @@ public class ClientHandler implements Runnable {
                                 logFlag=true;
                                 response+=jsoNtool.toJSON(response1);
                                 account= authenticationServiceImp.connect();
-                                System.out.println("Account is set by Sign up "+account.ID);
                                 setAccount();
                             }
                             else
@@ -117,7 +116,6 @@ public class ClientHandler implements Runnable {
                                 if(rslt==3 || rslt==4)
                                 {
                                     response="";
-                                    System.out.println("Wrong result: "+rslt);
                                     Response response2=new Response();
                                     response2.addResult("SignUp Failed!");
                                     Error error=new Error();
@@ -126,7 +124,6 @@ public class ClientHandler implements Runnable {
                                     response += jsoNtool.toJSON(response2);
                                 }
                             }
-                            System.out.println("ClientHandler final res: "+response);
                         }
                         else
                         {
@@ -184,7 +181,6 @@ public class ClientHandler implements Runnable {
                                             if(rslt==5 || rslt==999 || rslt==998)
                                             {
                                                 response="";
-                                                System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("Removing Failed!");
                                                 Error error=new Error();
@@ -268,7 +264,6 @@ public class ClientHandler implements Runnable {
                                             if(rslt==7 || rslt==999 || rslt==998)
                                             {
                                                 response="";
-                                                System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("retweeting Failed!");
                                                 Error error=new Error();
@@ -309,7 +304,6 @@ public class ClientHandler implements Runnable {
                                             if(rslt==8 || rslt==999 || rslt==998)
                                             {
                                                 response="";
-                                                System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("commenting Failed!");
                                                 Error error=new Error();
@@ -350,7 +344,6 @@ public class ClientHandler implements Runnable {
                                             if(rslt==9 || rslt==999)
                                             {
                                                 response="";
-                                                System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("following Failed!");
                                                 Error error=new Error();
@@ -392,7 +385,6 @@ public class ClientHandler implements Runnable {
                                             if(rslt==9 || rslt==999 || rslt==10)
                                             {
                                                 response="";
-                                                System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("unfollowing Failed!");
                                                 Error error=new Error();
@@ -435,7 +427,6 @@ public class ClientHandler implements Runnable {
                                             if(rslt==9 || rslt==999 )
                                             {
                                                 response="";
-                                                System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("profile loading Failed!");
                                                 Error error=new Error();
@@ -450,7 +441,6 @@ public class ClientHandler implements Runnable {
                                 case "action":
                                 {
                                     response="";
-                                    System.out.println("This is action: "+clientRequest.ParameterValue);
                                     ForServices forServices=new ForServices(4,clientRequest.ParameterValue);
                                     int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
                                     if(rslt==0)
@@ -478,7 +468,6 @@ public class ClientHandler implements Runnable {
                                             if(rslt==9 || rslt==999 )
                                             {
                                                 response="";
-                                                System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("reacted Failed!");
                                                 Error error=new Error();
@@ -542,7 +531,6 @@ public class ClientHandler implements Runnable {
             } catch (AccountChecker.IdException e) {
                 e.printStackTrace();
             }
-            System.out.println("Responsed: "+response);
             connectionService.sendToC(response);
         }
         try {
@@ -553,12 +541,22 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * set account
+     */
     public void setAccount()
     {
         observerServiceImp.addAccount(account);
         tweetingServiceImp.addAccount(account);
         timeLineServiceImp.addAccount(account);
     }
+
+    /**
+     * toRequest
+     * @param json data
+     * @return request
+     */
     public Request toRequest(String json)
     {
         Request request = null;
