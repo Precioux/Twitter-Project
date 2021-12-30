@@ -119,6 +119,21 @@ public class ClientHandler implements Runnable {
                             }
                             System.out.println("ClientHandler final res: "+response);
                         }
+                        else
+                        {
+                            switch (clientRequest.method)
+                            {
+                                case "logOut":
+                                {
+                                    response="";
+                                    response+="Bye!";
+                                    Response response1=new Response();
+                                    response1.addResult(response);
+                                    response1.setTik();
+                                    logFlag=false;
+                                }
+                            }
+                        }
                     }
                 }
 

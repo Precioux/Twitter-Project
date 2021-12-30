@@ -49,9 +49,23 @@ public class Client {
                         System.out.println("Connection closed");
                         break;
                     }
-                    printStream.println(clientRequest);
-                    serverResponse = bufferedReaderFromB.readLine();
-                    System.out.println("Server : " + serverResponse);
+                    else
+                    {
+                        switch (clientRequest)
+                        {
+                            case "logOut":
+                            {
+                                String request=commandPerserService.logOut();
+                                String response=connectionService.send(request);
+                                consoleView.print(response);
+                                logFlag=false;
+                                break;
+                            }
+                        }
+                    }
+//                    printStream.println(clientRequest);
+//                    serverResponse = bufferedReaderFromB.readLine();
+//                    System.out.println("Server : " + serverResponse);
                 }
                 else
                 {

@@ -18,6 +18,10 @@ import java.util.Scanner;
 public class CommandPerserServiceImp implements CommandPerserService {
     static Scanner scanner=new Scanner(System.in);
     static JSONtool jsonTool=new JSONtool();
+    public static String logOut(){
+        Request request=new Request("logOut","loggingOut","");
+        return jsonTool.toJSON(request);
+    }
     public static String logIn() throws JsonProcessingException {
         System.out.println("ID: ");
         String id=scanner.next();
