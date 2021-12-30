@@ -96,6 +96,22 @@ public class Client {
                                 consoleView.print(response);
                                 break;
                             }
+                            case "socialize":
+                            {
+                                System.out.println("follow, unfollow, view profile(in order to like,ret or comment)");
+                                String c=scanner.next();
+                                switch (c)
+                                {
+                                    case "follow":
+                                    {
+
+                                        String request=commandPerserService.follow();
+                                        String response=connectionService.send(request);
+                                        consoleView.print(response);
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
 //                    printStream.println(clientRequest);

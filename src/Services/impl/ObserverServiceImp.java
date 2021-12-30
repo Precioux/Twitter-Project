@@ -2,7 +2,9 @@ package Services.impl;
 import Tools.ObserverTool;
 import Tools.Tool;
 import Services.*;
+import com.google.gson.Gson;
 import entity.Account;
+import requestsFormats.ForServices;
 
 import java.util.Scanner;
 /**
@@ -13,7 +15,7 @@ import java.util.Scanner;
  * */
 public class ObserverServiceImp implements ObserverService {
     Account account=new Account();
-
+    int next=0;
     public void addAccount(Account account) {
         this.account=account;
     }
@@ -21,51 +23,54 @@ public class ObserverServiceImp implements ObserverService {
      *
      * @return reflex
      */
-    public int begin()
+    public int begin(String jdata)
     {
-        int naxt=0;
+        Gson gson=new Gson();
+        ForServices forServices=gson.fromJson(jdata,ForServices.class);
         ObserverTool observerTool = new ObserverTool();
         observerTool.addAccount(account);
-        boolean check=false;
-        while (!check) {
-            try {
-                System.out.println("1-Follow\n2-Unfollow\n3-View profile\n4-back");
-                Scanner scanner = new Scanner(System.in);
-                int choice = scanner.nextInt();
-                if (choice < 1 || choice > 4)
-                    throw new Tool.InvalidChoiceException();
-                else
-                {
-                    switch (choice)
-                    {
-                        case 1:
-                        {
-                            observerTool.follow();
-                            break;
-                        }
-                        case 2:
-                        {
-                            observerTool.unfollow();
-                            break;
-                        }
-                        case 3:
-                        {
-                            observerTool.profile();
-                            break;
-                        }
-                        case 4:
-                        {
-                            naxt=4;
-                            check=true;
-                            break;
-                        }
-                    }
-                }
-            } catch (Tool.InvalidChoiceException e) {
-                System.out.println("Invalid choice,try again");
+       // boolean check=false;
+  //      while (!check) {
+        //    System.out.println("1-Follow\n2-Unfollow\n3-View profile\n4-back");
+        //  Scanner scanner = new Scanner(System.in);
+        int choice = forServices.choice;
+//                if (choice < 1 || choice > 4)
+//                    throw new Tool.InvalidChoiceException();
+//                else
+//                {
+        switch (choice)
+        {
+            case 1:
+            {
+                int rslt=observerTool.follow(forServices.data);
+                changeNext(rslt);
+                break;
+            }
+            case 2:
+            {
+                observerTool.unfollow();
+                break;
+            }
+            case 3:
+            {
+                observerTool.profile();
+                break;
+            }
+            case 4:
+            {
+                next=4;
+               // check=true;
+                break;
             }
         }
-        return naxt;
+        //   }
+        //  }
+        return next;
+    }
+
+    @Override
+    public void changeNext(int next) {
+        this.next=next;
     }
 
 

@@ -1,10 +1,10 @@
 package requestsFormats;
 
-public class ForTweetingService {
+public class ForServices {
     public int choice;
     public String data;
 
-    public ForTweetingService(int choice, String data) {
+    public ForServices(int choice, String data) {
         this.choice = choice;
         this.data = data;
     }

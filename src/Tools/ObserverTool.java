@@ -204,13 +204,11 @@ public class ObserverTool extends Tool {
     /**
      * follow
      */
-    public void follow(){
-        boolean check=false;
-        while (!check) {
+    public int follow(String who){
+       int type=-1;
+//        while (!check) {
             try {
-                System.out.println("Enter id of user you want to follow: ");
-                Scanner scanner = new Scanner(System.in);
-                String user = scanner.next();
+                String user =who;
                 boolean c=isUser(user);
                 if(!c)
                     throw new userNotFoundException();
@@ -227,20 +225,21 @@ public class ObserverTool extends Tool {
                         fw2.write(account.ID+"\n");
                         fw1.close();
                         fw2.close();
-                        System.out.println(account.fname+",you followed "+user+" successfully!");
-                        check=true;
+                   //     System.out.println(account.fname+",you followed "+user+" successfully!");
+                    //    check=true;
+                        type=0;
                     }
                 }
             }  catch (userNotFoundException e) {
-                System.out.println("No User with given ID,try again");
+                //System.out.println("No User with given ID,try again");
+                type=9;
             } catch (FileNotFoundException e) {
-                System.out.println("File not found");
-                check=true;
+               type=999;
             } catch (IOException e) {
                 e.printStackTrace();
-                check=true;
             }
-        }
+        //  }
+        return type;
     }
 
     /**

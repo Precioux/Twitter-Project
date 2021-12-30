@@ -20,6 +20,13 @@ public class CommandPerserServiceImp implements CommandPerserService {
     static Scanner scanner=new Scanner(System.in);
     static Scanner scanner1=new Scanner(System.in).useDelimiter("\n");
     static JSONtool jsonTool=new JSONtool();
+    public static String follow()
+    {
+        System.out.println("Enter ID of user you intend to follow: ");
+        String fid=scanner.next();
+        Request request=new Request("follow","following "+fid,fid);
+        return jsonTool.toJSON(request);
+    }
     public static String comment()
     {
         System.out.println("Enter tweet you intend to comment: ");

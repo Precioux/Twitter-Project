@@ -3,7 +3,7 @@ import Tools.TweetTool;
 import Services.*;
 import com.google.gson.Gson;
 import entity.Account;
-import requestsFormats.ForTweetingService;
+import requestsFormats.ForServices;
 
 import java.io.IOException;
 
@@ -27,8 +27,8 @@ public class TweetingServiceImp implements TweetingService {
      */
     public int begin(String jData) throws IOException {
         Gson gson=new Gson();
-        ForTweetingService forTweetingService=gson.fromJson(jData, ForTweetingService.class);
-        int choice=forTweetingService.choice;
+        ForServices forServices =gson.fromJson(jData, ForServices.class);
+        int choice= forServices.choice;
         TweetTool tweetTool=new TweetTool();
         tweetTool.addAccount(account);
 //        System.out.println("\n");
@@ -39,7 +39,7 @@ public class TweetingServiceImp implements TweetingService {
 //        choice=scanner.nextInt();
         if(choice==1)
         {
-            tweetTool.add(forTweetingService.data);
+            tweetTool.add(forServices.data);
           //  System.out.println("\n");
            // begin();
         }
@@ -47,7 +47,7 @@ public class TweetingServiceImp implements TweetingService {
         {
             if(choice==2)
             {
-                int rslt=tweetTool.remove(forTweetingService.data);
+                int rslt=tweetTool.remove(forServices.data);
                 changeNext(rslt);
               //  System.out.println("\n");
                // begin();
@@ -55,7 +55,7 @@ public class TweetingServiceImp implements TweetingService {
             else
             {
                 if(choice==3) {
-                   int rslt=tweetTool.like(forTweetingService.data);
+                   int rslt=tweetTool.like(forServices.data);
                    changeNext(rslt);
                  //   System.out.println("\n");
                    // begin();
@@ -64,7 +64,7 @@ public class TweetingServiceImp implements TweetingService {
                 {
                     if(choice==4)
                     {
-                      int rslt=tweetTool.ret(forTweetingService.data);
+                      int rslt=tweetTool.ret(forServices.data);
                       changeNext(rslt);
                       //  System.out.println("\n");
                      //   begin();
@@ -73,30 +73,30 @@ public class TweetingServiceImp implements TweetingService {
                     {
                         if(choice==5)
                         {
-                            int rslt=tweetTool.comment(forTweetingService.data);
+                            int rslt=tweetTool.comment(forServices.data);
                             changeNext(rslt);
                             //System.out.println("\n");
                        //     begin();
                         }
-                        else
-                        {
-                            if(choice==6)
-                            {
-                                changeNext(6);
-                            }
-                            else
-                            {
-                                if(choice==7)
-                                {
-                                    changeNext(7);
-                                }
-                                else
-                                {
-                                    if(choice==8)
-                                        changeNext(8);
-                                }
-                            }
-                        }
+//                        else
+//                        {
+//                            if(choice==6)
+//                            {
+//                                changeNext(6);
+//                            }
+//                            else
+//                            {
+//                                if(choice==7)
+//                                {
+//                                    changeNext(7);
+//                                }
+//                                else
+//                                {
+//                                    if(choice==8)
+//                                        changeNext(8);
+//                                }
+//                            }
+//                        }
                     }
                 }
             }

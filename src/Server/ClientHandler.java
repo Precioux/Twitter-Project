@@ -9,7 +9,7 @@ import entity.Account;
 import entity.Error;
 import entity.Request;
 import entity.Response;
-import requestsFormats.ForTweetingService;
+import requestsFormats.ForServices;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,6 +30,7 @@ public class ClientHandler implements Runnable {
     final Socket socket;
     AuthenticationServiceImp authenticationServiceImp=new AuthenticationServiceImp();
     TweetingServiceImp tweetingServiceImp=new TweetingServiceImp();
+    ObserverServiceImp observerServiceImp=new ObserverServiceImp();
     CommandPerserServiceImp commandPerserService=new CommandPerserServiceImp();
     ConnectionServiceImp connectionService=null;
     JSONtool jsoNtool=new JSONtool();
@@ -143,8 +144,8 @@ public class ClientHandler implements Runnable {
                                 case "tweet":
                                 {
                                     response="";
-                                    ForTweetingService forTweetingService=new ForTweetingService(1,clientRequest.ParameterValue);
-                                    tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    ForServices forServices =new ForServices(1,clientRequest.ParameterValue);
+                                    tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
                                     Response response1=new Response();
                                     response1.setTik();
                                     String str1="Your Tweet sent successfully!";
@@ -155,8 +156,8 @@ public class ClientHandler implements Runnable {
                                 case "remove":
                                 {
                                     response="";
-                                    ForTweetingService forTweetingService=new ForTweetingService(2,clientRequest.ParameterValue);
-                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    ForServices forServices =new ForServices(2,clientRequest.ParameterValue);
+                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
                                     if(rslt==0)
                                     {
                                         response="";
@@ -194,8 +195,8 @@ public class ClientHandler implements Runnable {
                                 case "like":
                                 {
                                     response="";
-                                    ForTweetingService forTweetingService=new ForTweetingService(3,clientRequest.ParameterValue);
-                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    ForServices forServices =new ForServices(3,clientRequest.ParameterValue);
+                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
                                     if(rslt==0)
                                     {
                                         response="";
@@ -233,8 +234,8 @@ public class ClientHandler implements Runnable {
                                 case "retweet":
                                 {
                                     response="";
-                                    ForTweetingService forTweetingService=new ForTweetingService(4,clientRequest.ParameterValue);
-                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    ForServices forServices =new ForServices(4,clientRequest.ParameterValue);
+                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
                                     if(rslt==0)
                                     {
                                         response="";
@@ -271,8 +272,8 @@ public class ClientHandler implements Runnable {
                                 }
                                 case "comment":
                                 {
-                                    ForTweetingService forTweetingService=new ForTweetingService(5,clientRequest.ParameterValue);
-                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    ForServices forServices =new ForServices(5,clientRequest.ParameterValue);
+                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
                                     if(rslt==0)
                                     {
                                         response="";
@@ -298,6 +299,44 @@ public class ClientHandler implements Runnable {
                                                 System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("commenting Failed!");
+                                                Error error=new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                                case "follow":
+                                {
+                                    ForServices forServices=new ForServices(1,clientRequest.ParameterValue);
+                                    int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult(clientRequest.ParameterValue+" followed SuccessFully!");
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+                                    }
+                                    else
+                                    {
+                                        if(rslt==-1)
+                                        {
+                                            response="";
+                                            Response response1=new Response();
+                                            response1.addResult("Failed to follow "+clientRequest.ParameterValue+"!");
+                                            response+=jsoNtool.toJSON(response1);
+                                        }
+                                        else
+                                        {
+                                            if(rslt==9 || rslt==999)
+                                            {
+                                                response="";
+                                                System.out.println("Wrong result: "+rslt);
+                                                Response response2=new Response();
+                                                response2.addResult("following Failed!");
                                                 Error error=new Error();
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);
@@ -336,6 +375,7 @@ public class ClientHandler implements Runnable {
     }
     public void setAccount()
     {
+        observerServiceImp.addAccount(account);
         tweetingServiceImp.addAccount(account);
     }
     public Request toRequest(String json)

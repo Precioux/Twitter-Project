@@ -11,7 +11,11 @@ public interface ObserverService {
      *
      * @return reflex
      */
-    public int begin();
+    public int begin(String jData);
 
-
+    /**
+     *
+     * @param next next
+     */
+    public void changeNext(int next);
 }
