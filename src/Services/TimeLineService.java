@@ -14,6 +14,7 @@ public interface TimeLineService  {
      */
     public int begin();
     /**
+     * @return timeline
      * prints timeline
      */
     public String printTimeLine();

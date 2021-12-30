@@ -28,7 +28,7 @@ public class TimeLineServiceImp implements TimeLineService {
 
     /**
      *
-     * @return next choice
+     * @return result of work
      */
     public int begin()
     {
@@ -37,7 +37,6 @@ public class TimeLineServiceImp implements TimeLineService {
         timeline.clear();
         addr.clear();
         check.clear();
-        System.out.println("Try to set timeline for "+account.ID);
         int type=-1;
         try {
 
@@ -58,17 +57,13 @@ public class TimeLineServiceImp implements TimeLineService {
                 type=0;
             }
         } catch (noFollowerException e) {
-            //System.out.println("You follow no one!");
             type=11;
         }
-//    //    System.out.println("Enter -1 to return and 0 to stay");
-//      //  Scanner scanner=new Scanner(System.in);
-//        ///int change=scanner.nextInt();
-//        next=change;
         return type;
     }
 
     /**
+     * @return timeLine
      * prints timeline
      */
     public String printTimeLine()
