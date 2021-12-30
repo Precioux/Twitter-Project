@@ -21,6 +21,11 @@ public class CommandPerserServiceImp implements CommandPerserService {
     static Scanner scanner=new Scanner(System.in);
     static Scanner scanner1=new Scanner(System.in).useDelimiter("\n");
     static JSONtool jsonTool=new JSONtool();
+    public static String timeLine()
+    {
+        Request request=new Request("timeLine","timeline","");
+        return jsonTool.toJSON(request);
+    }
     public static String action(String who)
     {
         String f="";

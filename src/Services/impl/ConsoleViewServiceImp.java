@@ -26,6 +26,15 @@ public class ConsoleViewServiceImp implements ConsoleViewService {
                     System.out.println("{\"validity\":true,\"error\":\"No Error Found\",\"Count\":2,\"Results\":");
                     System.out.println("[\n"+p+"\n]\n}");
                 }
+                else
+                {
+                    if(response.Results.get(0).equals("TimeLine loaded SuccessFully!"))
+                    {
+                        System.out.println("ConsoleView: ");
+                        String tL=response.Results.get(1);
+                        System.out.println(tL);
+                    }
+                }
             }
         }
 

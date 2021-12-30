@@ -42,7 +42,7 @@ public class Client {
             {
                 System.out.println("logFlag: "+logFlag);
                 if(logFlag) {
-                    System.out.println("\nAvailable choices: tweet, removeTweet, comment, like, socialize, logOut, exit");
+                    System.out.println("\nAvailable choices: timeLine, tweet, removeTweet, comment, like, socialize, logOut, exit");
                     clientRequest = scanner.next();
                     if (clientRequest.equals("exit")) {
                         System.out.println("Closing this connection : " + socket);
@@ -97,6 +97,14 @@ public class Client {
                                 consoleView.print(response);
                                 break;
                             }
+                            case "timeLine":
+                            {
+                                String request=commandPerserService.timeLine();
+                                String response=connectionService.send(request);
+                                consoleView.print(response);
+                                break;
+
+                            }
                             case "socialize":
                             {
                                 System.out.println("follow, unfollow, (view) profile(in order to like,ret or comment)");
@@ -140,6 +148,7 @@ public class Client {
                                         }
                                         break;
                                     }
+
                                 }
                             }
                         }

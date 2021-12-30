@@ -16,7 +16,7 @@ public interface TimeLineService  {
     /**
      * prints timeline
      */
-    public void printTimeLine();
+    public String printTimeLine();
     /**
      *
      * @param key data

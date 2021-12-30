@@ -31,6 +31,7 @@ public class ClientHandler implements Runnable {
     AuthenticationServiceImp authenticationServiceImp=new AuthenticationServiceImp();
     TweetingServiceImp tweetingServiceImp=new TweetingServiceImp();
     ObserverServiceImp observerServiceImp=new ObserverServiceImp();
+    TimeLineServiceImp timeLineServiceImp=new TimeLineServiceImp();
     CommandPerserServiceImp commandPerserService=new CommandPerserServiceImp();
     ConnectionServiceImp connectionService=null;
     JSONtool jsoNtool=new JSONtool();
@@ -489,6 +490,43 @@ public class ClientHandler implements Runnable {
                                     }
                                     break;
                                 }
+                                case "timeLine":
+                                {
+                                    int rslt= timeLineServiceImp.begin();
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult("TimeLine loaded SuccessFully!");
+                                        response1.addResult(timeLineServiceImp.timeLine);
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+
+                                    }
+                                    else {
+                                        if (rslt == -1) {
+                                            response = "";
+                                            Response response1 = new Response();
+                                            response1.addResult("Failed to load timeLine!");
+                                            Error error = new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
+                                            response += jsoNtool.toJSON(response1);
+                                        } else {
+                                            if (rslt == 11) {
+                                                response = "";
+                                                System.out.println("Wrong result: " + rslt);
+                                                Response response2 = new Response();
+                                                response2.addResult("TimeLine loading Failed!");
+                                                Error error = new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -520,6 +558,7 @@ public class ClientHandler implements Runnable {
     {
         observerServiceImp.addAccount(account);
         tweetingServiceImp.addAccount(account);
+        timeLineServiceImp.addAccount(account);
     }
     public Request toRequest(String json)
     {

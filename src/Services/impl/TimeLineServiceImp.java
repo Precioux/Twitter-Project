@@ -21,7 +21,7 @@ public class TimeLineServiceImp implements TimeLineService {
     private ArrayList<Long> addr=new ArrayList<>();
     private ArrayList<Boolean> check=new ArrayList<>();
     Account account=new Account();
-
+    public String timeLine="";
     public void addAccount(Account account) {
         this.account=account;
     }
@@ -32,7 +32,13 @@ public class TimeLineServiceImp implements TimeLineService {
      */
     public int begin()
     {
-        int next = 0;
+        AFollowings.clear();
+        tweetlist.clear();
+        timeline.clear();
+        addr.clear();
+        check.clear();
+        System.out.println("Try to set timeline for "+account.ID);
+        int type=-1;
         try {
 
             findFollowings();
@@ -46,28 +52,34 @@ public class TimeLineServiceImp implements TimeLineService {
                     getComments(follower);
                 }
                 sortTimeline();
-                printTimeLine();
+                timeLine="";
+                timeLine+=printTimeLine();
+                System.out.println("TLS : "+timeLine);
+                type=0;
             }
         } catch (noFollowerException e) {
-            System.out.println("You follow no one!");
+            //System.out.println("You follow no one!");
+            type=11;
         }
-        System.out.println("Enter -1 to return and 0 to stay");
-        Scanner scanner=new Scanner(System.in);
-        int change=scanner.nextInt();
-        next=change;
-        return next;
+//    //    System.out.println("Enter -1 to return and 0 to stay");
+//      //  Scanner scanner=new Scanner(System.in);
+//        ///int change=scanner.nextInt();
+//        next=change;
+        return type;
     }
 
     /**
      * prints timeline
      */
-    public void printTimeLine()
+    public String printTimeLine()
     {
+        String tL="";
         for (String t:timeline) {
-            System.out.println("------------------------------------------------------");
-            System.out.println(t);
-            System.out.println("------------------------------------------------------");
+            tL+="------------------------------------------------------\n";
+            tL+=t;
+            tL+="\n------------------------------------------------------\n";
         }
+        return tL;
     }
 
     /**
