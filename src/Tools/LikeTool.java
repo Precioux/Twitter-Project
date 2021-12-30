@@ -55,7 +55,7 @@ public class LikeTool extends Tool{
             like.addDate(now);
             like.addData(likedTweet);
             like.makeDDU(str);
-            System.out.println("liked Successfully!");
+            //System.out.println("liked Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

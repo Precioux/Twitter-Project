@@ -54,7 +54,7 @@ public class CommentTool extends Tool{
             comment.addDate(now);
             comment.addData(Tweet);
             comment.makeDDU(str,com);
-            System.out.println("Commented Successfully!");
+       //     System.out.println("Commented Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -54,7 +54,7 @@ public class RetweetTool extends Tool{
             retweeT.addDate(now);
             retweeT.addData(likedTweet);
             retweeT.makeDDU(str);
-            System.out.println("Retweeted Successfully!");
+        //    System.out.println("Retweeted Successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

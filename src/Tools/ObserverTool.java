@@ -1,5 +1,9 @@
 package Tools;
 
+import com.google.gson.Gson;
+import requestsFormats.ForOther;
+import resultFormats.Result;
+
 import java.io.*;
 import java.util.Scanner;
 /**
@@ -13,7 +17,8 @@ public class ObserverTool extends Tool {
     public class noFollowingException extends Exception{}
     File folder = new File("./Data/Users/");
     protected String[] users = folder.list();
-
+    JSONtool jsoNtool=new JSONtool();
+    Gson gson=new Gson();
     /**
      * like
      * @param tweet data
@@ -29,11 +34,12 @@ public class ObserverTool extends Tool {
      * comment
      * @param Tweet data
      */
-    private void commentIt(String Tweet)
+    private void commentIt(String Tweet,String d)
     {
         CommentTool commentTool=new CommentTool();
         commentTool.addAccount(account);
-        //commentTool.add(Tweet);
+        commentTool.add(Tweet,d);
+
     }
 
     /**
@@ -46,15 +52,15 @@ public class ObserverTool extends Tool {
         retweetTool.addAccount(account);
         retweetTool.add(tweet);
     }
-
     /**
-     * profile
+     * profileForAction
      */
-    public void profile()
+    public int profileForAction(String jData)
     {
-        System.out.println("Enter ID of user you want to view his/her profile:");
-        Scanner scanner=new Scanner(System.in);
-        String u=scanner.next();
+        ForOther forOther=gson.fromJson(jData,ForOther.class);
+        System.out.println("This is profileA : "+forOther);
+        int type=-1;
+        String u=forOther.owner;
         try {
             boolean c=isUser(u);
             if(!c)
@@ -65,43 +71,112 @@ public class ObserverTool extends Tool {
                     throw new FileNotFoundException();
                 else {
                     String[] tweets = userfolder.list();
-                    System.out.println(tweets.length);
-                    int i=0;
-                    for (String tweet : tweets) {
-                        System.out.println("___________________________________________________________________________");
-                        System.out.println(i+1+"-  " +readTweet(u,tweet));
-                        System.out.println("___________________________________________________________________________");
-                        i++;
-                    }
-                    System.out.println("Do you want to react to any tweet?\nif answer is yes enter tweet's index\notherwise enter -1");
-                    int choice=scanner.nextInt();
+                    //    System.out.println(tweets.length);
+//                    p="";
+//                    int i=0;
+//                    for (String tweet : tweets) {
+//                        p+="___________________________________________________________________________\n";
+//                        p+=i+1+"-  " +readTweet(u,tweet)+"\n";
+//                        p+="___________________________________________________________________________";
+//                        i++;
+//                    }
+//                    System.out.println("p:\n"+p);
+//                    type=0;
+                    int choice=forOther.index;
                     if(choice!=-1)
                     {
-                        System.out.println("1-Like\n2-Comment\n3-Retweet");
-                        int r=scanner.nextInt();
+                      //  System.out.println("1-Like\n2-Comment\n3-Retweet");
+                        int r=forOther.action;
                         if(r==1)
                         {
                             likeIt(readTweetw(u,tweets[choice-1]));
+                            type=0;
                         }
                         else{
-                            if(r==2)
-                                commentIt(readTweetw(u,tweets[choice-1]));
+                            if(r==2){
+                                commentIt(readTweetw(u,tweets[choice-1]),forOther.d);
+                            type=0;}
                             else
                             {
                                 if(r==3)
                                     retweetIt(readTweetw(u,tweets[choice-1]));
+                                type=0;
                             }
                         }
                     }
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            type=999;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (userNotFoundException e) {
-            System.out.println("No user found with given ID");
+            type=9;
         }
+      //  Result result=new Result(type,p);
+        return type;
+    }
+
+    /**
+     * profile
+     */
+    public String profile(String who)
+    {
+        String p="";
+        int type=-1;
+        String u=who;
+        try {
+            boolean c=isUser(u);
+            if(!c)
+                throw new userNotFoundException();
+            else {
+                File userfolder = new File("./Data/Tweets/" + u + "/");
+                if (!userfolder.exists())
+                    throw new FileNotFoundException();
+                else {
+                    String[] tweets = userfolder.list();
+                //    System.out.println(tweets.length);
+                   p="";
+                    int i=0;
+                    for (String tweet : tweets) {
+                        p+="___________________________________________________________________________\n";
+                        p+=i+1+"-  " +readTweet(u,tweet)+"\n";
+                        p+="___________________________________________________________________________";
+                        i++;
+                    }
+                    System.out.println("p:\n"+p);
+                    type=0;
+                  //  System.out.println("Do you want to react to any tweet?\nif answer is yes enter tweet's index\notherwise enter -1");
+                    //int choice=scanner.nextInt();
+//                    if(choice!=-1)
+//                    {
+//                        System.out.println("1-Like\n2-Comment\n3-Retweet");
+//                        int r=scanner.nextInt();
+//                        if(r==1)
+//                        {
+//                            likeIt(readTweetw(u,tweets[choice-1]));
+//                        }
+//                        else{
+//                            if(r==2)
+//                                commentIt(readTweetw(u,tweets[choice-1]));
+//                            else
+//                            {
+//                                if(r==3)
+//                                    retweetIt(readTweetw(u,tweets[choice-1]));
+//                            }
+//                        }
+//                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            type=999;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (userNotFoundException e) {
+           type=9;
+        }
+        Result result=new Result(type,p);
+        return jsoNtool.toJSON(result);
     }
 
     /**

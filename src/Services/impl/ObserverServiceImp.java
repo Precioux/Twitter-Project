@@ -5,6 +5,7 @@ import Services.*;
 import com.google.gson.Gson;
 import entity.Account;
 import requestsFormats.ForServices;
+import resultFormats.Result;
 
 import java.util.Scanner;
 /**
@@ -16,6 +17,7 @@ import java.util.Scanner;
 public class ObserverServiceImp implements ObserverService {
     Account account=new Account();
     int next=0;
+    String profileShortCut="";
     public void addAccount(Account account) {
         this.account=account;
     }
@@ -54,13 +56,20 @@ public class ObserverServiceImp implements ObserverService {
             }
             case 3:
             {
-                observerTool.profile();
+                Result result =gson.fromJson(observerTool.profile(forServices.data),Result.class);
+                    if(result.type==0)
+                    {
+                        String p=result.data;
+                        System.out.println("p");
+                        recieveProfile(p);
+                    }
+                changeNext(result.type);
                 break;
             }
             case 4:
             {
-                next=4;
-               // check=true;
+             int rslt=observerTool.profileForAction(forServices.data);
+             changeNext(rslt);
                 break;
             }
         }
@@ -68,7 +77,15 @@ public class ObserverServiceImp implements ObserverService {
         //  }
         return next;
     }
-
+    public void recieveProfile(String p)
+    {
+        this.profileShortCut="";
+        this.profileShortCut+=p;
+    }
+    public String sendProfile()
+    {
+        return profileShortCut;
+    }
     @Override
     public void changeNext(int next) {
         this.next=next;

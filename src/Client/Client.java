@@ -11,6 +11,7 @@ import Services.impl.ConsoleViewServiceImp;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import entity.Account;
+import entity.Request;
 import entity.Response;
 
 import java.io.*;
@@ -31,7 +32,7 @@ public class Client {
     public static void main(String[] args) throws IOException {
         try {
             Socket socket = new Socket(getHost(), getPort());
-
+            Gson gson=new Gson();
             BufferedReader bufferedReaderFromB=new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintStream printStream=new PrintStream(socket.getOutputStream());
             ConnectionServiceImp connectionService=new ConnectionServiceImp(socket,bufferedReaderFromB,printStream);
@@ -98,7 +99,7 @@ public class Client {
                             }
                             case "socialize":
                             {
-                                System.out.println("follow, unfollow, view profile(in order to like,ret or comment)");
+                                System.out.println("follow, unfollow, (view) profile(in order to like,ret or comment)");
                                 String c=scanner.next();
                                 switch (c)
                                 {
@@ -116,6 +117,27 @@ public class Client {
                                         String request=commandPerserService.unfollow();
                                         String response=connectionService.send(request);
                                         consoleView.print(response);
+                                        break;
+                                    }
+                                    case "profile":
+                                    {
+                                        String request=commandPerserService.profile();
+                                        String response=connectionService.send(request);
+                                        consoleView.print(response);
+                                        Response response1=gson.fromJson(response,Response.class);
+                                        if(response1.validity)
+                                        {
+                                            System.out.println("Profile is "+true);
+                                            Request previousRequest=gson.fromJson(request,Request.class);
+                                            System.out.println("reacting to "+previousRequest.ParameterValue);
+                                            String requestAction=commandPerserService.action(previousRequest.ParameterValue);
+                                            if(!request.equals(null)) {
+                                                System.out.println("sending request : "+requestAction);
+                                                String responseAction = connectionService.send(requestAction);
+                                                consoleView.print(responseAction);
+                                            }
+                                            else break;
+                                        }
                                         break;
                                     }
                                 }
@@ -137,7 +159,7 @@ public class Client {
                     String response=connectionService.send(request);
                     System.out.println("res: "+response);
                     consoleView.print(response);
-                    Gson gson=new Gson();
+                   // Gson gson=new Gson();
                     Response response1=gson.fromJson(response,Response.class);
                     if(response1.validity)
                         logFlag=true;
@@ -152,7 +174,7 @@ public class Client {
                             String response=connectionService.send(request);
                             System.out.println("res: "+response);
                             consoleView.print(response);
-                            Gson gson=new Gson();
+                         //   Gson gson=new Gson();
                             Response response1=gson.fromJson(response,Response.class);
                             if(response1.validity)
                                 logFlag=true;

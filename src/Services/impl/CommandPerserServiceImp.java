@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import entity.Account;
 import entity.Request;
 import requestsFormats.Comment;
+import requestsFormats.ForOther;
 import requestsFormats.LogIn;
 
 import java.math.BigInteger;
@@ -20,6 +21,53 @@ public class CommandPerserServiceImp implements CommandPerserService {
     static Scanner scanner=new Scanner(System.in);
     static Scanner scanner1=new Scanner(System.in).useDelimiter("\n");
     static JSONtool jsonTool=new JSONtool();
+    public static String action(String who)
+    {
+        String f="";
+        System.out.println("If you want to react to any tweet enter tweet's index otherwise enter -1");
+        int c=scanner.nextInt();
+        String choice="";
+        if(c!=-1)
+        {
+            System.out.println("Comment ,Like ,Retweet?");
+            ForOther forOther=null;
+            choice+=scanner.next();
+            switch (choice)
+            {
+                case "Comment":
+                {
+                    System.out.println("Enter your comment ");
+                    String comment=scanner1.next();
+                    System.out.println("You have chosen to comment "+comment+" on "+c+"th tweet of "+who);
+                    forOther=new ForOther(c,who,2,comment);
+                    break;
+                }
+                case "Like":
+                {
+                    System.out.println("You have chosen to like"+c+"th tweet of "+who);
+                    forOther=new ForOther(c,who,1,"");
+                    break;
+                }
+                case "Retweet":
+                {
+                    System.out.println("You have chosen to ret" +c+"th tweet of "+who);
+                    forOther=new ForOther(c,who,3,"");
+                    break;
+                }
+            }
+            Request request=new Request("action","reacting",jsonTool.toJSON(forOther));
+            f+=jsonTool.toJSON(request);
+        }
+        else f+="";
+        return f;
+    }
+    public static String profile()
+    {
+        System.out.println("Enter ID of user you intend to view: ");
+        String fid=scanner.next();
+        Request request=new Request("profile","view "+fid,fid);
+        return jsonTool.toJSON(request);
+    }
     public static String unfollow()
     {
         System.out.println("Enter ID of user you intend to unfollow: ");

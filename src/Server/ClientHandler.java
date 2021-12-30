@@ -363,6 +363,7 @@ public class ClientHandler implements Runnable {
                                 }
                                 case "unfollow":
                                 {
+                                    response="";
                                     ForServices forServices=new ForServices(2,clientRequest.ParameterValue);
                                     int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
                                     if(rslt==0)
@@ -402,6 +403,92 @@ public class ClientHandler implements Runnable {
                                     }
                                     break;
                                 }
+                                case "profile":
+                                {
+                                    response="";
+                                    ForServices forServices=new ForServices(3,clientRequest.ParameterValue);
+                                    int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult("profile loaded SuccessFully!");
+                                        response1.addResult(observerServiceImp.sendProfile());
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+                                    }
+                                    else
+                                    {
+                                        if(rslt==-1)
+                                        {
+                                            response="";
+                                            Response response1=new Response();
+                                            response1.addResult("Failed to load profile "+clientRequest.ParameterValue+"!");
+                                            Error error=new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
+                                            response+=jsoNtool.toJSON(response1);
+                                        }
+                                        else
+                                        {
+                                            if(rslt==9 || rslt==999 )
+                                            {
+                                                response="";
+                                                System.out.println("Wrong result: "+rslt);
+                                                Response response2=new Response();
+                                                response2.addResult("profile loading Failed!");
+                                                Error error=new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                                case "action":
+                                {
+                                    response="";
+                                    System.out.println("This is action: "+clientRequest.ParameterValue);
+                                    ForServices forServices=new ForServices(4,clientRequest.ParameterValue);
+                                    int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult("reacted SuccessFully!");
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+                                    }
+                                    else
+                                    {
+                                        if(rslt==-1)
+                                        {
+                                            response="";
+                                            Response response1=new Response();
+                                            response1.addResult("Failed to react "+clientRequest.ParameterValue+"!");
+                                            Error error=new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
+                                            response+=jsoNtool.toJSON(response1);
+                                        }
+                                        else
+                                        {
+                                            if(rslt==9 || rslt==999 )
+                                            {
+                                                response="";
+                                                System.out.println("Wrong result: "+rslt);
+                                                Response response2=new Response();
+                                                response2.addResult("reacted Failed!");
+                                                Error error=new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
                             }
                         }
                     }
@@ -418,7 +505,7 @@ public class ClientHandler implements Runnable {
             } catch (AccountChecker.IdException e) {
                 e.printStackTrace();
             }
-
+            System.out.println("Responsed: "+response);
             connectionService.sendToC(response);
         }
         try {
