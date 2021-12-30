@@ -48,7 +48,8 @@ public class ObserverServiceImp implements ObserverService {
             }
             case 2:
             {
-                observerTool.unfollow();
+                int rslt=observerTool.unfollow(forServices.data);
+                changeNext(rslt);
                 break;
             }
             case 3:

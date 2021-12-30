@@ -110,6 +110,14 @@ public class Client {
                                         consoleView.print(response);
                                         break;
                                     }
+                                    case "unfollow":
+                                    {
+
+                                        String request=commandPerserService.unfollow();
+                                        String response=connectionService.send(request);
+                                        consoleView.print(response);
+                                        break;
+                                    }
                                 }
                             }
                         }

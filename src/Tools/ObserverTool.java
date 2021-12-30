@@ -165,14 +165,14 @@ public class ObserverTool extends Tool {
     /**
      * unfollow
      */
-    public void unfollow()
+    public int unfollow(String who)
     {
-        boolean check=false;
-        while (!check) {
+        int type=-1;
+        //while (!check) {
             try {
-                System.out.println("Enter id of user you want to unfollow: ");
-                Scanner scanner = new Scanner(System.in);
-                String user = scanner.next();
+          //      System.out.println("Enter id of user you want to unfollow: ");
+            //    Scanner scanner = new Scanner(System.in);
+                String user = who;
                 boolean c = isUser(user);
                 if (!c)
                     throw new userNotFoundException();
@@ -183,22 +183,23 @@ public class ObserverTool extends Tool {
                     else {
                         FollowEditor followEditor = new FollowEditor();
                         followEditor.addAccount(account.ID);
-                        check = followEditor.unfollower(user);
+                        boolean check = followEditor.unfollower(user);
                         if (!check)
                             throw new FileNotFoundException();
+                        else type=0;
                     }
                 }
             }  catch (userNotFoundException e) {
-                System.out.println("No User with given ID,try again");
+               // System.out.println("No User with given ID,try again");
+                type=9;
             } catch (FileNotFoundException e) {
-                System.out.println("File not found");
-                check=true;
+               type=999;
             } catch (noFollowingException e) {
-                System.out.println("You follow no one!");
-                check=true;
+               // System.out.println("You follow no one!");
+                type=10;
             }
-
-        }
+             return  type;
+      //  }
     }
 
     /**

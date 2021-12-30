@@ -173,6 +173,9 @@ public class ClientHandler implements Runnable {
                                             response="";
                                             Response response1=new Response();
                                             response1.addResult("Failed to Remove!");
+                                            Error error=new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
                                         }
                                         else
@@ -212,6 +215,9 @@ public class ClientHandler implements Runnable {
                                             response="";
                                             Response response1=new Response();
                                             response1.addResult("Failed to like!");
+                                            Error error=new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
                                         }
                                         else
@@ -251,6 +257,9 @@ public class ClientHandler implements Runnable {
                                             response="";
                                             Response response1=new Response();
                                             response1.addResult("Failed to retweet!");
+                                            Error error=new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
                                         }
                                         else
@@ -289,6 +298,9 @@ public class ClientHandler implements Runnable {
                                             response="";
                                             Response response1=new Response();
                                             response1.addResult("Failed to comment!");
+                                            Error error=new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
                                         }
                                         else
@@ -327,6 +339,9 @@ public class ClientHandler implements Runnable {
                                             response="";
                                             Response response1=new Response();
                                             response1.addResult("Failed to follow "+clientRequest.ParameterValue+"!");
+                                            Error error=new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
                                             response+=jsoNtool.toJSON(response1);
                                         }
                                         else
@@ -337,6 +352,47 @@ public class ClientHandler implements Runnable {
                                                 System.out.println("Wrong result: "+rslt);
                                                 Response response2=new Response();
                                                 response2.addResult("following Failed!");
+                                                Error error=new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                                case "unfollow":
+                                {
+                                    ForServices forServices=new ForServices(2,clientRequest.ParameterValue);
+                                    int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult(clientRequest.ParameterValue+" unfollowed SuccessFully!");
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+                                    }
+                                    else
+                                    {
+                                        if(rslt==-1)
+                                        {
+                                            response="";
+                                            Response response1=new Response();
+                                            response1.addResult("Failed to unfollow "+clientRequest.ParameterValue+"!");
+                                            Error error=new Error();
+                                            error.errorSearch(1000);
+                                            response1.addError(error);
+                                            response+=jsoNtool.toJSON(response1);
+                                        }
+                                        else
+                                        {
+                                            if(rslt==9 || rslt==999 || rslt==10)
+                                            {
+                                                response="";
+                                                System.out.println("Wrong result: "+rslt);
+                                                Response response2=new Response();
+                                                response2.addResult("unfollowing Failed!");
                                                 Error error=new Error();
                                                 error.errorSearch(rslt);
                                                 response2.addError(error);

@@ -20,6 +20,13 @@ public class CommandPerserServiceImp implements CommandPerserService {
     static Scanner scanner=new Scanner(System.in);
     static Scanner scanner1=new Scanner(System.in).useDelimiter("\n");
     static JSONtool jsonTool=new JSONtool();
+    public static String unfollow()
+    {
+        System.out.println("Enter ID of user you intend to unfollow: ");
+        String fid=scanner.next();
+        Request request=new Request("unfollow","unfollowing "+fid,fid);
+        return jsonTool.toJSON(request);
+    }
     public static String follow()
     {
         System.out.println("Enter ID of user you intend to follow: ");
