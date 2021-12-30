@@ -41,7 +41,7 @@ public class Client {
             {
                 System.out.println("logFlag: "+logFlag);
                 if(logFlag) {
-                    System.out.println("\nAvailable choices: tweet, removeTweet , logOut, exit");
+                    System.out.println("\nAvailable choices: tweet, removeTweet, like, socialize, logOut, exit");
                     clientRequest = scanner.next();
                     if (clientRequest.equals("exit")) {
                         System.out.println("Closing this connection : " + socket);
@@ -71,6 +71,27 @@ public class Client {
                             case "removeTweet":
                             {
                                 String request=commandPerserService.remove();
+                                String response=connectionService.send(request);
+                                consoleView.print(response);
+                                break;
+                            }
+                            case "like":
+                            {
+                                String request=commandPerserService.like();
+                                String response=connectionService.send(request);
+                                consoleView.print(response);
+                                break;
+                            }
+                            case "retweet":
+                            {
+                                String request=commandPerserService.retweet();
+                                String response=connectionService.send(request);
+                                consoleView.print(response);
+                                break;
+                            }
+                            case "comment":
+                            {
+                                String request=commandPerserService.comment();
                                 String response=connectionService.send(request);
                                 consoleView.print(response);
                                 break;

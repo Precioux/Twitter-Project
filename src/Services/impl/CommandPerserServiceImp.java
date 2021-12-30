@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import entity.Account;
 import entity.Request;
+import requestsFormats.Comment;
 import requestsFormats.LogIn;
 
 import java.math.BigInteger;
@@ -19,6 +20,30 @@ public class CommandPerserServiceImp implements CommandPerserService {
     static Scanner scanner=new Scanner(System.in);
     static Scanner scanner1=new Scanner(System.in).useDelimiter("\n");
     static JSONtool jsonTool=new JSONtool();
+    public static String comment()
+    {
+        System.out.println("Enter tweet you intend to comment: ");
+        String tweet=scanner1.next();
+        System.out.println("Enter your comment");
+        String comment=scanner1.next();
+        Comment comment1=new Comment(tweet,comment);
+        Request request=new Request("comment","to comment",jsonTool.toJSON(comment1));
+        return jsonTool.toJSON(request);
+    }
+    public static String retweet()
+    {
+        System.out.println("Enter tweet you intend to retweet: ");
+        String tweet=scanner1.next();
+        Request request=new Request("retweet","to retweet",tweet);
+        return jsonTool.toJSON(request);
+    }
+    public static String like()
+    {
+        System.out.println("Enter tweet you intend to like: ");
+        String tweet=scanner1.next();
+        Request request=new Request("like","to like",tweet);
+        return jsonTool.toJSON(request);
+    }
     public static String remove()
     {
         System.out.println("Enter tweet you intend to remove: ");

@@ -55,24 +55,27 @@ public class TweetingServiceImp implements TweetingService {
             else
             {
                 if(choice==3) {
-                    tweetTool.like();
-                    System.out.println("\n");
+                   int rslt=tweetTool.like(forTweetingService.data);
+                   changeNext(rslt);
+                 //   System.out.println("\n");
                    // begin();
                 }
                 else
                 {
                     if(choice==4)
                     {
-                        tweetTool.ret();
-                        System.out.println("\n");
+                      int rslt=tweetTool.ret(forTweetingService.data);
+                      changeNext(rslt);
+                      //  System.out.println("\n");
                      //   begin();
                     }
                     else
                     {
                         if(choice==5)
                         {
-                            tweetTool.comment();
-                            System.out.println("\n");
+                            int rslt=tweetTool.comment(forTweetingService.data);
+                            changeNext(rslt);
+                            //System.out.println("\n");
                        //     begin();
                         }
                         else

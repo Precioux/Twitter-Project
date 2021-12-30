@@ -189,6 +189,92 @@ public class ClientHandler implements Runnable {
                                             }
                                         }
                                     }
+                                    break;
+                                }
+                                case "like":
+                                {
+                                    response="";
+                                    ForTweetingService forTweetingService=new ForTweetingService(3,clientRequest.ParameterValue);
+                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult("liked SuccessFully!");
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+                                    }
+                                    else
+                                    {
+                                        if(rslt==-1)
+                                        {
+                                            response="";
+                                            Response response1=new Response();
+                                            response1.addResult("Failed to like!");
+                                            response+=jsoNtool.toJSON(response1);
+                                        }
+                                        else
+                                        {
+                                            if(rslt==6 || rslt==999 || rslt==998)
+                                            {
+                                                response="";
+                                                System.out.println("Wrong result: "+rslt);
+                                                Response response2=new Response();
+                                                response2.addResult("liking Failed!");
+                                                Error error=new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                                case "retweet":
+                                {
+                                    response="";
+                                    ForTweetingService forTweetingService=new ForTweetingService(4,clientRequest.ParameterValue);
+                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+                                    if(rslt==0)
+                                    {
+                                        response="";
+                                        Response response1=new Response();
+                                        response1.addResult("Retweeted SuccessFully!");
+                                        response1.setTik();
+                                        response+=jsoNtool.toJSON(response1);
+                                    }
+                                    else
+                                    {
+                                        if(rslt==-1)
+                                        {
+                                            response="";
+                                            Response response1=new Response();
+                                            response1.addResult("Failed to retweet!");
+                                            response+=jsoNtool.toJSON(response1);
+                                        }
+                                        else
+                                        {
+                                            if(rslt==7 || rslt==999 || rslt==998)
+                                            {
+                                                response="";
+                                                System.out.println("Wrong result: "+rslt);
+                                                Response response2=new Response();
+                                                response2.addResult("retweeting Failed!");
+                                                Error error=new Error();
+                                                error.errorSearch(rslt);
+                                                response2.addError(error);
+                                                response += jsoNtool.toJSON(response2);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                                case "comment":
+                                {
+                                    ForTweetingService forTweetingService=new ForTweetingService(5,clientRequest.ParameterValue);
+                                    int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forTweetingService));
+
+                                    break;
                                 }
                             }
                         }

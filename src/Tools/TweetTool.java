@@ -1,5 +1,7 @@
 package Tools;
+import com.google.gson.Gson;
 import entity.Tweet;
+import requestsFormats.Comment;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -120,10 +122,9 @@ public class TweetTool extends Tool {
      *
      * @throws IOException check
      */
-    public void ret() throws IOException {
-        boolean check = false;
+    public int ret(String t) throws IOException {
+        int type=-1;
         File folder = null;
-        while (!check) {
             try {
                 folder = new File("./Data/retweets/" + account.ID + "/");
                 if (!folder.exists())
@@ -133,13 +134,11 @@ public class TweetTool extends Tool {
                     if (tf.length == 0)
                         throw new noTweetException();
                     else {
-                        System.out.println("Enter index of tweet you want to retweet: ");
-                        Scanner scanner = new Scanner(System.in);
-                        int choice = scanner.nextInt();
-                        if (choice > tf.length)
-                            throw new InvalidChoiceException();
+                        int choice = findTweet(t);
+                        if (choice==-1)
+                            type=998;
                         else {
-                            File l = new File("./Data/Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
+                            File l = new File("./Data/Tweets/" + account.ID + "/"+tf[choice]+"/ddu");
                             FileReader fr = new FileReader(l);
                             if (!l.exists())
                                 throw new FileNotFoundException();
@@ -153,33 +152,29 @@ public class TweetTool extends Tool {
                                 RetweetTool retweetTool=new RetweetTool();
                                 retweetTool.addAccount(account);
                                 retweetTool.add(twt);
-                                check = true;
+                                type=0;
                             }
                             fr.close();
                         }
                     }
                 }
-            } catch (InvalidChoiceException e) {
-                System.out.println("Invalid choice,try again");
-                e.printStackTrace();
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                check=true;
+               type=999;
             } catch (noTweetException e) {
-                System.out.println("No tweet to retweet!");
-                check=true;
+                type=7;
             }
-        }
+            return type;
     }
 
     /**
      * add a comment
      */
-    public void comment()
+    public int comment(String jData)
     {
-        boolean check = false;
+        Gson gson=new Gson();
+        Comment c=gson.fromJson(jData,Comment.class);
+        int type=-1;
         File folder = null;
-        while (!check) {
             try {
                 folder = new File("./Data/Tweets/" + account.ID + "/");
                 if (!folder.exists())
@@ -189,13 +184,11 @@ public class TweetTool extends Tool {
                     if (tf.length == 0)
                         throw new noTweetException();
                     else {
-                        System.out.println("Enter index of tweet you want to add comment: ");
-                        Scanner scanner = new Scanner(System.in);
-                        int choice = scanner.nextInt();
-                        if (choice > tf.length)
+                        int choice = findTweet(c.tweet);
+                        if (choice ==-1)
                             throw new InvalidChoiceException();
                         else {
-                            File l = new File("./Data/Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
+                            File l = new File("./Data/Tweets/" + account.ID + "/"+tf[choice]+"/ddu");
                             FileReader fr = new FileReader(l);
                             if (!l.exists())
                                 throw new FileNotFoundException();
@@ -209,36 +202,32 @@ public class TweetTool extends Tool {
                                 CommentTool commentTool=new CommentTool();
                                 commentTool.addAccount(account);
                                 commentTool.add(twt);
-
-                                check = true;
+                                type=0;
                             }
                             fr.close();
                         }
                     }
                 }
             } catch (InvalidChoiceException e) {
-                System.out.println("Invalid choice,try again");
-                e.printStackTrace();
+                type=998;
+
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                check=true;
+               type=999;
             } catch (noTweetException e) {
-                System.out.println("No tweet to comment!");
-                check=true;
+               type=8;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        return type;
     }
 
     /**
      * lika a tweet
      * @throws IOException check
      */
-    public void like() throws IOException {
-        boolean check = false;
+    public int like(String t) throws IOException {
         File folder = null;
-        while (!check) {
+        int type=-1;
             try {
                 folder = new File("./Data/Tweets/" + account.ID + "/");
                 if (!folder.exists())
@@ -248,44 +237,48 @@ public class TweetTool extends Tool {
                     if (tf.length == 0)
                         throw new noTweetException();
                     else {
-                        System.out.println("Enter index of tweet you want to like: ");
-                        Scanner scanner = new Scanner(System.in);
-                        int choice = scanner.nextInt();
-                        if (choice > tf.length)
-                            throw new InvalidChoiceException();
-                        else {
-                            File l = new File("./Data/Tweets/" + account.ID + "/"+tf[choice-1]+"/ddu");
-                            FileReader fr = new FileReader(l);
-                            if (!l.exists())
-                                throw new FileNotFoundException();
-                            else {
-                                Scanner scanner1=new Scanner(fr).useDelimiter("\n");
-                                String rubbish=scanner1.next();
-                                String twt="@";
-                                twt+=scanner1.next();
-                                twt+="  ";
-                                twt+=scanner1.next();
-                                LikeTool likeTool=new LikeTool();
-                                likeTool.addAccount(account);
-                                likeTool.add(twt);
-                                check = true;
-                            }
-                            fr.close();
+//                        System.out.println("Enter index of tweet you want to like: ");
+//                        Scanner scanner = new Scanner(System.in);
+//                        int choice = scanner.nextInt();
+//                        if (choice > tf.length)
+//                            throw new InvalidChoiceException();
+//                        else {
+                        int choice = findTweet(t);
+                        if (choice == -1) {
+                              type=998;
                         }
+                        else
+                        {
+                        File l = new File("./Data/Tweets/" + account.ID + "/" + tf[choice] + "/ddu");
+                        FileReader fr = new FileReader(l);
+                        if (!l.exists())
+                            throw new FileNotFoundException();
+                        else {
+                            Scanner scanner1 = new Scanner(fr).useDelimiter("\n");
+                            String rubbish = scanner1.next();
+                            String twt = "@";
+                            twt += scanner1.next();
+                            twt += "  ";
+                            twt += scanner1.next();
+                            LikeTool likeTool = new LikeTool();
+                            likeTool.addAccount(account);
+                            likeTool.add(twt);
+                            type=0;
+                        }
+                        fr.close();
+                        //  }
+                    }
                     }
                 }
-            } catch (InvalidChoiceException e) {
-                System.out.println("Invalid choice,try again");
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                check=true;
+            }catch (FileNotFoundException e) {
+                type=999;
+
             } catch (noTweetException e) {
-                System.out.println("No tweet to like!");
-                check=true;
+                type=6;
             }
-        }
+return type;
     }
+
    private int findTweet(String t)
    {
        int ans=-1;
