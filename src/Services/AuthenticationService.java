@@ -14,17 +14,18 @@ import java.util.InputMismatchException;
  * */
 public interface AuthenticationService {
     public class InvalidChoiceException extends Exception {}
-
-    /**
-     * add
-     * @param account data
-     */
-
     AccountChecker accountChecker=new AccountChecker();
     /**
-     *
+     * @return result
+     * @param choice data
+     * @param jData data
      * @throws InputMismatchException check choice(Integer)
      * @throws InvalidChoiceException check choice(1 or 2)
+     * @throws IOException e
+     * @throws Tools.AccountChecker.BioException e
+     * @throws NoSuchAlgorithmException e
+     * @throws Tools.AccountChecker.IdException e
+     * @throws IOException r?
      */
     public int begin(int choice,String jData) throws InputMismatchException, InvalidChoiceException, AccountChecker.BioException, NoSuchAlgorithmException, AccountChecker.IdException, IOException ;
     /**

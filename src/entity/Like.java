@@ -36,6 +36,6 @@ public class Like extends TweetEntity {
      */
     public String toString()
     {
-        return date+"  Liked by "+publisher.ID+" "+data;
+        return date+"  Liked by "+publisher.ID+" [ "+data+" ]";
     }
 }

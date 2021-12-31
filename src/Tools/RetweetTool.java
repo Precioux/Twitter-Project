@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
 /**
  * This class defines Retweet Tool
@@ -43,6 +44,7 @@ public class RetweetTool extends Tool{
     public void add(String likedTweet) {
         try {
             LocalDateTime n = LocalDateTime.now();
+            LocalTime localTime=LocalTime.now();
             String strl = n.toString();
             String str= giveT(strl);
             String Name = "./Data/retweets/" + account.ID + "/" + str;
@@ -51,7 +53,7 @@ public class RetweetTool extends Tool{
             Retweet retweeT = new Retweet();
             retweeT.addPublisher(account);
             LocalDate now = LocalDate.now();
-            retweeT.addDate(now);
+            retweeT.addDate(now,localTime);
             retweeT.addData(likedTweet);
             retweeT.makeDDU(str);
         } catch (IOException e) {

@@ -71,10 +71,12 @@ public class AccountChecker {
     }
     /**
      * new account
+     * @param jData data
      * @return result
      * @throws IdException check ID
      * @throws BioException check bio
      * @throws NoSuchAlgorithmException for checking algorithm
+     * @throws IOException e
      */
     public String getInfo(String jData) throws NoSuchAlgorithmException, IdException, BioException, IOException {
         String ans="";
@@ -186,6 +188,7 @@ public class AccountChecker {
     /**
      * check account data
      * @return result
+     * @param jData data
      */
     public String checkInfo(String jData)
     {

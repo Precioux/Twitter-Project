@@ -12,8 +12,8 @@ public class Comment {
 
     /**
      * constructor
-     * @param tweet
-     * @param comment
+     * @param tweet data
+     * @param comment data
      */
     public Comment(String tweet, String comment) {
         this.tweet = tweet;

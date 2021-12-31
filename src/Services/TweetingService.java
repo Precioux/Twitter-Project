@@ -11,7 +11,7 @@ import java.io.IOException;
  * */
 public interface TweetingService  {
     /**
-     *
+     * @param jData data
      * @return reflex to manager
      * @throws IOException check
      */

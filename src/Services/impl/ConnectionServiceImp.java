@@ -29,7 +29,7 @@ public class ConnectionServiceImp implements ConnectionService {
 
     /**
      * send to client
-     * @param response
+     * @param response data
      */
     public void sendToC(String response)
     {

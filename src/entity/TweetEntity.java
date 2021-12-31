@@ -1,6 +1,8 @@
 package entity;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * This class defines Tweet material
  * @author Samin Mahdipour
@@ -11,7 +13,7 @@ public class TweetEntity {
     public Account publisher=new Account();
     protected String path="";
     protected String data="";
-    protected LocalDate date;
+    protected String date="";
     public class OFException extends Exception {};
 
     /**
@@ -24,7 +26,6 @@ public class TweetEntity {
     }
 
     /**
-     * @throws Tweet.OFException checker
      * @param data adder
      */
     public void addData(String data)
@@ -42,10 +43,11 @@ public class TweetEntity {
     /**
      *
      * @param date adder
+     * @param time data
      */
-    public void addDate(LocalDate date)
+    public void addDate(LocalDate date, LocalTime time)
     {
-        this.date=date;
+        this.date=date+" "+time;
     }
     /**
      *

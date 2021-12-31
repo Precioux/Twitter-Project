@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
 /**
  * This class defines like Tool
@@ -52,7 +53,8 @@ public class LikeTool extends Tool{
             Like like = new Like();
             like.addPublisher(account);
             LocalDate now = LocalDate.now();
-            like.addDate(now);
+            LocalTime localTime=LocalTime.now();
+            like.addDate(now,localTime);
             like.addData(likedTweet);
             like.makeDDU(str);
         } catch (IOException e) {

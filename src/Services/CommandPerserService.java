@@ -131,7 +131,7 @@ public interface CommandPerserService {
 
     /**
      * @return request for sign up
-     * @throws NoSuchAlgorithmException
+     * @throws NoSuchAlgorithmException  e
      */
     public static String SignUp() throws NoSuchAlgorithmException {
         return null;

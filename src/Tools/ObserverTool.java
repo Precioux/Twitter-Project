@@ -53,6 +53,7 @@ public class ObserverTool extends Tool {
         retweetTool.add(tweet);
     }
     /**
+     * @param jData data
      * @return result
      * profileForAction
      */
@@ -106,6 +107,7 @@ public class ObserverTool extends Tool {
 
     /**
      * @return profile
+     * @param who data
      * profile
      */
     public String profile(String who)
@@ -207,6 +209,8 @@ public class ObserverTool extends Tool {
 
     /**
      * unfollow
+     * @return ersult
+     * @param who data
      */
     public int unfollow(String who)
     {
@@ -242,6 +246,8 @@ public class ObserverTool extends Tool {
 
     /**
      * follow
+     * @param who data
+     * @return result
      */
     public int follow(String who){
        int type=-1;

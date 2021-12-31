@@ -689,6 +689,7 @@ public class ClientHandler implements Runnable {
 
     /**
      * submit log
+     * @param localTime data
      * @param localDate data
      * @param request data
      * @param result data

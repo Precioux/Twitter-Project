@@ -41,6 +41,7 @@ public class CommandPerserServiceImp implements CommandPerserService {
      */
     public static String action(String who)
     {
+        boolean wrong=false;
         String f="";
         System.out.println("If you want to react to any tweet enter tweet's index otherwise enter -1");
         int c=scanner.nextInt();
@@ -69,11 +70,16 @@ public class CommandPerserServiceImp implements CommandPerserService {
                     forOther=new ForOther(c,who,3,"");
                     break;
                 }
+                default:{
+                    wrong=true;
+                    break;}
             }
+            if(!wrong){
             Request request=new Request("action","reacting",jsonTool.toJSON(forOther));
-            f+=jsonTool.toJSON(request);
+            f+=jsonTool.toJSON(request);}
+            else f+="-";
         }
-        else f+="";
+        else f+="-";
         return f;
     }
 
@@ -204,7 +210,7 @@ public class CommandPerserServiceImp implements CommandPerserService {
     /**
      *
      * @return request for sign up
-     * @throws NoSuchAlgorithmException
+     * @throws NoSuchAlgorithmException e
      */
    public static String SignUp() throws NoSuchAlgorithmException {
        Account account=new Account();

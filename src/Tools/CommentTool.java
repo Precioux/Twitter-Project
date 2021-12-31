@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
 /**
  * This class defines comment Tool
@@ -37,7 +38,7 @@ public class CommentTool extends Tool{
     }
 
     /**
-     *
+     * @param com data
      * @param Tweet data
      */
     public void add(String Tweet,String com) {
@@ -51,7 +52,8 @@ public class CommentTool extends Tool{
             Comment comment = new Comment();
             comment.addPublisher(account);
             LocalDate now = LocalDate.now();
-            comment.addDate(now);
+            LocalTime localTime=LocalTime.now();
+            comment.addDate(now,localTime);
             comment.addData(Tweet);
             comment.makeDDU(str,com);
         } catch (IOException e) {

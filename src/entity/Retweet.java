@@ -35,6 +35,6 @@ public class Retweet extends TweetEntity {
      */
     public String toString()
     {
-        return date+"  Retweeted by "+publisher.ID+" "+data;
+        return date+"  Retweeted by "+publisher.ID+" [ "+data+" ]";
     }
 }

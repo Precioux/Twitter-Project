@@ -8,7 +8,7 @@ package Services;
  * */
 public interface ObserverService {
     /**
-     *
+     * @param jData data
      * @return reflex
      */
     public int begin(String jData);

@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
 /**
  * This class defines Tweet Tool
@@ -54,7 +55,8 @@ public class TweetTool extends Tool {
             Tweet tweet = new Tweet();
             tweet.addPublisher(account);
             LocalDate now = LocalDate.now();
-            tweet.addDate(now);
+            LocalTime localTime=LocalTime.now();
+            tweet.addDate(now,localTime);
             tweet.addData(t);
             tweet.makeDDU(Name);
         } catch (IOException e) {
@@ -115,6 +117,7 @@ public class TweetTool extends Tool {
     }
     /**
      *@return result
+     * @param t data
      * @throws IOException check
      */
     public int ret(String t) throws IOException {
@@ -164,6 +167,8 @@ public class TweetTool extends Tool {
     /**
      * @return result
      * add a comment
+     * @param jData d
+     *
      */
     public int comment(String jData)
     {
@@ -220,6 +225,7 @@ public class TweetTool extends Tool {
     /**
      * @return result
      * lika a tweet
+     * @param t  data
      * @throws IOException check
      */
     public int like(String t) throws IOException {
@@ -281,6 +287,7 @@ return type;
        return ans;
    }
     /**
+     * @param t  data
      * @return result
      * remove a tweet
      */

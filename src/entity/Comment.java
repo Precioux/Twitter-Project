@@ -21,7 +21,7 @@ public class Comment extends TweetEntity {
         File f=new File("./Data/comments/" + publisher.ID + "/" + str+"/ddu");
         try {
                 FileWriter fileWriter = new FileWriter(f);
-                fileWriter.write(toString()+cmt+"  on  " +data);
+                fileWriter.write(toString()+cmt+" >  on  " +data);
                 fileWriter.close();
 
         } catch (FileNotFoundException e) {
@@ -38,6 +38,6 @@ public class Comment extends TweetEntity {
      */
     public String toString()
     {
-        return date+"  "+publisher.ID+ " Commented ";
+        return date+"  "+publisher.ID+ " Commented < ";
     }
 }
