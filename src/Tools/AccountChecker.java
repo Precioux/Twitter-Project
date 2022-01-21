@@ -212,7 +212,7 @@ public class AccountChecker {
                     }
                 }
             } catch (FileNotFoundException e) {
-                ans+="No user with given ID,try again";
+               System.out.println("No user with given ID,try again");
                 type=1;
             } catch (WrongPasswordException e) {
                 ans+="Username and Password don't match!,try again";

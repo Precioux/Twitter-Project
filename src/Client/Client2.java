@@ -138,14 +138,12 @@ public class Client2 {
                                         Response response1=gson.fromJson(response,Response.class);
                                         if(response1.validity)
                                         {
-
                                             Request previousRequest=gson.fromJson(request,Request.class);
                                             String requestAction=commandPerserService.action(previousRequest.ParameterValue);
-                                            if(!request.equals(null)) {
+                                            if(!requestAction.equals("-")) {
                                                 String responseAction = connectionService.send(requestAction);
                                                 consoleView.print(responseAction);
                                             }
-                                            else break;
                                         }
                                         break;
                                     }
