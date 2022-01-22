@@ -33,7 +33,6 @@ public class AuthenticationServiceImp implements AuthenticationService {
         if(choice==2) {
             String ans=accountChecker.getInfo(jData);
             Result SignUpResult=gson.fromJson(ans, Result.class);
-            System.out.println("2-AuS type: "+SignUpResult.type);
             switch (SignUpResult.type)
             {
                 case 0:

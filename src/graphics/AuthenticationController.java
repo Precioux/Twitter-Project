@@ -1,4 +1,5 @@
-package TwitterGraphics;
+package graphics;
+import Services.impl.AuthenticationServiceImp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +11,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines authentication controller
+ */
 public class AuthenticationController {
-
+    AuthenticationServiceImp authenticationServiceImp=new AuthenticationServiceImp();
     @FXML
     private TextField idInput;
 
@@ -26,7 +34,9 @@ public class AuthenticationController {
 
     @FXML
     void toSignIn(ActionEvent event) {
-
+        String id=idInput.getText();
+        String pass=passInput.getText();
+        System.out.println(id+"\n"+pass);
     }
 
     @FXML

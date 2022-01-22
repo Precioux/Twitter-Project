@@ -1,4 +1,4 @@
-package TwitterGraphics;
+package graphics;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,21 +8,21 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SignUpView extends Application {
-    @Override
+public class AuthenticationView extends Application {
+
+
     public void start(Stage stage) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Authentication.fxml"));
             Scene scene = new Scene(root);
-            stage.setTitle("Sign Up");
+            stage.setTitle("Twitter");
             stage.setScene(scene);
             stage.show();
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
-
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

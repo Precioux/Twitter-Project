@@ -155,7 +155,7 @@ public class Client {
                 }
                 else
                 {
-                    System.out.println("1-SignIn\n2-SignUp");
+                    System.out.println("1-SignIn\n2-SignUpView");
                     int s=scanner.nextInt();
                     if(s==1)
                     {
