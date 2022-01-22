@@ -32,6 +32,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
         Gson gson=new Gson();
         if(choice==2) {
             String ans=accountChecker.getInfo(jData);
+            System.out.println("answer from account checker: "+ans);
             Result SignUpResult=gson.fromJson(ans, Result.class);
             switch (SignUpResult.type)
             {

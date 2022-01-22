@@ -34,6 +34,7 @@ import java.util.Optional;
  */
 public class AuthenticationController {
     AuthenticationServiceImp authenticationServiceImp=new AuthenticationServiceImp();
+    SignUpController signUpController=new SignUpController();
     Gson gson=new Gson();
     boolean logFlag=false;
     Account account=new Account();
@@ -50,7 +51,11 @@ public class AuthenticationController {
     @FXML
     private Button signUp;
     @FXML
-    private CheckBox remember;
+    private CheckBox remember=new CheckBox();
+    /**
+     * alart
+     * @param err error
+     */
     void alaart(String err)
     {
         Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -58,6 +63,11 @@ public class AuthenticationController {
         alert.setContentText(err);
         Optional<ButtonType> res=alert.showAndWait();
     }
+
+    /**
+     * sign in
+     * @param event event
+     */
     @FXML
     void toSignIn(ActionEvent event) {
         String id = idInput.getText();
@@ -74,8 +84,8 @@ public class AuthenticationController {
                 LocalDate localDate=LocalDate.now();
                 LocalTime localTime=LocalTime.now();
                 submitLog(localDate,localTime,"logIn","SuccessFul",0);
-                setAccount();
                 System.out.println("Sign In ok");
+                toTimeline();
             }
             else
             {
@@ -101,6 +111,11 @@ public class AuthenticationController {
             e.printStackTrace();
         }
     }
+    void toTimeline()
+    {
+
+
+    }
         @FXML
     void toSignUp(ActionEvent event) throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("SignUp.fxml"));
@@ -108,8 +123,7 @@ public class AuthenticationController {
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(signUpview);
         window.showAndWait();
-
-    }
+        }
 
     /**
      * submit log
@@ -142,15 +156,6 @@ public class AuthenticationController {
         }
 
 
-    }
-    /**
-     * set account
-     */
-    public void setAccount()
-    {
-//        observerServiceImp.addAccount(account);
-//        tweetingServiceImp.addAccount(account);
-//        timeLineServiceImp.addAccount(account);
     }
 
 }

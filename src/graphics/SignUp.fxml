@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.SignUpController">
+<GridPane fx:id="mainArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.SignUpController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="50.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
@@ -88,9 +89,6 @@
             <GridPane.margin>
                 <Insets bottom="60.0" right="30.0" />
             </GridPane.margin>
-            <font>
-                <Font size="4.0" />
-            </font>
         </TextField>
         <TextField fx:id="bio" GridPane.columnIndex="3" GridPane.rowIndex="2">
             <GridPane.margin>
@@ -141,5 +139,6 @@
                 <Insets right="5.0" />
             </GridPane.margin>
         </Button>
+      <CheckBox fx:id="remember2" mnemonicParsing="false" text="Remember Me" textFill="#00aaff" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
     </children>
 </GridPane>
