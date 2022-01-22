@@ -1,6 +1,6 @@
 package Tools;
 
-import entity.Account;
+import entity.*;
 
 /**
  * This class defines tool
@@ -14,10 +14,10 @@ public class Tool {
     public static class InvalidChoiceException extends Exception {}
     /**
      *
-     * @param account data
+     * @param aaccount data
      */
-    public void addAccount(Account account)
+    public void addAccount(Account aaccount)
     {
-        this.account=account;
+        account=aaccount;
     }
 }

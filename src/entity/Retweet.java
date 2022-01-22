@@ -17,10 +17,14 @@ public class Retweet extends TweetEntity {
     public void makeDDU(String str)
     {
         File f=new File("./Data/retweets/" + publisher.ID + "/" + str+"/ddu");
+        File ff=new File("./Data/retweets/" + publisher.ID + "/" + str+"/ddg");
         try {
                 FileWriter fileWriter = new FileWriter(f);
                 fileWriter.write(toString());
                 fileWriter.close();
+            FileWriter fileWriter2 = new FileWriter(ff);
+            fileWriter2.write(date+"\n"+publisher.ID+"\nRetweeted\n"+data);
+            fileWriter2.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

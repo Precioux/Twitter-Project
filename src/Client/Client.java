@@ -3,17 +3,12 @@ import Services.impl.CommandPerserServiceImp;
 import Services.impl.ConnectionServiceImp;
 import Services.impl.ConsoleViewServiceImp;
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import entity.Account;
 import entity.Request;
 import entity.Response;
+
 import java.io.*;
-import java.math.BigInteger;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.Properties;
 import java.util.Scanner;
 /**
@@ -155,7 +150,7 @@ public class Client {
                 }
                 else
                 {
-                    System.out.println("1-SignIn\n2-SignUpView");
+                    System.out.println("1-SignIn\n2-SignUp");
                     int s=scanner.nextInt();
                     if(s==1)
                     {

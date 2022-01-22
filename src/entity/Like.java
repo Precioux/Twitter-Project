@@ -17,10 +17,14 @@ public class Like extends TweetEntity {
     public void makeDDU(String str)
     {
        File f=new File("./Data/likes/" + publisher.ID + "/" + str+"/ddu");
+        File ff=new File("./Data/likes/" + publisher.ID + "/" + str+"/ddg");
        try {
                FileWriter fileWriter = new FileWriter(f);
                fileWriter.write(toString());
                fileWriter.close();
+           FileWriter fileWriter2 = new FileWriter(f);
+           fileWriter2.write(date+"\n"+publisher.ID+"\nLiked\n"+data);
+           fileWriter2.close();
 
        } catch (FileNotFoundException e) {
            e.printStackTrace();
