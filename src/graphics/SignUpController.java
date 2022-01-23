@@ -179,7 +179,12 @@ public class SignUpController {
     }
     void toTimeline()
     {
+        File file=new File("./files/Exchange.txt");
+        FileWriter fw=null;
         try {
+            fw=new FileWriter(file);
+            fw.write(account.ID);
+            fw.close();
             Stage window = (Stage) mainArea.getScene().getWindow();
             Parent Root = FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
             Scene Aview = new Scene(Root);

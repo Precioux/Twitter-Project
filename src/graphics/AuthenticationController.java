@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import requestsFormats.LogIn;
 
@@ -34,11 +35,12 @@ import java.util.Optional;
  */
 public class AuthenticationController {
     AuthenticationServiceImp authenticationServiceImp=new AuthenticationServiceImp();
-    SignUpController signUpController=new SignUpController();
     Gson gson=new Gson();
     boolean logFlag=false;
     Account account=new Account();
     JSONtool jsonTool=new JSONtool();
+    @FXML
+    private GridPane mainArea;
     @FXML
     private TextField idInput;
 
@@ -113,7 +115,21 @@ public class AuthenticationController {
     }
     void toTimeline()
     {
-
+      File file=new File("./files/Exchange.txt");
+      FileWriter fw=null;
+      try {
+          fw=new FileWriter(file);
+          fw.write(account.ID);
+          fw.close();
+          Stage window = (Stage) mainArea.getScene().getWindow();
+          Parent Root = FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
+          Scene Aview = new Scene(Root);
+          window.setScene(Aview);
+          window.show();
+          System.out.println("send to timeLine");
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
 
     }
         @FXML

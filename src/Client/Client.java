@@ -40,7 +40,7 @@ public class Client {
             while (true)
             {
                 if(logFlag) {
-                    System.out.println("\nAvailable choices: timeLine, tweet, removeTweet, comment, like, socialize, logOut, exit");
+                    System.out.println("\nAvailable choices: timeLine, TWEET, removeTweet, comment, like, socialize, logOut, exit");
                     clientRequest = scanner.next();
                     if (clientRequest.equals("exit")) {
                         System.out.println("Closing this connection : " + socket);
@@ -60,7 +60,7 @@ public class Client {
                                 logFlag=false;
                                 break;
                             }
-                            case "tweet":
+                            case "TWEET":
                             {
                                 String request=commandPerserService.tweet();
                                 String response=connectionService.send(request);

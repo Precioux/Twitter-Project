@@ -1,18 +1,29 @@
 package graphics;
 
-import Tools.*;
-import entity.*;
+import Tools.JSONtool;
+import com.google.gson.Gson;
+import entity.Account;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,12 +36,27 @@ public class TimeLineController {
     private ArrayList<String> timeline=new ArrayList<>();
     private ArrayList<Long> addr=new ArrayList<>();
     private ArrayList<Boolean> check=new ArrayList<>();
-
     JSONtool jsoNtool=new JSONtool();
     Account account=new Account();
-//    public void setAccount(Account account) {
-//        this.account=account;
-//    }
+    Gson gson=new Gson();
+
+    /**
+     * sets account
+     *
+     */
+    public void setAccount() {
+       File file=new File("./files/Exchange.txt");
+       FileReader fr=null;
+       try {
+           fr=new FileReader(file);
+           Scanner scanner=new Scanner(fr);
+           String d=scanner.next();
+           account.ID=d;
+           System.out.println(account.ID);
+       } catch (FileNotFoundException e) {
+           e.printStackTrace();
+       }
+    }
     @FXML
     private MenuBar menuBar;
 
@@ -38,24 +64,81 @@ public class TimeLineController {
     private Button refresh;
 
     @FXML
-    private ListView<tweet> MainTimeLine;
-    private final ObservableList<tweet> tweets = FXCollections.observableArrayList();
+    private ListView<TWEET> MainTimeLine;
+    private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
+
+    /**
+     * refreshes the timeLine
+     * @param event ecent
+     */
     @FXML
     void refreshIt(ActionEvent event) {
-      getTimeLine();
+        getTimeLine();
     }
 
+    /**
+     * from json to TWEET
+     */
+    void toTweetType()
+    {
+        for (String t:timeline) {
+            tweets.add(gson.fromJson(t, TWEET.class));
+        }
+    }
+    /**
+     * set list view
+     */
+    void initialize() {
+        toTweetType();
+        MainTimeLine.setItems(tweets);
+        MainTimeLine.getSelectionModel().selectedItemProperty().
+                addListener(
+                        new ChangeListener<TWEET>() {
+                            @Override
+                            public void changed(ObservableValue<? extends TWEET> ov,
+                                                TWEET oldValue, TWEET newValue) {
+                                //????????????????????????????
+                            }
+                        }
+                );
+        // set custom ListView cell factory
+        MainTimeLine.setCellFactory(
+                new Callback<ListView<TWEET>, ListCell<TWEET>>() {
+                    @Override
+                    public ListCell<TWEET> call(ListView<TWEET> listView) {
+                        return new TweetController();
+                        //return new ImageTextCell();
+                    }
+                }
+        );
+    }
+    @FXML
+    void toProfile(ActionEvent actionEvent)
+    {
+
+    }
+    @FXML
+    void toTweet(ActionEvent event) throws IOException {
+
+        Parent signUpRoot= FXMLLoader.load(getClass().getResource("AddTweet.fxml"));
+        Scene signUpview=new Scene(signUpRoot);
+        Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(signUpview);
+        window.showAndWait();
+    }
     /**
      *
      * Timeline
      */
     public void getTimeLine()
     {
+        setAccount();
         AFollowings.clear();
         tweetlist.clear();
         timeline.clear();
         addr.clear();
         check.clear();
+        tweets.clear();
             findFollowings();
                 for (String follower : AFollowings) {
                     getTweets(follower);
@@ -64,7 +147,7 @@ public class TimeLineController {
                     getComments(follower);
                 }
                 sortTimeline();
-
+                initialize();
 
 
     }
@@ -72,7 +155,7 @@ public class TimeLineController {
     /**
      *
      * @param key data
-     * @return tweet
+     * @return TWEET
      */
     public String search(long key)
     {
@@ -142,7 +225,7 @@ public class TimeLineController {
                 File twt = new File("./Data/Tweets/" + follower + "/" + t + "/ddu");
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader).useDelimiter("\n");
-                tweet T=new tweet();
+                TWEET T=new TWEET();
                  T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getText(scanner.next());
@@ -173,7 +256,7 @@ public class TimeLineController {
                 File twt = new File("./Data/comments/" + follower + "/" + t + "/ddg");
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader);
-                tweet T=new tweet();
+                TWEET T=new TWEET();
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getStatus(scanner.next());
@@ -204,7 +287,7 @@ public class TimeLineController {
                 File twt = new File("./Data/retweets/" + follower + "/" + t + "/ddg");
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader);
-                tweet T=new tweet();
+                TWEET T=new TWEET();
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getStatus(scanner.next());
@@ -235,7 +318,7 @@ public class TimeLineController {
                 File twt = new File("./Data/likes/" + follower + "/" + t + "/ddg");
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader);
-                tweet T=new tweet();
+                TWEET T=new TWEET();
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getStatus(scanner.next());

@@ -42,7 +42,7 @@ public class TweetTool extends Tool {
 
     /**
      * @param t data
-     * add a new tweet
+     * add a new TWEET
      */
     public void add(String t) {
         try {
@@ -67,7 +67,7 @@ public class TweetTool extends Tool {
     /**
      *
      * @param d address
-     * @return tweet data
+     * @return TWEET data
      * @throws IOException check
      */
   private String readTweet(String d) throws IOException {
@@ -224,7 +224,7 @@ public class TweetTool extends Tool {
 
     /**
      * @return result
-     * lika a tweet
+     * lika a TWEET
      * @param t  data
      * @throws IOException check
      */
@@ -289,7 +289,7 @@ return type;
     /**
      * @param t  data
      * @return result
-     * remove a tweet
+     * remove a TWEET
      */
     public int remove(String t)
   {

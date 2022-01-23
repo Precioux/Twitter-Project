@@ -21,7 +21,7 @@ public interface TimeLineService  {
     /**
      *
      * @param key data
-     * @return tweet
+     * @return TWEET
      */
     public String search(long key);
 

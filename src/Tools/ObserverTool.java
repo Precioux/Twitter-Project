@@ -153,7 +153,7 @@ public class ObserverTool extends Tool {
      *
      * @param u data
      * @param d data
-     * @return tweet
+     * @return TWEET
      * @throws IOException check
      */
     private String readTweet(String u,String d) throws IOException {
@@ -182,7 +182,7 @@ public class ObserverTool extends Tool {
      *
      * @param u data
      * @param d data
-     * @return  tweet
+     * @return  TWEET
      * @throws IOException check
      */
     private String readTweetw(String u,String d) throws IOException {

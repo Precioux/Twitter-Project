@@ -156,7 +156,7 @@ public class ClientHandler implements Runnable {
                                     logFlag=false;
                                     break;
                                 }
-                                case "tweet":
+                                case "TWEET":
                                 {
                                     response="";
                                     ForServices forServices =new ForServices(1,clientRequest.ParameterValue);
@@ -168,7 +168,7 @@ public class ClientHandler implements Runnable {
                                     response+=jsoNtool.toJSON(response1);
                                     LocalDate localDate=LocalDate.now();
                                     LocalTime localTime=LocalTime.now();
-                                    submitLog(localDate,localTime,"tweet","SuccessFul",0);
+                                    submitLog(localDate,localTime,"TWEET","SuccessFul",0);
                                     break;
                                 }
                                 case "remove":

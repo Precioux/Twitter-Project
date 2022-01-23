@@ -102,7 +102,7 @@ public interface CommandPerserService {
     }
 
     /**
-     * request for tweet
+     * request for TWEET
      *
      * @return request
      */

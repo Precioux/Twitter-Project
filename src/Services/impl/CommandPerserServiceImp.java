@@ -43,7 +43,7 @@ public class CommandPerserServiceImp implements CommandPerserService {
     {
         boolean wrong=false;
         String f="";
-        System.out.println("If you want to react to any tweet enter tweet's index otherwise enter -1");
+        System.out.println("If you want to react to any TWEET enter TWEET's index otherwise enter -1");
         int c=scanner.nextInt();
         String choice="";
         if(c!=-1)
@@ -125,7 +125,7 @@ public class CommandPerserServiceImp implements CommandPerserService {
      */
     public static String comment()
     {
-        System.out.println("Enter tweet you intend to comment: ");
+        System.out.println("Enter TWEET you intend to comment: ");
         String tweet=scanner1.next();
         System.out.println("Enter your comment");
         String comment=scanner1.next();
@@ -140,7 +140,7 @@ public class CommandPerserServiceImp implements CommandPerserService {
      */
     public static String retweet()
     {
-        System.out.println("Enter tweet you intend to retweet: ");
+        System.out.println("Enter TWEET you intend to retweet: ");
         String tweet=scanner1.next();
         Request request=new Request("retweet","to retweet",tweet);
         return jsonTool.toJSON(request);
@@ -152,7 +152,7 @@ public class CommandPerserServiceImp implements CommandPerserService {
      */
     public static String like()
     {
-        System.out.println("Enter tweet you intend to like: ");
+        System.out.println("Enter TWEET you intend to like: ");
         String tweet=scanner1.next();
         Request request=new Request("like","to like",tweet);
         return jsonTool.toJSON(request);
@@ -164,22 +164,22 @@ public class CommandPerserServiceImp implements CommandPerserService {
      */
     public static String remove()
     {
-        System.out.println("Enter tweet you intend to remove: ");
+        System.out.println("Enter TWEET you intend to remove: ");
         String tweet=scanner1.next();
         Request request=new Request("remove","removing",tweet);
         return jsonTool.toJSON(request);
     }
 
     /**
-     * request for tweet
+     * request for TWEET
      * @return request
      */
     public static String tweet()
     {
-        System.out.println("Enter tweet: ");
+        System.out.println("Enter TWEET: ");
 
         String tweet=scanner1.next();
-        Request request=new Request("tweet","tweeting",tweet);
+        Request request=new Request("TWEET","tweeting",tweet);
         return jsonTool.toJSON(request);
     }
 

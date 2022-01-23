@@ -80,7 +80,7 @@ public class TimeLineServiceImp implements TimeLineService {
     /**
      *
      * @param key data
-     * @return tweet
+     * @return TWEET
      */
     public String search(long key)
     {
