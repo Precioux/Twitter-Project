@@ -124,13 +124,28 @@ public class SignUpController {
             int rslt = authenticationServiceImp.begin(2, data);
             System.out.println(rslt);
             if (rslt == 0) {
+                File file=new File("./files/Remember.txt");
                 if(remember.isSelected())
-                    logFlag = true;
-                LocalDate localDate = LocalDate.now();
-                LocalTime localTime = LocalTime.now();
-                submitLog(localDate, localTime, "SignUpView", "SuccessFul", 0);
-                System.out.println("succcess");
-                toTimeline();
+                {
+                    FileWriter f=null;
+                    try {
+                        f=new FileWriter(file);
+                        f.write(account.ID);
+                        f.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    if (file.exists())
+                        file.delete();
+                }
+                    LocalDate localDate = LocalDate.now();
+                    LocalTime localTime = LocalTime.now();
+                    submitLog(localDate, localTime, "SignUpView", "SuccessFul", 0);
+                    System.out.println("succcess");
+                    toTimeline();
+
             } else {
                 if (rslt == 3 || rslt == 4) {
                     Error error = new Error();

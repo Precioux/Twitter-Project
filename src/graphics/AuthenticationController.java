@@ -54,6 +54,27 @@ public class AuthenticationController {
     private Button signUp;
     @FXML
     private CheckBox remember=new CheckBox();
+//    public void initialize()
+//    {
+//        File toCheck=new File("./files/Remember.txt");
+//        if(toCheck.exists())
+//        {
+//            FileReader fileReader=null;
+//            try {
+//                fileReader=new FileReader(toCheck);
+//                Scanner scanner=new Scanner(fileReader);
+//                String u=scanner.next();
+//                account.addID(u);
+//                fileReader.close();
+//                scanner.close();
+//                toTimeline();
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
     /**
      * alart
      * @param err error
@@ -78,9 +99,21 @@ public class AuthenticationController {
         try {
             int rslt=authenticationServiceImp.begin(1,jsonTool.toJSON(login));
             if(rslt==0) {
-                if(remember.isSelected()) {
-                    System.out.println("checkboxxed");
-                    logFlag = true;
+                File file=new File("./files/Remember.txt");
+                if(remember.isSelected())
+                {
+                    FileWriter f=null;
+                    try {
+                        f=new FileWriter(file);
+                        f.write(id);
+                        f.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    if (file.exists())
+                        file.delete();
                 }
                 account= authenticationServiceImp.connect();
                 LocalDate localDate=LocalDate.now();

@@ -13,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -25,10 +22,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProfileController {
     JSONtool jsoNtool=new JSONtool();
@@ -69,22 +63,29 @@ public class ProfileController {
 
     @FXML
     private Button unfollow;
+    String view="";
+    String user="";
     /**
      * sets account
      *
      */
     public void setAccount() {
         System.out.println("this is set account");
-        File file=new File("./files/Exchange.txt");
-        FileReader fr=null;
+        File fileV=new File("./files/View.txt");
+        File fileU=new File("./files/Exchange.txt");
+        FileReader fV=null;
+        FileReader fU=null;
         try {
-            fr=new FileReader(file);
-            Scanner scanner=new Scanner(fr);
-            String d=scanner.next();
-            System.out.println(d);
-            account.ID=d;
-            File file1=new File("./Data/Users/"+d+"/accountData");
-            id.setText(d);
+            fV=new FileReader(fileV);
+            fU=new FileReader(fileU);
+            Scanner scannerV=new Scanner(fileV);
+            Scanner scannerU=new Scanner(fileU);
+            view=scannerV.next();
+            user=scannerU.next();
+            System.out.println(view);
+            account.ID=view;
+            File file1=new File("./Data/Users/"+view+"/accountData");
+            id.setText(view);
             Scanner scanner1=new Scanner(file1).useDelimiter("\n");
             account.password=scanner1.next();
             account.fname=scanner1.next();
@@ -106,33 +107,54 @@ public class ProfileController {
             e.printStackTrace();
         }
     }
-    @FXML
-    void toChange(ActionEvent event) {
-        FileChooser fileChooser=new FileChooser();
-        fileChooser.setTitle("Profile Photo");
-        Stage stage=(Stage) mainArea.getScene().getWindow();
-        File file=fileChooser.showOpenDialog(stage);
-        if (file!=null)
-        {
-            File accountData=new File("./Data/Users/"+account.ID+"/accountData");
-            FileWriter fw=null;
-            try {
-                account.photoPath="";
-                account.addPhotoPath(file.getAbsolutePath());
-                fw=new FileWriter(accountData);
-                fw.write(account.toStringForOverWrite());
-                System.out.println("profile changed");
-                File p=new File(account.photoPath);
-                Image image=new Image(p.toURI().toString());
-                photo.setImage(image);
-                fw.close();
 
-            } catch (IOException e) {
-                e.printStackTrace();
+    /**
+     * to change profile
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    void toChange(ActionEvent event) throws IOException {
+        if( view.equals(user))
+         {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Profile Photo");
+            Stage stage = (Stage) mainArea.getScene().getWindow();
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+                File accountData = new File("./Data/Users/" + account.ID + "/accountData");
+                FileWriter fw = null;
+                try {
+                    account.photoPath = "";
+                    account.addPhotoPath(file.getAbsolutePath());
+                    fw = new FileWriter(accountData);
+                    fw.write(account.toStringForOverWrite());
+                    System.out.println("profile changed");
+                    File p = new File(account.photoPath);
+                    Image image = new Image(p.toURI().toString());
+                    photo.setImage(image);
+                    fw.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
+        else {
+            alaart("You cannot change another user's profile!!");
+        }
     }
-
+    /**
+     * alart
+     * @param err error
+     */
+    void alaart(String err) throws IOException {
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(err);
+        Optional<ButtonType> res=alert.showAndWait();
+    }
     @FXML
     void toFollow(ActionEvent event) {
 

@@ -11,6 +11,7 @@ import java.io.IOException;
 public class AuthenticationView extends Application {
 
 
+
     public void start(Stage stage) throws IOException {
         try {
             System.out.println(getClass().getResource("Authentication.fxml"));

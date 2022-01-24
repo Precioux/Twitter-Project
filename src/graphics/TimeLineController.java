@@ -20,10 +20,7 @@ import javafx.scene.control.MenuBar;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -73,7 +70,7 @@ public class TimeLineController {
      */
     @FXML
     void refreshIt(ActionEvent event) {
-        getTimeLine();
+        initialize();
     }
 
     /**
@@ -90,7 +87,7 @@ public class TimeLineController {
      */
    public void initialize()
     {
-
+         getTimeLine();
         toTweetType();
         MainTimeLine.setItems(tweets);
         MainTimeLine.getSelectionModel().selectedItemProperty().
@@ -115,13 +112,30 @@ public class TimeLineController {
         );
     }
 
+    /**
+     * to user's profile
+     * @param event e
+     * @throws IOException e
+     */
     @FXML
-    void toProfile(ActionEvent event) throws IOException {
-        Parent signUpRoot= FXMLLoader.load(getClass().getResource("Profile.fxml"));
-        Scene p=new Scene(signUpRoot);
-        Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(p);
-        window.show();
+    void toProfile(ActionEvent event) {
+        File viewer=new File("./files/View.txt");
+        System.out.println(viewer.exists());
+        FileWriter fileWriter=null;
+        try {
+            fileWriter = new FileWriter(viewer);
+            System.out.println(account.ID);
+            fileWriter.write(account.ID);
+            fileWriter.close();
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+            Scene p = new Scene(signUpRoot);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(p);
+            window.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     void toTweet(ActionEvent event) throws IOException {
@@ -153,7 +167,7 @@ public class TimeLineController {
                     getComments(follower);
                 }
                 sortTimeline();
-                initialize();
+
 
 
     }
