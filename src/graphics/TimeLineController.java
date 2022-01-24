@@ -197,7 +197,7 @@ public class TimeLineController {
     /**
      * get likes
      */
-    int getlikes(String user,String txt)
+    int getlike(String user,String txt)
     {
         int number=0;
         File toTweetFolder=new File("./Data/Tweets/"+user+"/");
@@ -215,7 +215,6 @@ public class TimeLineController {
                 data.addUser(scanner.next());
                 data.addString(scanner.next());
                 tweetsToString[i]=jsoNtool.toJSON(data);
-                scanner.close();
                 fileReader.close();
                 i++;
 
@@ -231,13 +230,16 @@ public class TimeLineController {
                 index=j;}
             j++;
         }
+        System.out.println("this is txt:"+txt);
         File tweet=new File("./Data/Tweets/"+user+"/"+tweetsToAddress[index]+"/likes");
         FileReader fileReader=null;
         try {
             fileReader=new FileReader(tweet);
-            BufferedReader bufferedReader=new BufferedReader(fileReader);
-            number=bufferedReader.read();
-            System.out.println(number);
+            Scanner scanner=new Scanner(fileReader);
+            if(scanner.hasNextInt()) {
+                System.out.println("got n");
+                number = scanner.nextInt();
+            }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -280,10 +282,17 @@ public class TimeLineController {
             arr[index++] = value;
         }
         Arrays.sort(arr);
-        for (long i:arr)
+
+        int l=arr.length;
+        System.out.println("length:"+l);
+        for (int i=l-1;i>=0;i--)
         {
-            timeline.add(search(i));
+            timeline.add(search(arr[i]));
         }
+//        for (long i:arr)
+//        {
+//            timeline.add(search(i));
+//        }
 
     }
     /**
@@ -324,7 +333,7 @@ public class TimeLineController {
                 T.getOwner(scanner.next());
                 T.getText(scanner.next());
                 T.getStatus("Tweeted");
-                T.getLikes(getlikes(T.owner,t));
+                T.getLikes(getlike(T.owner,T.text));
                 String twet=jsoNtool.toJSON(T);
                 HashMap<Long,String> ht=new HashMap<>();
                 long num=Long.parseLong(t);
@@ -353,7 +362,7 @@ public class TimeLineController {
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getText(scanner.next());
-                T.getLikes(getlikes(T.owner,T.text));
+                T.getLikes(getlike(T.owner,T.text));
                 T.getStatus("Tweeted");
                 String twet=jsoNtool.toJSON(T);
                 HashMap<Long,String> ht=new HashMap<>();
@@ -379,7 +388,7 @@ public class TimeLineController {
             for (String t : twts) {
                 File twt = new File("./Data/comments/" + follower + "/" + t + "/ddg");
                 FileReader filereader = new FileReader(twt);
-                Scanner scanner=new Scanner(filereader);
+                Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 TWEET T=new TWEET();
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());
@@ -410,7 +419,7 @@ public class TimeLineController {
             for (String t : twts) {
                 File twt = new File("./Data/retweets/" + follower + "/" + t + "/ddg");
                 FileReader filereader = new FileReader(twt);
-                Scanner scanner=new Scanner(filereader);
+                Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 TWEET T=new TWEET();
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());
@@ -435,13 +444,13 @@ public class TimeLineController {
      */
     public void getLikes(String follower)
     {
-        File folder=new File("./Data/likes/"+follower+"/");
+        File folder=new File("./Data/Likes/"+follower+"/");
         try {
             String[] twts = folder.list();
             for (String t : twts) {
-                File twt = new File("./Data/likes/" + follower + "/" + t + "/ddg");
+                File twt = new File("./Data/Likes/" + follower + "/" + t + "/ddg");
                 FileReader filereader = new FileReader(twt);
-                Scanner scanner=new Scanner(filereader);
+                Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 TWEET T=new TWEET();
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());

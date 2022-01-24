@@ -4,6 +4,7 @@ import Services.impl.ObserverServiceImp;
 import Tools.JSONtool;
 import com.google.gson.Gson;
 import entity.Account;
+import entity.Data;
 import entity.Error;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -136,7 +137,60 @@ public class ProfileController {
             e.printStackTrace();
         }
     }
+    /**
+     * get likes
+     */
+    int getlike(String user,String txt)
+    {
+        int number=0;
+        File toTweetFolder=new File("./Data/Tweets/"+user+"/");
+        String[] tweetsToAddress=toTweetFolder.list();
+        String[] tweetsToString=new String[tweetsToAddress.length];
+        int i=0;
+        for (String address:tweetsToAddress) {
+            File tweet=new File("./Data/Tweets/"+user+"/"+address+"/DDU");
+            FileReader fileReader=null;
+            try{
+                Data data=new Data();
+                fileReader=new FileReader(tweet);
+                Scanner scanner=new Scanner(fileReader).useDelimiter("\n");
+                data.addTime(scanner.next());
+                data.addUser(scanner.next());
+                data.addString(scanner.next());
+                tweetsToString[i]=jsoNtool.toJSON(data);
+                fileReader.close();
+                i++;
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        int index=-1;
+        int j=0;
+        for (String twt:tweetsToString) {
+            Data d=gson.fromJson(twt,Data.class);
+            if (d.string.equals(txt)){
+                index=j;}
+            j++;
+        }
+        System.out.println("this is txt:"+txt);
+        File tweet=new File("./Data/Tweets/"+user+"/"+tweetsToAddress[index]+"/likes");
+        FileReader fileReader=null;
+        try {
+            fileReader=new FileReader(tweet);
+            Scanner scanner=new Scanner(fileReader);
+            if(scanner.hasNextInt()) {
+                System.out.println("got n");
+                number = scanner.nextInt();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return number;
+    }
     /**
      * to change profile
      * @param event
@@ -286,6 +340,7 @@ public class ProfileController {
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getText(scanner.next());
+                T.getLikes(getlike(T.owner,T.text));
                 T.getStatus("Tweeted");
                 String twet=jsoNtool.toJSON(T);
                 HashMap<Long,String> ht=new HashMap<>();

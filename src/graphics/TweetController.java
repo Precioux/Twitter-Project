@@ -115,11 +115,14 @@ public class TweetController extends ListCell<TWEET> {
      */
     @FXML
     public void commentIt(ActionEvent event)  {
+        setAccount();
         File file=new File("./files/CommentSource.txt");
         FileWriter fileWriter=null;
         try {
             fileWriter=new FileWriter(file);
+            System.out.println(account.ID+"\n"+userID.getText()+"\n"+tweetText.getText());
             fileWriter.write(account.ID+"\n"+userID.getText()+"\n"+tweetText.getText());
+            fileWriter.close();
             Parent signUpRoot = FXMLLoader.load(getClass().getResource("Comment.fxml"));
             Scene p = new Scene(signUpRoot);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

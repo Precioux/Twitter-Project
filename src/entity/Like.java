@@ -22,7 +22,7 @@ public class Like extends TweetEntity {
                FileWriter fileWriter = new FileWriter(f);
                fileWriter.write(toString());
                fileWriter.close();
-           FileWriter fileWriter2 = new FileWriter(f);
+           FileWriter fileWriter2 = new FileWriter(ff);
            fileWriter2.write(date+"\n"+publisher.ID+"\nLiked\n"+data);
            fileWriter2.close();
 

@@ -158,10 +158,12 @@ public class ObserverTool extends Tool {
                  FileReader fileReader=null;
                  try {
                      fileReader=new FileReader(like);
-                     fileWriter=new FileWriter(like);
                      Scanner scanner=new Scanner(fileReader);
-                     int n=scanner.nextInt();
+                     int n=0;
+                    n=scanner.nextInt();
+                     System.out.println(n);
                      n=n+1;
+                     fileWriter=new FileWriter(like);
                      fileWriter.write(String.valueOf(n));
                      fileReader.close();
                      fileWriter.close();

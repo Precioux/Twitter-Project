@@ -237,7 +237,7 @@ public class SignUpController {
             Parent Root = FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
             Scene Aview = new Scene(Root);
             window.setScene(Aview);
-            window.showAndWait();
+            window.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
