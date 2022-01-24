@@ -88,7 +88,9 @@ public class TimeLineController {
     /**
      * set list view
      */
-    void initialize() {
+   public void initialize()
+    {
+
         toTweetType();
         MainTimeLine.setItems(tweets);
         MainTimeLine.getSelectionModel().selectedItemProperty().
@@ -112,10 +114,14 @@ public class TimeLineController {
                 }
         );
     }
-    @FXML
-    void toProfile(ActionEvent actionEvent)
-    {
 
+    @FXML
+    void toProfile(ActionEvent event) throws IOException {
+        Parent signUpRoot= FXMLLoader.load(getClass().getResource("Profile.fxml"));
+        Scene p=new Scene(signUpRoot);
+        Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(p);
+        window.show();
     }
     @FXML
     void toTweet(ActionEvent event) throws IOException {
