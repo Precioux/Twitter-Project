@@ -93,7 +93,8 @@ public class TimeLineController {
     @FXML
     public void toExit(ActionEvent actionEvent)
     {
-
+        Stage window = (Stage) area.getScene().getWindow();
+        window.close();
     }
     /**
      * search
