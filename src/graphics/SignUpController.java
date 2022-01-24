@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -22,15 +23,19 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static Services.impl.CommandPerserServiceImp.toHash;
 
 public class SignUpController {
      String data="";
+     String photo="";
      boolean logFlag=false;
      AuthenticationServiceImp authenticationServiceImp=new AuthenticationServiceImp();
      Account account=new Account();
+     @FXML
+     private TextField path;
     @FXML
     private TextField bio;
 
@@ -64,6 +69,8 @@ public class SignUpController {
     private CheckBox remember=new CheckBox();
     @FXML
     private GridPane mainArea=new GridPane();
+
+    ArrayList<String> aa=new ArrayList<>();
     @FXML
     void toCancel(ActionEvent event) throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("Authentication.fxml"));
@@ -73,6 +80,23 @@ public class SignUpController {
         window.showAndWait();
     }
 
+    /**
+     * choose photo
+     * @param actionEvent event
+     * @throws IOException
+     */
+    @FXML
+    void toChoose(ActionEvent actionEvent) throws IOException {
+        FileChooser fileChooser=new FileChooser();
+       fileChooser.setTitle("Profile Photo");
+       Stage stage=(Stage) mainArea.getScene().getWindow();
+       File file=fileChooser.showOpenDialog(stage);
+       if (file!=null)
+       {
+           path.setText(file.getAbsolutePath());
+           photo+=file.getAbsolutePath();
+       }
+    }
     @FXML
     void toSumbit(ActionEvent event) throws NoSuchAlgorithmException {
         String fname = firstname.getText();
@@ -93,6 +117,7 @@ public class SignUpController {
         account.addjDate(l);
         String Bio=bio.getText();
         account.addBio(Bio);
+        account.addPhotoPath(photo);
         JSONtool jsoNtool=new JSONtool();
         data+=jsoNtool.toJSON(account);
         try {

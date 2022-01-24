@@ -22,6 +22,16 @@ public class Account {
     public LocalDate birthdate;
     public LocalDate joindate;
     public String bio;
+    public String photoPath;
+
+    /**
+     * add profile photo
+     * @param photoPath path
+     */
+    public void addPhotoPath(String photoPath)
+    {
+        this.photoPath=photoPath;
+    }
     /**
      *
      * @param fname data
@@ -92,7 +102,7 @@ public class Account {
      */
     public String toString()
     {
-        return password+"\n"+fname+"\n"+lname+"\n"+bio+"\n"+birthdate+"\n"+joindate;
+        return password+"\n"+fname+"\n"+lname+"\n"+bio+"\n"+birthdate+"\n"+joindate+"\n"+photoPath;
     }
 
     /**
