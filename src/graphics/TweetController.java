@@ -209,6 +209,7 @@ public class TweetController extends ListCell<TWEET> {
      */
     @FXML
     void toRetweet(ActionEvent event) throws IOException {
+        System.out.println("this is retweeter");
 actions(3);
     }
     private FXMLLoader mLLoader;
