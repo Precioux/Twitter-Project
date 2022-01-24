@@ -103,78 +103,93 @@ public class SignUpController {
            photo+=file.getAbsolutePath();
        }
     }
+   boolean nullCheck()
+   {
+       boolean ans=true;
+       if(firstname.getText().equals(null) || lastname.getText().equals(null) || photo.isEmpty() || year.getText().isEmpty() || month.getText().isEmpty() || day.getText().isEmpty() || id.getText().isEmpty() || password.getText().isEmpty() )
+           ans=false;
+       return ans;
+   }
+    /**
+     * sumbit sign up
+     * @param event e
+     * @throws NoSuchAlgorithmException e
+     */
     @FXML
-    void toSumbit(ActionEvent event) throws NoSuchAlgorithmException {
-        String fname = firstname.getText();
-        account.addFirstName(fname);
-        String lname = lastname.getText();
-        account.addLastName(lname);
-        String Id=id.getText();
-        account.ID=Id;
-        int y,d,m;
-        y=Integer.parseInt(year.getText());
-        m=Integer.parseInt(month.getText());
-        d=Integer.parseInt(day.getText());
-        LocalDate bd= LocalDate.of(y,m,d);
-        account.addBdate(bd);
-        String Password=password.getText();
-        account.addPassword(toHash(Password));
-        LocalDate l=LocalDate.now();
-        account.addjDate(l);
-        String Bio=bio.getText();
-        account.addBio(Bio);
-        account.addPhotoPath(photo);
-        JSONtool jsoNtool=new JSONtool();
-        data+=jsoNtool.toJSON(account);
-        try {
-            int rslt = authenticationServiceImp.begin(2, data);
-            System.out.println(rslt);
-            if (rslt == 0) {
-                File file=new File("./files/Remember.txt");
-                System.out.println(remember.isSelected());
-                System.out.println(Id);
-                if(remember.isSelected())
-                {
-                    FileWriter f=null;
-                    try {
-                        f=new FileWriter(file);
-                        f.write(Id);
-                        f.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+    void toSumbit(ActionEvent event) throws NoSuchAlgorithmException, IOException {
+        if (nullCheck()) {
+            String fname = firstname.getText();
+            account.addFirstName(fname);
+            String lname = lastname.getText();
+            account.addLastName(lname);
+            String Id = id.getText();
+            account.ID = Id;
+            int y, d, m;
+            y = Integer.parseInt(year.getText());
+            m = Integer.parseInt(month.getText());
+            d = Integer.parseInt(day.getText());
+            LocalDate bd = LocalDate.of(y, m, d);
+            account.addBdate(bd);
+            String Password = password.getText();
+            account.addPassword(toHash(Password));
+            LocalDate l = LocalDate.now();
+            account.addjDate(l);
+            String Bio = bio.getText();
+            account.addBio(Bio);
+            account.addPhotoPath(photo);
+            JSONtool jsoNtool = new JSONtool();
+            data += jsoNtool.toJSON(account);
+            try {
+                int rslt = authenticationServiceImp.begin(2, data);
+                System.out.println(rslt);
+                if (rslt == 0) {
+                    File file = new File("./files/Remember.txt");
+                    System.out.println(remember.isSelected());
+                    System.out.println(Id);
+                    if (remember.isSelected()) {
+                        FileWriter f = null;
+                        try {
+                            f = new FileWriter(file);
+                            f.write(Id);
+                            f.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        if (file.exists())
+                            file.delete();
                     }
-                }
-                else {
-                    if (file.exists())
-                        file.delete();
-                }
                     LocalDate localDate = LocalDate.now();
                     LocalTime localTime = LocalTime.now();
                     submitLog(localDate, localTime, "SignUpView", "SuccessFul", 0);
                     System.out.println("succcess");
                     toTimeline();
 
-            } else {
-                if (rslt == 3 || rslt == 4) {
-                    Error error = new Error();
-                    error.errorSearch(rslt);
-                    alaart(error.getErrorType());
-                    LocalDate localDate = LocalDate.now();
-                    LocalTime localTime = LocalTime.now();
-                    submitLog(localDate, localTime, "SignUpView", "Failed", rslt);
-                    System.out.println("failure");
+                } else {
+                    if (rslt == 3 || rslt == 4) {
+                        Error error = new Error();
+                        error.errorSearch(rslt);
+                        alaart(error.getErrorType());
+                        LocalDate localDate = LocalDate.now();
+                        LocalTime localTime = LocalTime.now();
+                        submitLog(localDate, localTime, "SignUpView", "Failed", rslt);
+                        System.out.println("failure");
+                    }
                 }
+            } catch (AuthenticationService.InvalidChoiceException e) {
+                e.printStackTrace();
+            } catch (AccountChecker.BioException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (AccountChecker.IdException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (AuthenticationService.InvalidChoiceException e) {
-            e.printStackTrace();
-        } catch (AccountChecker.BioException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (AccountChecker.IdException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        else {
+            alaart("Please fill all fields!");
         }
     }
     /**
@@ -191,7 +206,7 @@ public class SignUpController {
         Parent Root= FXMLLoader.load(getClass().getResource("Authentication.fxml"));
         Scene Aview=new Scene(Root);
         window.setScene(Aview);
-        window.showAndWait();}
+        window.show();}
     }
     /**
      * submit log
