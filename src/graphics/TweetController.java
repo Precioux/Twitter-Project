@@ -1,6 +1,7 @@
 package graphics;
 
 import Services.impl.ObserverServiceImp;
+import Services.impl.TweetingServiceImp;
 import Tools.JSONtool;
 import com.google.gson.Gson;
 import entity.Account;
@@ -27,6 +28,7 @@ public class TweetController extends ListCell<TWEET> {
     Account account=new Account();
     JSONtool jsoNtool=new JSONtool();
     ObserverServiceImp observerServiceImp=new ObserverServiceImp();
+    TweetingServiceImp tweetingServiceImp=new TweetingServiceImp();
     Gson gson=new Gson();
 
     @FXML
@@ -193,9 +195,44 @@ public class TweetController extends ListCell<TWEET> {
      */
     @FXML
     void removeIt(ActionEvent actionEvent) throws IOException {
+        setAccount();
+        tweetingServiceImp.addAccount(account);
         if(userID.getText().equals(account.ID))
         {
+            ForServices forServices =new ForServices(2,tweetText.getText());
+            int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
+            if(rslt==0)
+            {
+                LocalDate localDate=LocalDate.now();
+                LocalTime localTime=LocalTime.now();
+                submitLog(localDate,localTime,"remove","SuccessFul",0);
+            }
+            else
+            {
+                if(rslt==-1)
+                {
 
+                    Error error=new Error();
+                    error.errorSearch(1000);
+                   alaart(error.getErrorType());
+                   LocalDate localDate=LocalDate.now();
+                    LocalTime localTime=LocalTime.now();
+                    submitLog(localDate,localTime,"remove","Failed",1000);
+                }
+                else
+                {
+                    if(rslt==5 || rslt==999 || rslt==998)
+                    {
+
+                        Error error=new Error();
+                        error.errorSearch(rslt);
+                     alaart(error.getErrorType());
+                        LocalDate localDate=LocalDate.now();
+                        LocalTime localTime=LocalTime.now();
+                        submitLog(localDate,localTime,"remove","Failed",rslt);
+                    }
+                }
+            }
         }
         else
         {
@@ -237,7 +274,6 @@ actions(3);
                 }
 
             }
-           // updatelikes();
             status.setText(item.status);
             userID.setText(item.owner);
             tweetText.setText(item.text);
