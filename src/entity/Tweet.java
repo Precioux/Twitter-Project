@@ -18,17 +18,22 @@ public class Tweet extends TweetEntity {
     public void makeDDU(String str) throws IOException {
         path=str;
         File ddu=new File(path+"\\ddu");
+        File like=new File(path+"\\likes");
         FileWriter fw=null;
+        FileWriter ff=null;
         try {
             fw=new FileWriter(ddu);
+            ff=new FileWriter(like);
             fw.write(date+"\n");
             fw.write(publisher.ID+"\n");
             fw.write(data);
+            ff.write("0");
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             fw.close();
+            ff.close();
         }
     }
 

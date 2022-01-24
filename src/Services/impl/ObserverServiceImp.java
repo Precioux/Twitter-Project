@@ -1,13 +1,10 @@
 package Services.impl;
+import Services.ObserverService;
 import Tools.ObserverTool;
-import Tools.Tool;
-import Services.*;
 import com.google.gson.Gson;
 import entity.Account;
 import requestsFormats.ForServices;
 import resultFormats.Result;
-
-import java.util.Scanner;
 /**
  * This class defines Observer Service Imp
  * @author Samin Mahdipour
@@ -68,6 +65,12 @@ public class ObserverServiceImp implements ObserverService {
              int rslt=observerTool.profileForAction(forServices.data);
              changeNext(rslt);
                 break;
+            }
+            case 5:
+            {
+               int rslt= observerTool.profileForAction(observerTool.reactions(forServices.data));
+               changeNext(rslt);
+               break;
             }
         }
         return next;

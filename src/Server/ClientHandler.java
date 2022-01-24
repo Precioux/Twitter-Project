@@ -560,7 +560,7 @@ public class ClientHandler implements Runnable {
                                         {
                                             response="";
                                             Response response1=new Response();
-                                            response1.addResult("Failed to react "+clientRequest.ParameterValue+"!");
+                                            response1.addResult("Failed to React "+clientRequest.ParameterValue+"!");
                                             Error error=new Error();
                                             error.errorSearch(1000);
                                             response1.addError(error);

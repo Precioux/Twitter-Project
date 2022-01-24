@@ -1,6 +1,8 @@
 package Tools;
 
 import com.google.gson.Gson;
+import entity.Data;
+import entity.React;
 import requestsFormats.ForOther;
 import resultFormats.Result;
 
@@ -104,7 +106,85 @@ public class ObserverTool extends Tool {
         }
         return type;
     }
+     public String reactions(String jData)
+     {
+         int rslt=0;
+         React react=gson.fromJson(jData,React.class);
+         File toTweetFolder=new File("./Data/Tweets/"+react.getTo()+"/");
+         String[] tweetsToAddress=toTweetFolder.list();
+         String[] tweetsToString=new String[tweetsToAddress.length];
+         int i=0;
+         for (String address:tweetsToAddress) {
+             File tweet=new File("./Data/Tweets/"+react.getTo()+"/"+address+"/DDU");
+             FileReader fileReader=null;
+             try{
+                 Data data=new Data();
+                 fileReader=new FileReader(tweet);
+                 Scanner scanner=new Scanner(fileReader).useDelimiter("\n");
+                 data.addTime(scanner.next());
+                 data.addUser(scanner.next());
+                 data.addString(scanner.next());
+                 tweetsToString[i]=jsoNtool.toJSON(data);
+                 scanner.close();
+                 fileReader.close();
+                 i++;
 
+             } catch (IOException e) {
+                 e.printStackTrace();
+             }
+         }
+         int index=-1;
+         int j=0;
+         for (String twt:tweetsToString) {
+             Data d=gson.fromJson(twt,Data.class);
+             if (d.string.equals(react.getTweet())){
+                 index=j;}
+             j++;
+         }
+         ForOther forOther=null;
+         switch (react.getAction())
+         {
+             case 1:
+             {
+                 index++;
+                 forOther=new ForOther(index,react.getTo(),2,react.getComment());
+                 break;
+             }
+             case 2:
+             {
+
+                 File like=new File("./Data/Tweets/"+react.getTo()+"/"+tweetsToAddress[index]+"/likes");
+                 FileWriter fileWriter=null;
+                 FileReader fileReader=null;
+                 try {
+                     fileReader=new FileReader(like);
+                     fileWriter=new FileWriter(like);
+                     Scanner scanner=new Scanner(fileReader);
+                     int n=scanner.nextInt();
+                     n=n+1;
+                     fileWriter.write(String.valueOf(n));
+                     fileReader.close();
+                     fileWriter.close();
+
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+                 index++;
+                 forOther=new ForOther(index,react.getTo(),1,"");
+                 break;
+             }
+             case 3:
+             {
+                 index++;
+                 forOther=new ForOther(index,react.getTo(),3,"");
+                 break;
+             }
+             default:{
+                 index=-1;
+                 break;}
+         }
+         return jsoNtool.toJSON(forOther);
+     }
     /**
      * @return profile
      * @param who data

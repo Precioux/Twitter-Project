@@ -3,6 +3,7 @@ package graphics;
 import Tools.JSONtool;
 import com.google.gson.Gson;
 import entity.Account;
+import entity.Data;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -194,6 +195,58 @@ public class TimeLineController {
     }
 
     /**
+     * get likes
+     */
+    int getlikes(String user,String txt)
+    {
+        int number=0;
+        File toTweetFolder=new File("./Data/Tweets/"+user+"/");
+        String[] tweetsToAddress=toTweetFolder.list();
+        String[] tweetsToString=new String[tweetsToAddress.length];
+        int i=0;
+        for (String address:tweetsToAddress) {
+            File tweet=new File("./Data/Tweets/"+user+"/"+address+"/DDU");
+            FileReader fileReader=null;
+            try{
+                Data data=new Data();
+                fileReader=new FileReader(tweet);
+                Scanner scanner=new Scanner(fileReader).useDelimiter("\n");
+                data.addTime(scanner.next());
+                data.addUser(scanner.next());
+                data.addString(scanner.next());
+                tweetsToString[i]=jsoNtool.toJSON(data);
+                scanner.close();
+                fileReader.close();
+                i++;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        int index=-1;
+        int j=0;
+        for (String twt:tweetsToString) {
+            Data d=gson.fromJson(twt,Data.class);
+            if (d.string.equals(txt)){
+                index=j;}
+            j++;
+        }
+        File tweet=new File("./Data/Tweets/"+user+"/"+tweetsToAddress[index]+"/likes");
+        FileReader fileReader=null;
+        try {
+            fileReader=new FileReader(tweet);
+            BufferedReader bufferedReader=new BufferedReader(fileReader);
+            number=bufferedReader.read();
+            System.out.println(number);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return number;
+    }
+    /**
      *
      * @param key data
      * @return TWEET
@@ -271,6 +324,7 @@ public class TimeLineController {
                 T.getOwner(scanner.next());
                 T.getText(scanner.next());
                 T.getStatus("Tweeted");
+                T.getLikes(getlikes(T.owner,t));
                 String twet=jsoNtool.toJSON(T);
                 HashMap<Long,String> ht=new HashMap<>();
                 long num=Long.parseLong(t);
@@ -299,6 +353,7 @@ public class TimeLineController {
                 T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getText(scanner.next());
+                T.getLikes(getlikes(T.owner,T.text));
                 T.getStatus("Tweeted");
                 String twet=jsoNtool.toJSON(T);
                 HashMap<Long,String> ht=new HashMap<>();

@@ -43,7 +43,7 @@ public class CommandPerserServiceImp implements CommandPerserService {
     {
         boolean wrong=false;
         String f="";
-        System.out.println("If you want to react to any tweet enter tweet's index otherwise enter -1");
+        System.out.println("If you want to React to any tweet enter tweet's index otherwise enter -1");
         int c=scanner.nextInt();
         String choice="";
         if(c!=-1)
