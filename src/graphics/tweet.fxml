@@ -8,7 +8,7 @@
 
 <Pane fx:id="tweetArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Hyperlink fx:id="userID" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="210.0" text="\@IdOFUser" textFill="#00aaff">
+      <Hyperlink fx:id="userID" layoutX="14.0" layoutY="14.0" onAction="#goProfile" prefHeight="42.0" prefWidth="210.0" text="\@IdOFUser" textFill="#00aaff">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>

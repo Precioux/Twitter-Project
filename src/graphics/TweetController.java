@@ -4,13 +4,14 @@ import entity.Account;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -61,6 +62,29 @@ public class TweetController extends ListCell<TWEET> {
 
     @FXML
     private Hyperlink userID;
+    @FXML
+    public void goProfile(ActionEvent actionEvent)
+    {
+        setAccount();
+        File viewer=new File("./files/View.txt");
+        System.out.println(viewer.exists());
+        FileWriter fileWriter=null;
+        try {
+            fileWriter = new FileWriter(viewer);
+            System.out.println(userID.getText());
+            fileWriter.write(userID.getText());
+            fileWriter.close();
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+            Scene p = new Scene(signUpRoot);
+            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            window.setScene(p);
+            window.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * alart
      * @param err error
