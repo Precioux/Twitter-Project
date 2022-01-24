@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.TimeLineController">
+<BorderPane fx:id="area" maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.TimeLineController">
    <top>
       <MenuBar fx:id="menuBar" prefHeight="0.0" prefWidth="366.0" BorderPane.alignment="CENTER">
         <menus>
@@ -21,8 +21,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Application">
             <items>
-              <MenuItem mnemonicParsing="false" text="Log Out" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
+              <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#toLogOut" text="Log Out" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#toExit" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

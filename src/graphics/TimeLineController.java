@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -37,6 +38,8 @@ public class TimeLineController {
     JSONtool jsoNtool=new JSONtool();
     Account account=new Account();
     Gson gson=new Gson();
+    @FXML
+    private BorderPane area;
 
     /**
      * sets account
@@ -65,6 +68,33 @@ public class TimeLineController {
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
 
+    /**
+     * log out
+     * @param actionEvent e
+     */
+    @FXML
+    public void toLogOut(ActionEvent actionEvent)
+    {
+        try {
+            Stage window = (Stage) area.getScene().getWindow();
+            Parent Root = FXMLLoader.load(getClass().getResource("Authentication.fxml"));
+            Scene Aview = new Scene(Root);
+            window.setScene(Aview);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * exit
+     * @param actionEvent e
+     */
+    @FXML
+    public void toExit(ActionEvent actionEvent)
+    {
+
+    }
     /**
      * search
      * @param actionEvent e
