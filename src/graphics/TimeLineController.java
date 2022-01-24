@@ -177,13 +177,16 @@ public class TimeLineController {
         addr.clear();
         check.clear();
         tweets.clear();
+        MainTimeLine.getItems().clear();
             findFollowings();
                 for (String follower : AFollowings) {
                     getTweets(follower);
                     getLikes(follower);
                     getRetweets(follower);
                     getComments(follower);
+
                 }
+               getMytweets();
                 sortTimeline();
 
 
@@ -280,7 +283,35 @@ public class TimeLineController {
             e.printStackTrace();
         }
     }
-
+    /**
+     * get all tweets
+     */
+    public void getMytweets()
+    {
+        File folder=new File("./Data/Tweets/"+account.ID+"/");
+        try {
+            String[] twts = folder.list();
+            for (String t : twts) {
+                File twt = new File("./Data/Tweets/" + account.ID + "/" + t + "/ddu");
+                FileReader filereader = new FileReader(twt);
+                Scanner scanner=new Scanner(filereader).useDelimiter("\n");
+                TWEET T=new TWEET();
+                T.getTime(scanner.next());
+                T.getOwner(scanner.next());
+                T.getText(scanner.next());
+                T.getStatus("Tweeted");
+                String twet=jsoNtool.toJSON(T);
+                HashMap<Long,String> ht=new HashMap<>();
+                long num=Long.parseLong(t);
+                ht.put(num,twet);
+                addr.add(num);
+                check.add(false);
+                tweetlist.add(ht);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * get all comments
      * @param follower data
