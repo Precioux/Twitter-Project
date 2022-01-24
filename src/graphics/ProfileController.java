@@ -1,8 +1,10 @@
 package graphics;
 
+import Services.impl.ObserverServiceImp;
 import Tools.JSONtool;
 import com.google.gson.Gson;
 import entity.Account;
+import entity.Error;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,8 +22,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import requestsFormats.ForServices;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 public class ProfileController {
@@ -33,7 +38,9 @@ public class ProfileController {
     private ArrayList<String> timeline=new ArrayList<>();
     private ArrayList<Long> addr=new ArrayList<>();
     private ArrayList<Boolean> check=new ArrayList<>();
+    ObserverServiceImp observerServiceImp=new ObserverServiceImp();
     ObservableList<TWEET> Otweets= FXCollections.observableArrayList();
+    Account accountUser=new Account();
     Gson gson=new Gson();
     @FXML
     private GridPane mainArea;
@@ -67,6 +74,28 @@ public class ProfileController {
     String user="";
     /**
      * sets account
+     *
+     */
+    public void setUser(String user) {
+        System.out.println("this is set user");
+        try {
+            accountUser.ID=user;
+            File file1=new File("./Data/Users/"+user+"/accountData");
+            Scanner scanner1=new Scanner(file1).useDelimiter("\n");
+            accountUser.password=scanner1.next();
+            accountUser.fname=scanner1.next();
+            accountUser.lname=scanner1.next();
+            accountUser.bio=scanner1.next();
+            accountUser.birthString=scanner1.next();
+            accountUser.joinString=scanner1.next();
+            accountUser.photoPath=scanner1.next();
+            System.out.println(accountUser.toStringForOverWrite());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * sets account view
      *
      */
     public void setAccount() {
@@ -156,8 +185,41 @@ public class ProfileController {
         Optional<ButtonType> res=alert.showAndWait();
     }
     @FXML
-    void toFollow(ActionEvent event) {
-
+    void toFollow(ActionEvent event) throws IOException {
+        setUser(user);
+        observerServiceImp.addAccount(accountUser);
+        ForServices forServices=new ForServices(1,view);
+        int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
+        if(rslt==0)
+        {
+            LocalDate localDate=LocalDate.now();
+            LocalTime localTime=LocalTime.now();
+            submitLog(localDate,localTime,"follow","SuccessFul",0);
+        }
+        else
+        {
+            if(rslt==-1)
+            {
+                Error error=new Error();
+                error.errorSearch(1000);
+                alaart(error.getErrorType());
+                LocalDate localDate=LocalDate.now();
+                LocalTime localTime=LocalTime.now();
+                submitLog(localDate,localTime,"follow","Failed",1000);
+            }
+            else
+            {
+                if(rslt==9 || rslt==999 || rslt==12)
+                {
+                    Error error=new Error();
+                    error.errorSearch(rslt);
+                    alaart(error.getErrorType());
+                    LocalDate localDate=LocalDate.now();
+                    LocalTime localTime=LocalTime.now();
+                    submitLog(localDate,localTime,"follow","Failed",rslt);
+                }
+            }
+        }
     }
 
     @FXML
@@ -170,8 +232,42 @@ public class ProfileController {
     }
 
     @FXML
-    void toUnfollow(ActionEvent event) {
+    void toUnfollow(ActionEvent event) throws IOException {
+        setUser(user);
+        observerServiceImp.addAccount(accountUser);
+        ForServices forServices=new ForServices(2,view);
+        int rslt=observerServiceImp.begin(jsoNtool.toJSON(forServices));
+        if(rslt==0)
+        {
+            LocalDate localDate=LocalDate.now();
+            LocalTime localTime=LocalTime.now();
+            submitLog(localDate,localTime,"unfollow","SuccessFul",0);
+        }
+        else
+        {
+            if(rslt==-1)
+            {
+                Error error=new Error();
+                error.errorSearch(1000);
+               alaart(error.getErrorType());
+                LocalDate localDate=LocalDate.now();
+                LocalTime localTime=LocalTime.now();
+                submitLog(localDate,localTime,"unfollow","Failed",1000);
+            }
+            else
+            {
+                if(rslt==9 || rslt==999 || rslt==10)
+                {
 
+                    Error error=new Error();
+                    error.errorSearch(rslt);
+                   alaart(error.getErrorType());
+                    LocalDate localDate=LocalDate.now();
+                    LocalTime localTime=LocalTime.now();
+                    submitLog(localDate,localTime,"unfollow","Failed",rslt);
+                }
+            }
+        }
     }
     /**
      * get all tweets
@@ -296,5 +392,37 @@ public class ProfileController {
         );
     }
 
+    /**
+     * submit log
+     * @param localTime data
+     * @param localDate data
+     * @param request data
+     * @param result data
+     * @param ErrorCode data
+     */
+    public void submitLog(LocalDate localDate, LocalTime localTime,String request, String result, int ErrorCode)
+    {
+        File file=new File("./files/log.txt");
+        String log="";
+        FileWriter fileWriter=null;
+        try {
+            fileWriter = new FileWriter(file,true);
+            if (ErrorCode==0) {
+                log+= localDate+" "+localTime+ "  @" + accountUser.ID + "  : " + request + " => " + result+"\n";
+            }
+            else
+            {
+                Error error=new Error();
+                error.errorSearch(ErrorCode);
+                log+=localDate +" "+localTime+ "  @" + accountUser.ID + "  : " + request + " => " + result+" > "+error.getErrorType()+"\n";
+            }
+            fileWriter.write(log);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 }
