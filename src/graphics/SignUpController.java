@@ -71,6 +71,12 @@ public class SignUpController {
     private GridPane mainArea=new GridPane();
 
     ArrayList<String> aa=new ArrayList<>();
+
+    /**
+     * to cancel
+     * @param event e
+     * @throws IOException e
+     */
     @FXML
     void toCancel(ActionEvent event) throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("Authentication.fxml"));
@@ -125,12 +131,14 @@ public class SignUpController {
             System.out.println(rslt);
             if (rslt == 0) {
                 File file=new File("./files/Remember.txt");
+                System.out.println(remember.isSelected());
+                System.out.println(Id);
                 if(remember.isSelected())
                 {
                     FileWriter f=null;
                     try {
                         f=new FileWriter(file);
-                        f.write(account.ID);
+                        f.write(Id);
                         f.close();
                     } catch (IOException e) {
                         e.printStackTrace();

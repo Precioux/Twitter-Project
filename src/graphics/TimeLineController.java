@@ -65,6 +65,18 @@ public class TimeLineController {
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
 
     /**
+     * search
+     * @param actionEvent e
+     */
+    @FXML
+    public void searchforUser(ActionEvent actionEvent) throws IOException {
+        Parent signUpRoot = FXMLLoader.load(getClass().getResource("Search.fxml"));
+        Scene p = new Scene(signUpRoot);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(p);
+        window.show();
+    }
+    /**
      * refreshes the timeLine
      * @param event ecent
      */
@@ -137,6 +149,12 @@ public class TimeLineController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * to tweet
+     * @param event e
+     * @throws IOException e
+     */
     @FXML
     void toTweet(ActionEvent event) throws IOException {
 

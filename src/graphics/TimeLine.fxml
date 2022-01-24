@@ -59,6 +59,14 @@
                   <Insets left="40.0" top="20.0" />
                </VBox.margin>
             </Button>
+            <Button fx:id="search" mnemonicParsing="false" onAction="#searchforUser" prefHeight="36.0" prefWidth="56.0" style="-fx-background-color: #00aaff;" text="Search" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="40.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </left>

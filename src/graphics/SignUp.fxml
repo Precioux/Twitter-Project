@@ -141,7 +141,7 @@
                 <Insets right="10.0" />
             </GridPane.margin>
         </Button>
-      <CheckBox fx:id="remember2" mnemonicParsing="false" text="Remember Me" textFill="#00aaff" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <CheckBox fx:id="remember" mnemonicParsing="false" text="Remember Me" textFill="#00aaff" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
       <Label text="Add profile Photo :" textFill="#00aaff" GridPane.columnIndex="1">
          <font>
             <Font name="System Bold" size="16.0" />

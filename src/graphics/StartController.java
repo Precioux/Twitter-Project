@@ -14,15 +14,6 @@ public class StartController {
     @FXML
     private Pane mainArea;
 
-//    /**
-//     * initialize
-//     * @throws IOException e
-//     */
-//    public void initialize() throws IOException {
-//        Check();
-//    }
-
-
 
     /**
      * to timeLine
@@ -74,5 +65,15 @@ public class StartController {
         }
         else toAuthentication();
 
+    }
+
+    /**
+     * refresh start
+     * @param actionEvent e
+     * @throws IOException e
+     */
+    @FXML
+    public void freshStart(javafx.event.ActionEvent actionEvent) throws IOException {
+    toAuthentication();
     }
 }

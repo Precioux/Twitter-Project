@@ -119,7 +119,7 @@ public class ClientHandler implements Runnable {
                                 account= authenticationServiceImp.connect();
                                 LocalDate localDate=LocalDate.now();
                                 LocalTime localTime=LocalTime.now();
-                                submitLog(localDate,localTime,"SignUpView","SuccessFul",0);
+                                submitLog(localDate,localTime,"SignUp","SuccessFul",0);
                                 setAccount();
                             }
                             else
@@ -128,14 +128,14 @@ public class ClientHandler implements Runnable {
                                 {
                                     response="";
                                     Response response2=new Response();
-                                    response2.addResult("SignUpView Failed!");
+                                    response2.addResult("SignUp Failed!");
                                     Error error=new Error();
                                     error.errorSearch(rslt);
                                     response2.addError(error);
                                     response += jsoNtool.toJSON(response2);
                                     LocalDate localDate=LocalDate.now();
                                     LocalTime localTime=LocalTime.now();
-                                    submitLog(localDate,localTime,"SignUpView","Failed",rslt);
+                                    submitLog(localDate,localTime,"SignUp","Failed",rslt);
                                 }
                             }
                         }
@@ -156,7 +156,7 @@ public class ClientHandler implements Runnable {
                                     logFlag=false;
                                     break;
                                 }
-                                case "TWEET":
+                                case "tweet":
                                 {
                                     response="";
                                     ForServices forServices =new ForServices(1,clientRequest.ParameterValue);
