@@ -23,7 +23,26 @@ public class Account {
     public LocalDate joindate;
     public String bio;
     public String photoPath;
+    public String birthString;
+    public String joinString;
 
+    /**
+     * string of birth
+     * @param birthString b
+     */
+    public void addBirthString(String birthString)
+    {
+        this.birthString=birthString;
+    }
+
+    /**
+     * string join
+     * @param joinString join
+     */
+    public void addJoinString(String joinString)
+    {
+        this.joinString=joinString;
+    }
     /**
      * add profile photo
      * @param photoPath path
@@ -103,6 +122,16 @@ public class Account {
     public String toString()
     {
         return password+"\n"+fname+"\n"+lname+"\n"+bio+"\n"+birthdate+"\n"+joindate+"\n"+photoPath;
+    }
+
+
+    /**
+     *
+     * @return user data
+     */
+    public String toStringForOverWrite()
+    {
+        return password+"\n"+fname+"\n"+lname+"\n"+bio+"\n"+birthString+"\n"+joinString+"\n"+photoPath;
     }
 
     /**

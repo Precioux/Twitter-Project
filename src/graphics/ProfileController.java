@@ -19,13 +19,12 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,6 +41,8 @@ public class ProfileController {
     private ArrayList<Boolean> check=new ArrayList<>();
     ObservableList<TWEET> Otweets= FXCollections.observableArrayList();
     Gson gson=new Gson();
+    @FXML
+    private GridPane mainArea;
     @FXML
     private Button back;
 
@@ -90,13 +91,15 @@ public class ProfileController {
             account.lname=scanner1.next();
             account.bio=scanner1.next();
             bio.setText(account.bio);
-            String r=scanner1.next();
-            joined.setText(scanner1.next());
+            account.birthString=scanner1.next();
+            account.joinString=scanner1.next();
+            joined.setText(account.joinString);
             account.photoPath=scanner1.next();
             System.out.println(account.photoPath);
             File p=new File(account.photoPath);
             Image image=new Image(p.toURI().toString());
             photo.setImage(image);
+            System.out.println(account.toStringForOverWrite());
 
 
         } catch (FileNotFoundException e) {
@@ -105,7 +108,29 @@ public class ProfileController {
     }
     @FXML
     void toChange(ActionEvent event) {
+        FileChooser fileChooser=new FileChooser();
+        fileChooser.setTitle("Profile Photo");
+        Stage stage=(Stage) mainArea.getScene().getWindow();
+        File file=fileChooser.showOpenDialog(stage);
+        if (file!=null)
+        {
+            File accountData=new File("./Data/Users/"+account.ID+"/accountData");
+            FileWriter fw=null;
+            try {
+                account.photoPath="";
+                account.addPhotoPath(file.getAbsolutePath());
+                fw=new FileWriter(accountData);
+                fw.write(account.toStringForOverWrite());
+                System.out.println("profile changed");
+                File p=new File(account.photoPath);
+                Image image=new Image(p.toURI().toString());
+                photo.setImage(image);
+                fw.close();
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
