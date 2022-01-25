@@ -43,7 +43,7 @@
     <left>
         <VBox prefHeight="674.0" prefWidth="170.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="profile" mnemonicParsing="false" onAction="#toProfile" prefHeight="59.0" prefWidth="85.0" style="-fx-background-color: 940000;" text="Profile" textFill="WHITE">
+                <Button fx:id="profile" mnemonicParsing="false" onAction="#toProfile" prefHeight="59.0" prefWidth="85.0" style="-fx-background-color: #940000;" text="Profile" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

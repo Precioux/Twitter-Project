@@ -33,7 +33,18 @@ public class StartControllerImp implements StartController {
         window.show();
         System.out.println("send to timeLine");
     }
-
+    /**
+     * to timeLine
+     * @throws IOException e
+     */
+    public void  toDarkTimeLine() throws IOException {
+        Stage window = (Stage) mainArea.getScene().getWindow();
+        Parent Root = FXMLLoader.load(getClass().getResource("TimeLineDark.fxml"));
+        Scene Aview = new Scene(Root);
+        window.setScene(Aview);
+        window.show();
+        System.out.println("send to Dark timeLine");
+    }
     /**
      * to authentication
      * @throws IOException e
@@ -46,7 +57,37 @@ public class StartControllerImp implements StartController {
        window.show();
        System.out.println("send to authentication");
    }
+    /**
+     * set Theme
+     */
+    public void setTheme()
+    {
+        int theme=-1;
+        File Theme=new File("./files/Setting/Theme.txt");
+        FileReader fileReader=null;
+        try {
+            fileReader = new FileReader(Theme);
+            Scanner scanner=new Scanner(fileReader);
+            if(scanner.hasNextInt())
+            {
+                theme=scanner.nextInt();
+            }
+            System.out.println("Theme :"+theme);
+            if(theme==0)
+            {
+                toTimeLine();
+            }
+            else {
+                toDarkTimeLine();
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
     /**
      * check
      * @param actionEvent e
@@ -67,7 +108,7 @@ public class StartControllerImp implements StartController {
                 FileWriter fileWriter=new FileWriter(w);
                 fileWriter.write(u);
                 fileWriter.close();
-                toTimeLine();
+                setTheme();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {

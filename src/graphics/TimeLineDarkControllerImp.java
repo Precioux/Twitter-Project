@@ -318,11 +318,11 @@ public class TimeLineDarkControllerImp implements TimeLineController {
     @FXML
     public void toTweet(ActionEvent event) throws IOException {
 
-        Parent signUpRoot= FXMLLoader.load(getClass().getResource("AddTweet.fxml"));
+        Parent signUpRoot= FXMLLoader.load(getClass().getResource("AddTweetDark.fxml"));
         Scene signUpview=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(signUpview);
-        window.showAndWait();
+        window.show();
     }
     /**
      *

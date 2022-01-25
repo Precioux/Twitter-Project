@@ -24,6 +24,7 @@ import javafx.util.Callback;
 
 import java.io.*;
 import java.util.*;
+
 /**
  * AP-Project-Phase4
  * @author Samin Mahdipour
@@ -88,7 +89,7 @@ public class TimeLineControllerImp implements TimeLineController {
     public void toChangeTheme(ActionEvent actionEvent) throws IOException {
         Parent r= FXMLLoader.load(getClass().getResource("Theme.fxml"));
         Scene s=new Scene(r);
-        Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage window=(Stage) area.getScene().getWindow();
         window.setScene(s);
         window.show();
     }
@@ -226,27 +227,16 @@ public class TimeLineControllerImp implements TimeLineController {
     public void getSetting()
     {
         File ExitMode=new File("./files/Setting/ExitMode.txt");
-        File Theme=new File("./files/Setting/Theme.txt");
         FileReader onExitMode=null;
-        FileReader onTheme=null;
         try {
-            onTheme=new FileReader(Theme);
             onExitMode=new FileReader(ExitMode);
             Scanner scannerOnExitMode=new Scanner(onExitMode);
-            Scanner scannerOnTheme=new Scanner(onTheme);
-            if(scannerOnTheme.hasNextInt())
-            {
-                theme=scannerOnTheme.nextInt();
-
-            }
             if (scannerOnExitMode.hasNextInt())
             {
                 Emode=scannerOnExitMode.nextInt();
 
             }
             onExitMode.close();
-            onTheme.close();;
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

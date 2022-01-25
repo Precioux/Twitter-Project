@@ -19,13 +19,12 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import requestsFormats.LogIn;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
+import java.util.Scanner;
 
 /**
  * AP-Project-Phase4
@@ -68,6 +67,38 @@ public class AuthenticationControllerImp implements AuthenticationController {
     }
 
     /**
+     * set Theme
+     */
+    public void setTheme()
+    {
+        int theme=-1;
+        File Theme=new File("./files/Setting/Theme.txt");
+        FileReader fileReader=null;
+        try {
+            fileReader = new FileReader(Theme);
+            Scanner scanner=new Scanner(fileReader);
+            if(scanner.hasNextInt())
+            {
+                theme=scanner.nextInt();
+            }
+            System.out.println("Theme :"+theme);
+            if(theme==0)
+            {
+                toTimeline();
+            }
+            else {
+                toDarkTimeline();
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * sign in
      * @param event event
      */
@@ -95,9 +126,14 @@ public class AuthenticationControllerImp implements AuthenticationController {
                     if (file.exists())
                         file.delete();
                 }
+                account= authenticationServiceImp.connect();
+                LocalDate localDate=LocalDate.now();
+                LocalTime localTime=LocalTime.now();
+                submitLog(localDate,localTime,"logIn","SuccessFul",0);
+                System.out.println("Sign In ok");
                 File ExitMode=new File("./files/Setting/ExitMode.txt");
                 File Theme=new File("./files/Setting/Theme.txt");
-                if(!ExitMode.exists() || !Theme.exists() )
+                if(!ExitMode.exists() && !Theme.exists() )
                 {
                     FileWriter onExitMode=null;
                     FileWriter onTheme=null;
@@ -108,16 +144,15 @@ public class AuthenticationControllerImp implements AuthenticationController {
                         onExitMode.close();
                         onTheme.write("0");
                         onTheme.close();
+                        toTimeline();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                account= authenticationServiceImp.connect();
-                LocalDate localDate=LocalDate.now();
-                LocalTime localTime=LocalTime.now();
-                submitLog(localDate,localTime,"logIn","SuccessFul",0);
-                System.out.println("Sign In ok");
-                toTimeline();
+                else {
+                    setTheme();
+                }
+
             }
             else
             {
@@ -167,6 +202,28 @@ public class AuthenticationControllerImp implements AuthenticationController {
 
     }
 
+    /**
+     * to dark TimeLine
+     */
+    public void toDarkTimeline()
+    {
+        File file=new File("./files/Exchange.txt");
+        FileWriter fw=null;
+        try {
+            fw=new FileWriter(file);
+            fw.write(account.ID);
+            fw.close();
+            Stage window = (Stage) mainArea.getScene().getWindow();
+            Parent Root = FXMLLoader.load(getClass().getResource("TimeLineDark.fxml"));
+            Scene Aview = new Scene(Root);
+            window.setScene(Aview);
+            window.show();
+            System.out.println("send to timeLine Dark");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     /**
      * to sign up
      * @param event e

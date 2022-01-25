@@ -3,10 +3,10 @@ package graphics;
 import Services.impl.TweetingServiceImp;
 import Tools.JSONtool;
 import entity.Account;
+import graphics.Controllers.addTweetController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -23,8 +23,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
-
-public class AddTweetController {
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines add tweet controller
+ */
+public class AddTweetControllerImp  implements addTweetController {
     TweetingServiceImp tweetingServiceImp=new TweetingServiceImp();
     JSONtool jsoNtool=new JSONtool();
     Account account=new Account();
@@ -52,21 +58,87 @@ public class AddTweetController {
             e.printStackTrace();
         }
     }
-    @FXML
-    void cancelIt(ActionEvent event) throws IOException {
+
+    /**
+     * to TimeLine
+     * @throws IOException e
+     */
+    public void toTimeLine() throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
         Scene signUpview=new Scene(signUpRoot);
-        Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage window=(Stage) area.getScene().getWindow();
         window.setScene(signUpview);
-        window.showAndWait();
+        window.show();
     }
+    /**
+     * to dark TimeLine
+     * @throws IOException e
+     */
+    public void toDarkTimeLine() throws IOException {
+        Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLineDark.fxml"));
+        Scene signUpview=new Scene(signUpRoot);
+        Stage window=(Stage) area.getScene().getWindow();
+        window.setScene(signUpview);
+        window.show();
+    }
+    /**
+     * set Theme
+     */
+    public void setTheme()
+    {
+        int theme=-1;
+        File Theme=new File("./files/Setting/Theme.txt");
+        FileReader fileReader=null;
+        try {
+            fileReader = new FileReader(Theme);
+            Scanner scanner=new Scanner(fileReader);
+            if(scanner.hasNextInt())
+            {
+                theme=scanner.nextInt();
+            }
+            System.out.println("Theme :"+theme);
+            if(theme==0)
+            {
+                toTimeLine();
+            }
+            else {
+                toDarkTimeLine();
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * cancel
+     * @param event e
+     * @throws IOException e
+     */
     @FXML
-    void addText(ActionEvent event) throws IOException {
+    public void cancelIt(ActionEvent event) throws IOException {
+     toTimeLine();
+    }
+
+    /**
+     * add text
+     * @param event e
+     * @throws IOException e
+     */
+    @FXML
+    public void addText(ActionEvent event) throws IOException {
       String txt=textBox.getText();
-      if(txt.length() >256)
-      {
-          alaart("More than 256 characters!");
-      }
+        if(txt.length() >256 || txt.length()==0)
+        {
+            if(txt.length()>256)
+                alaart("More than 256 characters!");
+            else
+            if(txt.length()==0)
+                alaart("Please enter text!");
+        }
       else
       {
           setAccount();
@@ -74,18 +146,14 @@ public class AddTweetController {
           ForServices forServices =new ForServices(1,txt);
           int est=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
           System.out.println("sent tweet");
-          Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
-          Scene signUpview=new Scene(signUpRoot);
-          Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-          window.setScene(signUpview);
-          window.show();
+         toTimeLine();
       }
     }
     /**
      * alart
      * @param err error
      */
-    void alaart(String err) throws IOException {
+    public void alaart(String err) throws IOException {
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(err);

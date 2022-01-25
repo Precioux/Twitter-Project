@@ -88,11 +88,20 @@ public class ThemeControllerImp implements ThemeController {
      * @throws IOException e
      */
     public void toTimeLine(ActionEvent actionEvent) throws IOException {
+        if (light.isSelected()){
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
         Scene signUpview=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(signUpview);
-        window.show();
+        window.show();}
+        else {
+            Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLineDark.fxml"));
+            Scene signUpview=new Scene(signUpRoot);
+            Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            window.setScene(signUpview);
+            window.show();
+        }
+
     }
 
     /**
