@@ -61,7 +61,7 @@ public class TimeLineDarkControllerImp implements TimeLineController {
      * @param actionEvent
      */
     public void toExitMode(ActionEvent actionEvent) throws IOException {
-        Parent r= FXMLLoader.load(getClass().getResource("Mode.fxml"));
+        Parent r= FXMLLoader.load(getClass().getResource("ModeDark.fxml"));
         Scene s=new Scene(r);
         Stage window=(Stage) area.getScene().getWindow();
         window.setScene(s);
