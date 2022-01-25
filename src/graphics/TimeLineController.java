@@ -49,6 +49,23 @@ public class TimeLineController {
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
     @FXML
     public void toHelp(ActionEvent actionEvent) {
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        File file=new File("./files/Help.txt");
+        FileReader fileReader=null;
+        String data="";
+        try {
+            fileReader=new FileReader(file);
+            Scanner scanner=new Scanner(fileReader).useDelimiter("\n");
+            while (scanner.hasNext())
+            {
+                data+=scanner.next();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        alert.setContentText(data);
+        Optional<ButtonType> res=alert.showAndWait();
     }
 
     /**
