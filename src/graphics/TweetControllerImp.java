@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import entity.Account;
 import entity.Error;
 import entity.React;
+import graphics.Controllers.TweetController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +24,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.Scanner;
-
-public class TweetController extends ListCell<TWEET> {
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines Tweet controller
+ */
+public class TweetControllerImp extends ListCell<TWEET> implements TweetController {
     Account account=new Account();
     JSONtool jsoNtool=new JSONtool();
     ObserverServiceImp observerServiceImp=new ObserverServiceImp();
@@ -76,6 +83,11 @@ public class TweetController extends ListCell<TWEET> {
             e.printStackTrace();
         }
     }
+
+    /**
+     * go to profile
+     * @param actionEvent e
+     */
     @FXML
     public void goProfile(ActionEvent actionEvent)
     {
@@ -104,7 +116,7 @@ public class TweetController extends ListCell<TWEET> {
      * alart
      * @param err error
      */
-    void alaart(String err) throws IOException {
+    public void alaart(String err) throws IOException {
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(err);
@@ -141,7 +153,7 @@ public class TweetController extends ListCell<TWEET> {
      * @throws IOException
      */
     @FXML
-    void likeIt(ActionEvent event) throws IOException {
+    public void likeIt(ActionEvent event) throws IOException {
         System.out.println("like ");
      actions(2);
     }
@@ -152,7 +164,7 @@ public class TweetController extends ListCell<TWEET> {
      * @param acti a
      * @throws IOException e
      */
-    void actions(int acti) throws IOException {
+    public void actions(int acti) throws IOException {
         setAccount();
         observerServiceImp.addAccount(account);
         System.out.println("this is actions for "+acti);
@@ -194,7 +206,7 @@ public class TweetController extends ListCell<TWEET> {
      * @throws IOException e
      */
     @FXML
-    void removeIt(ActionEvent actionEvent) throws IOException {
+    public void removeIt(ActionEvent actionEvent) throws IOException {
         setAccount();
         tweetingServiceImp.addAccount(account);
         if(userID.getText().equals(account.ID))
@@ -245,7 +257,7 @@ public class TweetController extends ListCell<TWEET> {
      * @param event e
      */
     @FXML
-    void toRetweet(ActionEvent event) throws IOException {
+    public void toRetweet(ActionEvent event) throws IOException {
         System.out.println("this is retweeter");
 actions(3);
     }
@@ -257,11 +269,10 @@ actions(3);
      * @param empty e
      */
     protected void updateItem(TWEET item, boolean empty) {
-        // required to ensure that cell displays properly
         super.updateItem(item, empty);
 
         if (empty || item == null) {
-            setGraphic(null); // don't display anything
+            setGraphic(null);
         }
         else {
             if (mLLoader == null) {

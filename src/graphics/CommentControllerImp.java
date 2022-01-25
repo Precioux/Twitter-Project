@@ -5,6 +5,7 @@ import Tools.JSONtool;
 import entity.Account;
 import entity.Error;
 import entity.React;
+import graphics.Controllers.CommentController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,14 +19,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import requestsFormats.ForServices;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.Scanner;
-
-public class CommentController {
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines comment controller
+ */
+public class CommentControllerImp implements CommentController {
    ObserverServiceImp observerServiceImp=new ObserverServiceImp();
    Account account=new Account();
    JSONtool jsoNtool=new JSONtool();
@@ -57,8 +63,14 @@ public class CommentController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * to timeLine
+     * @param event e
+     * @throws IOException e
+     */
     @FXML
-    void backTimeLine(ActionEvent event) throws IOException {
+    public void backTimeLine(ActionEvent event) throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
         Scene signUpview=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -66,8 +78,12 @@ public class CommentController {
         window.show();
     }
 
+    /**
+     * comment
+     * @param event e
+     */
     @FXML
-    void commentIt(ActionEvent event)  {
+    public void commentIt(ActionEvent event)  {
         File file=new File("./files/CommentSource.txt");
         FileReader fileReader=null;
         try {
@@ -151,7 +167,7 @@ public class CommentController {
      * alart
      * @param err error
      */
-    void alaart(String err) throws IOException {
+    public void alaart(String err) throws IOException {
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(err);

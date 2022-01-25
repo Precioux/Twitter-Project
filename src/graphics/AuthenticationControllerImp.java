@@ -7,6 +7,7 @@ import Tools.JSONtool;
 import com.google.gson.Gson;
 import entity.Account;
 import entity.Error;
+import graphics.Controllers.AuthenticationController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +34,7 @@ import java.util.Optional;
  * @since 1.22.2022
  * this class defines authentication controller
  */
-public class AuthenticationController {
+public class AuthenticationControllerImp implements AuthenticationController {
     AuthenticationServiceImp authenticationServiceImp=new AuthenticationServiceImp();
     Gson gson=new Gson();
     boolean logFlag=false;
@@ -54,32 +55,11 @@ public class AuthenticationController {
     private Button signUp;
     @FXML
     private CheckBox remember=new CheckBox();
-//    public void initialize()
-//    {
-//        File toCheck=new File("./files/Remember.txt");
-//        if(toCheck.exists())
-//        {
-//            FileReader fileReader=null;
-//            try {
-//                fileReader=new FileReader(toCheck);
-//                Scanner scanner=new Scanner(fileReader);
-//                String u=scanner.next();
-//                account.addID(u);
-//                fileReader.close();
-//                scanner.close();
-//                toTimeline();
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
     /**
      * alart
      * @param err error
      */
-    void alaart(String err)
+    public void alaart(String err)
     {
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -92,7 +72,7 @@ public class AuthenticationController {
      * @param event event
      */
     @FXML
-    void toSignIn(ActionEvent event) {
+    public void toSignIn(ActionEvent event) {
         String id = idInput.getText();
         String pass = passInput.getText();
         LogIn login = new LogIn(id, pass);
@@ -114,6 +94,23 @@ public class AuthenticationController {
                 else {
                     if (file.exists())
                         file.delete();
+                }
+                File ExitMode=new File("./files/Setting/ExitMode.txt");
+                File Theme=new File("./files/Setting/Theme.txt");
+                if(!ExitMode.exists() || !Theme.exists() )
+                {
+                    FileWriter onExitMode=null;
+                    FileWriter onTheme=null;
+                    try {
+                        onTheme=new FileWriter(Theme);
+                        onExitMode=new FileWriter(ExitMode);
+                        onExitMode.write("0");
+                        onExitMode.close();
+                        onTheme.write("0");
+                        onTheme.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 account= authenticationServiceImp.connect();
                 LocalDate localDate=LocalDate.now();
@@ -146,7 +143,11 @@ public class AuthenticationController {
             e.printStackTrace();
         }
     }
-    void toTimeline()
+
+    /**
+     * to TimeLine
+     */
+    public void toTimeline()
     {
       File file=new File("./files/Exchange.txt");
       FileWriter fw=null;
@@ -165,8 +166,14 @@ public class AuthenticationController {
       }
 
     }
+
+    /**
+     * to sign up
+     * @param event e
+     * @throws IOException
+     */
         @FXML
-    void toSignUp(ActionEvent event) throws IOException {
+        public void toSignUp(ActionEvent event) throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("SignUp.fxml"));
         Scene signUpview=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();

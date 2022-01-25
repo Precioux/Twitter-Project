@@ -1,5 +1,6 @@
 package graphics;
 
+import graphics.Controllers.StartController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,8 +10,14 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.Scanner;
-
-public class StartController {
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines Start controller
+ */
+public class StartControllerImp implements StartController {
     @FXML
     private Pane mainArea;
 
@@ -19,7 +26,7 @@ public class StartController {
      * to timeLine
      * @throws IOException e
      */
-    void  toTimeLine() throws IOException {
+    public void  toTimeLine() throws IOException {
         Stage window = (Stage) mainArea.getScene().getWindow();
         Parent Root = FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
         Scene Aview = new Scene(Root);
@@ -32,7 +39,7 @@ public class StartController {
      * to authentication
      * @throws IOException e
      */
-   void toAuthentication() throws IOException {
+    public void toAuthentication() throws IOException {
        Stage window = (Stage) mainArea.getScene().getWindow();
        Parent Root = FXMLLoader.load(getClass().getResource("Authentication.fxml"));
        Scene Aview = new Scene(Root);
@@ -41,7 +48,12 @@ public class StartController {
        System.out.println("send to authentication");
    }
 
-@FXML
+    /**
+     * check
+     * @param actionEvent e
+     * @throws IOException e
+     */
+    @FXML
     public void Check(javafx.event.ActionEvent actionEvent) throws IOException {
         File toCheck = new File("./files/Remember.txt");
         if (toCheck.exists()) {

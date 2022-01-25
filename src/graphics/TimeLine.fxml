@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="area" maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.TimeLineController">
+<BorderPane fx:id="area" maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.TimeLineControllerImp">
    <top>
       <MenuBar fx:id="menuBar" prefHeight="0.0" prefWidth="366.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Options">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="mode" mnemonicParsing="false" onAction="#toExitMode" text="Choose Exit Mode" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Application">

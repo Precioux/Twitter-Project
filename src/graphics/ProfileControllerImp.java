@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import entity.Account;
 import entity.Data;
 import entity.Error;
+import graphics.Controllers.ProfileController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,8 +30,14 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
-
-public class ProfileController {
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines profile controller
+ */
+public class ProfileControllerImp implements ProfileController {
     JSONtool jsoNtool=new JSONtool();
     Account account=new Account();
     public class noFollowerException  extends Exception {}
@@ -140,7 +147,7 @@ public class ProfileController {
     /**
      * get likes
      */
-    int getlike(String user,String txt)
+    public int getlike(String user, String txt)
     {
         int number=0;
         File toTweetFolder=new File("./Data/Tweets/"+user+"/");
@@ -197,7 +204,7 @@ public class ProfileController {
      * @throws IOException
      */
     @FXML
-    void toChange(ActionEvent event) throws IOException {
+    public void toChange(ActionEvent event) throws IOException {
         if( view.equals(user))
          {
             FileChooser fileChooser = new FileChooser();
@@ -232,14 +239,20 @@ public class ProfileController {
      * alart
      * @param err error
      */
-    void alaart(String err) throws IOException {
+    public void alaart(String err) throws IOException {
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(err);
         Optional<ButtonType> res=alert.showAndWait();
     }
+
+    /**
+     * follow
+     * @param event e
+     * @throws IOException e
+     */
     @FXML
-    void toFollow(ActionEvent event) throws IOException {
+    public void toFollow(ActionEvent event) throws IOException {
         setUser(user);
         observerServiceImp.addAccount(accountUser);
         ForServices forServices=new ForServices(1,view);
@@ -275,18 +288,26 @@ public class ProfileController {
             }
         }
     }
-
+    /**
+     * to time Line
+     * @param event e
+     * @throws IOException e
+     */
     @FXML
-    void toTimeLine(ActionEvent event) throws IOException {
+    public void toTimeLine(ActionEvent event) throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
         Scene signUpview=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(signUpview);
         window.show();
     }
-
+    /**
+     * unfollow
+     * @param event e
+     * @throws IOException e
+     */
     @FXML
-    void toUnfollow(ActionEvent event) throws IOException {
+    public void toUnfollow(ActionEvent event) throws IOException {
         setUser(user);
         observerServiceImp.addAccount(accountUser);
         ForServices forServices=new ForServices(2,view);
@@ -394,7 +415,11 @@ public class ProfileController {
         }
 
     }
-    void addTweets()
+
+    /**
+     * add
+     */
+    public void addTweets()
     {
         AFollowings.clear();
         tweetlist.clear();
@@ -409,7 +434,7 @@ public class ProfileController {
     /**
      * from json to TWEET
      */
-    void toTweetType()
+    public void toTweetType()
     {
         for (String t:timeline) {
             Otweets.add(gson.fromJson(t, TWEET.class));
@@ -440,7 +465,7 @@ public class ProfileController {
                 new Callback<ListView<TWEET>, ListCell<TWEET>>() {
                     @Override
                     public ListCell<TWEET> call(ListView<TWEET> listView) {
-                        return new TweetController();
+                        return new TweetControllerImp();
                         //return new ImageTextCell();
                     }
                 }

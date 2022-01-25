@@ -5,6 +5,7 @@ import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import com.google.gson.Gson;
 import entity.Account;
 import entity.Data;
+import graphics.Controllers.TimeLineController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,10 +23,14 @@ import javafx.util.Callback;
 
 import java.io.*;
 import java.util.*;
-
-public class TimeLineController {
-
-
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines TimeLine controller
+ */
+public class TimeLineControllerImp implements TimeLineController {
     public class noFollowerException  extends Exception {}
     private ArrayList<String> AFollowings=new ArrayList<>();
     private ArrayList<HashMap<Long, String>> tweetlist = new ArrayList<HashMap<Long, String>>();
@@ -35,7 +40,8 @@ public class TimeLineController {
     JSONtool jsoNtool=new JSONtool();
     Account account=new Account();
     Gson gson=new Gson();
-    int Emode=2;
+    int Emode=-1;
+    int theme=-1;
     @FXML
     private BorderPane area;
 
@@ -48,6 +54,18 @@ public class TimeLineController {
     @FXML
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
+
+    /**
+     * exit mode
+     * @param actionEvent
+     */
+    public void toExitMode(ActionEvent actionEvent) throws IOException {
+        Parent r= FXMLLoader.load(getClass().getResource("Mode.fxml"));
+        Scene s=new Scene(r);
+        Stage window=(Stage) area.getScene().getWindow();
+        window.setScene(s);
+        window.show();
+    }
 
     /**
      * to full screen
@@ -66,9 +84,13 @@ public class TimeLineController {
      * @param actionEvent e
      */
     @FXML
-    public void toChangeTheme(ActionEvent actionEvent) {
+    public void toChangeTheme(ActionEvent actionEvent) throws IOException {
+        Parent r= FXMLLoader.load(getClass().getResource("Theme.fxml"));
+        Scene s=new Scene(r);
+        Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(s);
+        window.show();
     }
-
     /**
      * help
      * @param actionEvent e
@@ -130,6 +152,10 @@ public class TimeLineController {
     @FXML
     public void toLogOut(ActionEvent actionEvent)
     {
+        File ExitMode=new File("./files/Setting/ExitMode.txt");
+        File Theme=new File("./files/Setting/Theme.txt");
+        ExitMode.delete();
+        Theme.delete();
         try {
             Stage window = (Stage) area.getScene().getWindow();
             Parent Root = FXMLLoader.load(getClass().getResource("Authentication.fxml"));
@@ -148,17 +174,19 @@ public class TimeLineController {
     @FXML
     public void toExit(ActionEvent actionEvent)
     {
-        if(Emode==1){
+        getSetting();
+
+        if(Emode==0){
         Stage window = (Stage) area.getScene().getWindow();
-        window.close();}
+        window.close();
+        }
         else {
-            if(Emode==2)
-            {
+
                 Stage stage=(Stage) area.getScene().getWindow();
                 FXTrayIcon trayIcon=new FXTrayIcon(stage,getClass().getResource("recources/twitterlogo.png"));
                 trayIcon.show();
                 stage.close();
-            }
+
         }
     }
     /**
@@ -178,17 +206,49 @@ public class TimeLineController {
      * @param event ecent
      */
     @FXML
-    void refreshIt(ActionEvent event) {
+    public void refreshIt(ActionEvent event) {
         initialize();
     }
 
     /**
      * from json to TWEET
      */
-    void toTweetType()
+    public void toTweetType()
     {
         for (String t:timeline) {
             tweets.add(gson.fromJson(t, TWEET.class));
+        }
+    }
+
+    /**
+     * get previous setting
+     */
+    public void getSetting()
+    {
+        File ExitMode=new File("./files/Setting/ExitMode.txt");
+        File Theme=new File("./files/Setting/Theme.txt");
+        FileReader onExitMode=null;
+        FileReader onTheme=null;
+        try {
+            onTheme=new FileReader(Theme);
+            onExitMode=new FileReader(ExitMode);
+            Scanner scannerOnExitMode=new Scanner(onExitMode);
+            Scanner scannerOnTheme=new Scanner(onTheme);
+            if(scannerOnTheme.hasNextInt())
+            {
+                theme=scannerOnTheme.nextInt();
+            }
+            if (scannerOnExitMode.hasNextInt())
+            {
+                Emode=scannerOnExitMode.nextInt();
+            }
+            onExitMode.close();
+            onTheme.close();;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     /**
@@ -196,6 +256,7 @@ public class TimeLineController {
      */
    public void initialize()
     {
+        getSetting();
          getTimeLine();
         toTweetType();
         MainTimeLine.setItems(tweets);
@@ -214,7 +275,7 @@ public class TimeLineController {
                 new Callback<ListView<TWEET>, ListCell<TWEET>>() {
                     @Override
                     public ListCell<TWEET> call(ListView<TWEET> listView) {
-                        return new TweetController();
+                        return new TweetControllerImp();
                         //return new ImageTextCell();
                     }
                 }
@@ -227,7 +288,7 @@ public class TimeLineController {
      * @throws IOException e
      */
     @FXML
-    void toProfile(ActionEvent event) {
+    public void toProfile(ActionEvent event) {
         File viewer=new File("./files/View.txt");
         System.out.println(viewer.exists());
         FileWriter fileWriter=null;
@@ -253,7 +314,7 @@ public class TimeLineController {
      * @throws IOException e
      */
     @FXML
-    void toTweet(ActionEvent event) throws IOException {
+    public void toTweet(ActionEvent event) throws IOException {
 
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("AddTweet.fxml"));
         Scene signUpview=new Scene(signUpRoot);
@@ -293,7 +354,7 @@ public class TimeLineController {
     /**
      * get likes
      */
-    int getlike(String user,String txt)
+    public int getlike(String user, String txt)
     {
         int number=0;
         File toTweetFolder=new File("./Data/Tweets/"+user+"/");

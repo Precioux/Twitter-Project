@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainArea" prefHeight="356.0" prefWidth="628.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.StartController">
+<Pane fx:id="mainArea" prefHeight="356.0" prefWidth="628.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.StartControllerImp">
    <children>
       <Button fx:id="start" layoutX="268.0" layoutY="238.0" mnemonicParsing="false" onAction="#Check" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: white;" text="Start" textFill="#00aaff">
          <font>

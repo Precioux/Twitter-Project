@@ -4,6 +4,7 @@ import Services.impl.ObserverServiceImp;
 import Tools.JSONtool;
 import entity.Account;
 import entity.Error;
+import graphics.Controllers.SearchController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +24,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.Scanner;
-
-public class SearchController {
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines search controller
+ */
+public class SearchControllerImp implements SearchController {
     ObserverServiceImp observerServiceImp=new ObserverServiceImp();
     JSONtool jsoNtool=new JSONtool();
     Account account=new Account();
@@ -88,7 +95,7 @@ public class SearchController {
      * alart
      * @param err error
      */
-    void alaart(String err) throws IOException {
+    public void alaart(String err) throws IOException {
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(err);
@@ -101,7 +108,7 @@ public class SearchController {
      * @throws IOException e
      */
     @FXML
-    void toTimeLine(ActionEvent actionEvent) throws IOException {
+    public void toTimeLine(ActionEvent actionEvent) throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
         Scene t=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -113,7 +120,7 @@ public class SearchController {
      * @param event e
      */
     @FXML
-    void searchIt(ActionEvent event) throws IOException {
+    public void searchIt(ActionEvent event) throws IOException {
         setAccount();
         observerServiceImp.addAccount(account);
         ForServices forServices = new ForServices(3, searchBar.getText());

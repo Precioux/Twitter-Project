@@ -6,6 +6,7 @@ import Tools.AccountChecker;
 import Tools.JSONtool;
 import entity.Account;
 import entity.Error;
+import graphics.Controllers.SignUpController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,8 +28,14 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import static Services.impl.CommandPerserServiceImp.toHash;
-
-public class SignUpController {
+/**
+ * AP-Project-Phase4
+ * @author Samin Mahdipour
+ * @version 4.0
+ * @since 1.22.2022
+ * this class defines sign up controller
+ */
+public class SignUpControllerImp implements SignUpController {
      String data="";
      String photo="";
      boolean logFlag=false;
@@ -78,7 +85,7 @@ public class SignUpController {
      * @throws IOException e
      */
     @FXML
-    void toCancel(ActionEvent event) throws IOException {
+    public void toCancel(ActionEvent event) throws IOException {
         Parent signUpRoot= FXMLLoader.load(getClass().getResource("Authentication.fxml"));
         Scene signUpview=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -92,7 +99,7 @@ public class SignUpController {
      * @throws IOException
      */
     @FXML
-    void toChoose(ActionEvent actionEvent) throws IOException {
+    public void toChoose(ActionEvent actionEvent) throws IOException {
         FileChooser fileChooser=new FileChooser();
        fileChooser.setTitle("Profile Photo");
        Stage stage=(Stage) mainArea.getScene().getWindow();
@@ -103,7 +110,12 @@ public class SignUpController {
            photo+=file.getAbsolutePath();
        }
     }
-   boolean nullCheck()
+
+    /**
+     * check
+     * @return result
+     */
+    public boolean nullCheck()
    {
        boolean ans=true;
        if(firstname.getText().equals(null) || lastname.getText().equals(null) || photo.isEmpty() || year.getText().isEmpty() || month.getText().isEmpty() || day.getText().isEmpty() || id.getText().isEmpty() || password.getText().isEmpty() )
@@ -116,7 +128,7 @@ public class SignUpController {
      * @throws NoSuchAlgorithmException e
      */
     @FXML
-    void toSumbit(ActionEvent event) throws NoSuchAlgorithmException, IOException {
+    public void toSumbit(ActionEvent event) throws NoSuchAlgorithmException, IOException {
         if (nullCheck()) {
             String fname = firstname.getText();
             account.addFirstName(fname);
@@ -159,6 +171,20 @@ public class SignUpController {
                         if (file.exists())
                             file.delete();
                     }
+                    File ExitMode=new File("./files/Setting/ExitMode.txt");
+                    File Theme=new File("./files/Setting/Theme.txt");
+                        FileWriter onExitMode=null;
+                        FileWriter onTheme=null;
+                        try {
+                            onTheme=new FileWriter(Theme);
+                            onExitMode=new FileWriter(ExitMode);
+                            onExitMode.write("0");
+                            onExitMode.close();
+                            onTheme.write("0");
+                            onTheme.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     LocalDate localDate = LocalDate.now();
                     LocalTime localTime = LocalTime.now();
                     submitLog(localDate, localTime, "SignUpView", "SuccessFul", 0);
@@ -196,7 +222,7 @@ public class SignUpController {
      * alart
      * @param err error
      */
-    void alaart(String err) throws IOException {
+    public void alaart(String err) throws IOException {
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(err);
@@ -240,7 +266,11 @@ public class SignUpController {
 
 
     }
-    void toTimeline()
+
+    /**
+     * timeline
+     */
+    public void toTimeline()
     {
         File file=new File("./files/Exchange.txt");
         FileWriter fw=null;
