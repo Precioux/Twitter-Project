@@ -29,12 +29,12 @@ import java.util.Scanner;
  * @author Samin Mahdipour
  * @version 4.0
  * @since 1.22.2022
- * this class defines comment controller
+ * this class defines comment controller dark
  */
-public class CommentControllerImp implements CommentController {
-   ObserverServiceImp observerServiceImp=new ObserverServiceImp();
-   Account account=new Account();
-   JSONtool jsoNtool=new JSONtool();
+public class commentControllerDarkImp implements CommentController {
+    ObserverServiceImp observerServiceImp=new ObserverServiceImp();
+    Account account=new Account();
+    JSONtool jsoNtool=new JSONtool();
     @FXML
     private Button cancel;
 
@@ -71,7 +71,7 @@ public class CommentControllerImp implements CommentController {
      */
     @FXML
     public void backTimeLine(ActionEvent event) throws IOException {
-        Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
+        Parent signUpRoot= FXMLLoader.load(getClass().getResource("TimeLineDark.fxml"));
         Scene signUpview=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(signUpview);
@@ -99,41 +99,41 @@ public class CommentControllerImp implements CommentController {
                     alaart("More than 256 characters");
             } else{
                 React react = new React(from, to, 1, tweet, commentBox.getText());
-                setAccount();
-                observerServiceImp.addAccount(account);
-                ForServices forServices = new ForServices(5, jsoNtool.toJSON(react));
-                int rslt = observerServiceImp.begin(jsoNtool.toJSON(forServices));
-                if (rslt == 0) {
+            setAccount();
+            observerServiceImp.addAccount(account);
+            ForServices forServices = new ForServices(5, jsoNtool.toJSON(react));
+            int rslt = observerServiceImp.begin(jsoNtool.toJSON(forServices));
+            if (rslt == 0) {
+                LocalDate localDate = LocalDate.now();
+                LocalTime localTime = LocalTime.now();
+                submitLog(localDate, localTime, Integer.toString(1), "SuccessFul", 0);
+            } else {
+                if (rslt == -1) {
+
+                    Error error = new Error();
+                    error.errorSearch(1000);
+                    alaart(error.getErrorType());
                     LocalDate localDate = LocalDate.now();
                     LocalTime localTime = LocalTime.now();
-                    submitLog(localDate, localTime, Integer.toString(1), "SuccessFul", 0);
+                    submitLog(localDate, localTime, Integer.toString(1), "Failed", 1000);
                 } else {
-                    if (rslt == -1) {
-
+                    if (rslt == 9 || rslt == 999) {
                         Error error = new Error();
-                        error.errorSearch(1000);
+                        error.errorSearch(rslt);
                         alaart(error.getErrorType());
                         LocalDate localDate = LocalDate.now();
                         LocalTime localTime = LocalTime.now();
-                        submitLog(localDate, localTime, Integer.toString(1), "Failed", 1000);
-                    } else {
-                        if (rslt == 9 || rslt == 999) {
-                            Error error = new Error();
-                            error.errorSearch(rslt);
-                            alaart(error.getErrorType());
-                            LocalDate localDate = LocalDate.now();
-                            LocalTime localTime = LocalTime.now();
-                            submitLog(localDate, localTime, Integer.toString(1), "Failed", rslt);
-                        }
+                        submitLog(localDate, localTime, Integer.toString(1), "Failed", rslt);
                     }
                 }
-
-                Parent signUpRoot = FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
-                Scene signUpview = new Scene(signUpRoot);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(signUpview);
-                window.showAndWait();
             }
+
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("TimeLineDark.fxml"));
+            Scene signUpview = new Scene(signUpRoot);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(signUpview);
+            window.showAndWait();
+        }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -180,7 +180,7 @@ public class CommentControllerImp implements CommentController {
         alert.setContentText(err);
         Optional<ButtonType> res=alert.showAndWait();
         Stage window = (Stage)mainArea.getScene().getWindow();
-        Parent Root = FXMLLoader.load(getClass().getResource("Comment.fxml"));
+        Parent Root = FXMLLoader.load(getClass().getResource("CommentDark.fxml"));
         Scene Aview = new Scene(Root);
         window.setScene(Aview);
         window.showAndWait();

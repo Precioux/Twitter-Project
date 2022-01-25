@@ -137,7 +137,7 @@ public class TweetDarkControllerImp extends ListCell<TWEET> implements TweetCont
             System.out.println(account.ID+"\n"+userID.getText()+"\n"+tweetText.getText());
             fileWriter.write(account.ID+"\n"+userID.getText()+"\n"+tweetText.getText());
             fileWriter.close();
-            Parent signUpRoot = FXMLLoader.load(getClass().getResource("Comment.fxml"));
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("CommentDark.fxml"));
             Scene p = new Scene(signUpRoot);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(p);
