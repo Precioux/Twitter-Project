@@ -30,7 +30,7 @@ import java.util.*;
  * @since 1.22.2022
  * this class defines TimeLine controller
  */
-public class TimeLineControllerImp implements TimeLineController {
+public class TimeLineDarkControllerImp implements TimeLineController {
     public class noFollowerException  extends Exception {}
     private ArrayList<String> AFollowings=new ArrayList<>();
     private ArrayList<HashMap<Long, String>> tweetlist = new ArrayList<HashMap<Long, String>>();
@@ -41,7 +41,6 @@ public class TimeLineControllerImp implements TimeLineController {
     Account account=new Account();
     Gson gson=new Gson();
     int Emode=-1;
-    @FXML
     int theme=-1;
     @FXML
     public BorderPane area=new BorderPane();
@@ -179,15 +178,15 @@ public class TimeLineControllerImp implements TimeLineController {
         getSetting();
 
         if(Emode==0){
-        Stage window = (Stage) area.getScene().getWindow();
-        window.close();
+            Stage window = (Stage) area.getScene().getWindow();
+            window.close();
         }
         else {
 
-                Stage stage=(Stage) area.getScene().getWindow();
-                FXTrayIcon trayIcon=new FXTrayIcon(stage,getClass().getResource("recources/twitterlogo.png"));
-                trayIcon.show();
-                stage.close();
+            Stage stage=(Stage) area.getScene().getWindow();
+            FXTrayIcon trayIcon=new FXTrayIcon(stage,getClass().getResource("recources/twitterlogo.png"));
+            trayIcon.show();
+            stage.close();
 
         }
     }
@@ -261,10 +260,10 @@ public class TimeLineControllerImp implements TimeLineController {
     /**
      * set list view
      */
-   public void initialize()
+    public void initialize()
     {
         getSetting();
-         getTimeLine();
+        getTimeLine();
         toTweetType();
         MainTimeLine.setItems(tweets);
         MainTimeLine.getSelectionModel().selectedItemProperty().
@@ -282,8 +281,7 @@ public class TimeLineControllerImp implements TimeLineController {
                 new Callback<ListView<TWEET>, ListCell<TWEET>>() {
                     @Override
                     public ListCell<TWEET> call(ListView<TWEET> listView) {
-                        return new TweetControllerImp();
-                        //return new ImageTextCell();
+                        return new TweetDarkControllerImp();
                     }
                 }
         );
@@ -343,16 +341,16 @@ public class TimeLineControllerImp implements TimeLineController {
         check.clear();
         tweets.clear();
         MainTimeLine.getItems().clear();
-            findFollowings();
-                for (String follower : AFollowings) {
-                    getTweets(follower);
-                    getLikes(follower);
-                    getRetweets(follower);
-                    getComments(follower);
+        findFollowings();
+        for (String follower : AFollowings) {
+            getTweets(follower);
+            getLikes(follower);
+            getRetweets(follower);
+            getComments(follower);
 
-                }
-               getMytweets();
-                sortTimeline();
+        }
+        getMytweets();
+        sortTimeline();
 
 
 
@@ -493,7 +491,7 @@ public class TimeLineControllerImp implements TimeLineController {
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 TWEET T=new TWEET();
-                 T.getTime(scanner.next());
+                T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getText(scanner.next());
                 T.getStatus("Tweeted");

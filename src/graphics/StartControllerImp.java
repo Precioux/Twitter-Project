@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.Properties;
 import java.util.Scanner;
 /**
  * AP-Project-Phase4
@@ -20,8 +21,6 @@ import java.util.Scanner;
 public class StartControllerImp implements StartController {
     @FXML
     private Pane mainArea;
-
-
     /**
      * to timeLine
      * @throws IOException e
@@ -87,5 +86,26 @@ public class StartControllerImp implements StartController {
     @FXML
     public void freshStart(javafx.event.ActionEvent actionEvent) throws IOException {
     toAuthentication();
+    }
+
+    /**
+     * get logo
+     * @return logo
+     */
+    public static String getLogo()
+    {
+        String logoW="";
+        try {
+            InputStream inputStream=new FileInputStream("./Config/propertyLogo.properties");
+            Properties properties=new Properties();
+            properties.load(inputStream);
+            logoW= properties.getProperty("logoW");
+            System.out.println(logoW);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return logoW;
     }
 }

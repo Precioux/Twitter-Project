@@ -9,14 +9,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
+
 /**
  * AP-Project-Phase4
  * @author Samin Mahdipour
@@ -34,11 +35,17 @@ public class ThemeControllerImp implements ThemeController {
 
     @FXML
     private ToggleGroup theme;
-
+    @FXML
+    private Label result;
     /**
      * initialize
      */
-    public void initialize(){
+    public void initialize() {
+        try {
+            getBefore();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         theme.selectedToggleProperty().addListener(
                 new ChangeListener<Toggle>()
                 {
@@ -46,10 +53,14 @@ public class ThemeControllerImp implements ThemeController {
                                         final Toggle toggle, final Toggle new_toggle)
                     {
                         System.out.println(((ToggleButton)new_toggle).getText());
-                        if(dark.isSelected())
+                        if(dark.isSelected()) {
                             set(1);
-                        else
+                            result.setText("Dark Theme");
+                        }
+                        else {
                             set(0);
+                            result.setText("Light Theme");
+                        }
                     }
                 });
     }
@@ -82,5 +93,31 @@ public class ThemeControllerImp implements ThemeController {
         Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(signUpview);
         window.show();
+    }
+
+    /**
+     * get previous Data
+     * @throws FileNotFoundException e
+     */
+    public void getBefore() throws FileNotFoundException {
+        int s=-1;
+        File file=new File("./files/Setting/Theme.txt");
+        FileReader fileReader=new FileReader(file);
+        Scanner scanner=new Scanner(fileReader);
+        if(scanner.hasNextInt()){
+            s=scanner.nextInt();
+            System.out.println("previous:" +s);
+        }
+        if(s==0)
+        {
+            light.setSelected(true);
+            dark.setSelected(false);
+            result.setText("Light Theme");
+        }
+        else {
+            dark.setSelected(true);
+            light.setSelected(false);
+            result.setText("Dark Theme");
+        }
     }
 }

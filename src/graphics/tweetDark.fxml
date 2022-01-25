@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="tweetArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="758.0" style="-fx-background-color: #616161;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Hyperlink fx:id="userID" layoutX="14.0" layoutY="14.0" onAction="#goProfile" prefHeight="42.0" prefWidth="210.0" text="Precioux">
+            <font>
+                <Font name="System Bold" size="22.0" />
+            </font>
+        </Hyperlink>
+        <Label fx:id="tweetText" layoutX="19.0" layoutY="66.0" prefHeight="176.0" prefWidth="720.0" text="tweet" textFill="WHITE">
+            <font>
+                <Font size="16.0" />
+            </font></Label>
+        <Button fx:id="retweet" layoutX="250.0" layoutY="300.0" mnemonicParsing="false" onAction="#toRetweet" prefHeight="42.0" prefWidth="91.0" style="-fx-background-color: #303030;" text="Retweet" textFill="WHITE" />
+        <Label layoutX="30.0" layoutY="250.0" text="Likes:" textFill="#bcbcbc">
+            <font>
+                <Font size="16.0" />
+            </font></Label>
+        <Label fx:id="likes" layoutX="70.0" layoutY="250.0" text="#numberOfLikes" textFill="#bcbcbc">
+            <font>
+                <Font size="16.0" />
+            </font></Label>
+        <Label fx:id="time" layoutX="450.0" layoutY="242.0" prefHeight="42.0" prefWidth="285.0" text="time" textFill="#bcbcbc">
+            <font>
+                <Font size="16.0" />
+            </font></Label>
+        <Label fx:id="status" layoutX="241.0" layoutY="21.0" prefHeight="20.0" prefWidth="125.0" text="Status">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font></Label>
+        <Button fx:id="comment" layoutX="137.0" layoutY="300.0" mnemonicParsing="false" onAction="#commentIt" prefHeight="42.0" prefWidth="102.0" style="-fx-background-color: #303030;" text="Comment" textFill="WHITE" />
+        <Button fx:id="like" layoutX="30.0" layoutY="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#likeIt" prefHeight="42.0" prefWidth="91.0" style="-fx-background-color: #303030;" text="Like" textFill="WHITE" />
+        <Button fx:id="remove" layoutX="635.0" layoutY="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeIt" prefHeight="42.0" prefWidth="91.0" style="-fx-background-color: #a90808;" text="Remove" textFill="WHITE" />
+    </children>
+</Pane>
