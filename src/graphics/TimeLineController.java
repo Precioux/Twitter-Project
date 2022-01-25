@@ -1,6 +1,7 @@
 package graphics;
 
 import Tools.JSONtool;
+import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import com.google.gson.Gson;
 import entity.Account;
 import entity.Data;
@@ -38,26 +39,10 @@ public class TimeLineController {
     JSONtool jsoNtool=new JSONtool();
     Account account=new Account();
     Gson gson=new Gson();
+    int Emode=2;
     @FXML
     private BorderPane area;
 
-    /**
-     * sets account
-     *
-     */
-    public void setAccount() {
-       File file=new File("./files/Exchange.txt");
-       FileReader fr=null;
-       try {
-           fr=new FileReader(file);
-           Scanner scanner=new Scanner(fr);
-           String d=scanner.next();
-           account.ID=d;
-           System.out.println(account.ID);
-       } catch (FileNotFoundException e) {
-           e.printStackTrace();
-       }
-    }
     @FXML
     private MenuBar menuBar;
 
@@ -67,7 +52,23 @@ public class TimeLineController {
     @FXML
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
-
+    /**
+     * sets account
+     *
+     */
+    public void setAccount() {
+        File file=new File("./files/Exchange.txt");
+        FileReader fr=null;
+        try {
+            fr=new FileReader(file);
+            Scanner scanner=new Scanner(fr);
+            String d=scanner.next();
+            account.ID=d;
+            System.out.println(account.ID);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * log out
      * @param actionEvent e
@@ -93,8 +94,18 @@ public class TimeLineController {
     @FXML
     public void toExit(ActionEvent actionEvent)
     {
+        if(Emode==1){
         Stage window = (Stage) area.getScene().getWindow();
-        window.close();
+        window.close();}
+        else {
+            if(Emode==2)
+            {
+                Stage stage=(Stage) area.getScene().getWindow();
+                FXTrayIcon trayIcon=new FXTrayIcon(stage,getClass().getResource("recources/twitterlogo.png"));
+                trayIcon.show();
+                stage.close();
+            }
+        }
     }
     /**
      * search
