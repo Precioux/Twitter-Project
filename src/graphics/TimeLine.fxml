@@ -11,74 +11,74 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="area" maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.TimeLineControllerImp">
-   <top>
-      <MenuBar fx:id="menuBar" prefHeight="0.0" prefWidth="366.0" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Options">
-            <items>
-              <MenuItem fx:id="mode" mnemonicParsing="false" onAction="#toExitMode" text="Choose Exit Mode" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Application">
-            <items>
-              <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#toLogOut" text="Log Out" />
-                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#toExit" text="Exit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem fx:id="about" mnemonicParsing="false" onAction="#toAbout" text="About" />
-                  <MenuItem fx:id="Help" mnemonicParsing="false" onAction="#toHelp" text="Help" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="View">
-              <items>
-                <MenuItem fx:id="screen" mnemonicParsing="false" onAction="#toFullScreen" text="Toggle Full Screen" />
-                  <MenuItem fx:id="theme" mnemonicParsing="false" onAction="#toChangeTheme" text="Change Theme" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <left>
-      <VBox prefHeight="674.0" prefWidth="170.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="profile" mnemonicParsing="false" onAction="#toProfile" prefHeight="59.0" prefWidth="85.0" style="-fx-background-color: #00aaff;" text="Profile" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="refresh" mnemonicParsing="false" onAction="#refreshIt" prefHeight="49.0" prefWidth="78.0" style="-fx-background-color: #00aaff;" text="Refresh" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="tweet" mnemonicParsing="false" onAction="#toTweet" prefHeight="48.0" prefWidth="58.0" style="-fx-background-color: #00aaff;" text="Tweet" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="search" mnemonicParsing="false" onAction="#searchforUser" prefHeight="36.0" prefWidth="56.0" style="-fx-background-color: #00aaff;" text="Search" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-   </left>
-   <center>
-      <ListView fx:id="MainTimeLine" BorderPane.alignment="CENTER" />
-   </center>
+    <top>
+        <MenuBar fx:id="menuBar" prefHeight="0.0" prefWidth="366.0" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Options">
+                    <items>
+                        <MenuItem fx:id="mode" mnemonicParsing="false" onAction="#toExitMode" text="Choose Exit Mode" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Application">
+                    <items>
+                        <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#toLogOut" text="Log Out" />
+                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#toExit" text="Exit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem fx:id="about" mnemonicParsing="false" onAction="#toAbout" text="About" />
+                        <MenuItem fx:id="Help" mnemonicParsing="false" onAction="#toHelp" text="Help" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="View">
+                    <items>
+                        <MenuItem fx:id="screen" mnemonicParsing="false" onAction="#toFullScreen" text="Toggle Full Screen" />
+                        <MenuItem fx:id="theme" mnemonicParsing="false" onAction="#toChangeTheme" text="Change Theme" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <VBox prefHeight="674.0" prefWidth="170.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="profile" mnemonicParsing="false" onAction="#toProfile" prefHeight="59.0" prefWidth="85.0" style="-fx-background-color: #00aaff;" text="Profile" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="40.0" top="20.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="refresh" mnemonicParsing="false" onAction="#refreshIt" prefHeight="49.0" prefWidth="78.0" style="-fx-background-color: #00aaff;" text="Refresh" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="40.0" top="20.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="tweet" mnemonicParsing="false" onAction="#toTweet" prefHeight="48.0" prefWidth="58.0" style="-fx-background-color: #00aaff;" text="Tweet" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="40.0" top="20.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="search" mnemonicParsing="false" onAction="#searchforUser" prefHeight="36.0" prefWidth="56.0" style="-fx-background-color: #00aaff;" text="Search" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets left="40.0" top="20.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <ListView fx:id="MainTimeLine" BorderPane.alignment="CENTER" />
+    </center>
 </BorderPane>

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class TimeLineView extends Application {
@@ -13,7 +14,7 @@ public class TimeLineView extends Application {
 
     public void start(Stage stage) throws IOException {
         try {
-            System.out.println(getClass().getResource("TimeLine.fxml"));
+            System.out.println(new File("TimeLine.fxml").exists());
             Parent root = FXMLLoader.load(getClass().getResource("TimeLine.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle("TimeLine");

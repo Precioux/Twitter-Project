@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import entity.Account;
 import entity.Data;
 import graphics.Controllers.TimeLineController;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -41,10 +42,9 @@ public class TimeLineControllerImp implements TimeLineController {
     Account account=new Account();
     Gson gson=new Gson();
     int Emode=-1;
-    @FXML
     int theme=-1;
     @FXML
-    public BorderPane area=new BorderPane();
+    private BorderPane area;
 
     @FXML
     private MenuBar menuBar;
@@ -88,10 +88,9 @@ public class TimeLineControllerImp implements TimeLineController {
     public void toChangeTheme(ActionEvent actionEvent) throws IOException {
         Parent r= FXMLLoader.load(getClass().getResource("Theme.fxml"));
         Scene s=new Scene(r);
-        Stage window=(Stage) area.getScene().getWindow();
+        Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(s);
         window.show();
-        System.out.println("still here");
     }
     /**
      * help
@@ -174,22 +173,21 @@ public class TimeLineControllerImp implements TimeLineController {
      * @param actionEvent e
      */
     @FXML
-    public void toExit(ActionEvent actionEvent)
-    {
+    public void toExit(ActionEvent actionEvent) {
         getSetting();
-
-        if(Emode==0){
         Stage window = (Stage) area.getScene().getWindow();
-        window.close();
+        if (Emode == 0) {
+
+            Platform.exit();
+            System.exit(0);
         }
         else {
 
-                Stage stage=(Stage) area.getScene().getWindow();
-                FXTrayIcon trayIcon=new FXTrayIcon(stage,getClass().getResource("recources/twitterlogo.png"));
-                trayIcon.show();
-                stage.close();
+        FXTrayIcon trayIcon = new FXTrayIcon(window, getClass().getResource("recources/twitterlogo.png"));
+        trayIcon.show();
+        window.close();
+    }
 
-        }
     }
     /**
      * search
@@ -239,11 +237,12 @@ public class TimeLineControllerImp implements TimeLineController {
             if(scannerOnTheme.hasNextInt())
             {
                 theme=scannerOnTheme.nextInt();
-                setTheme();
+
             }
             if (scannerOnExitMode.hasNextInt())
             {
                 Emode=scannerOnExitMode.nextInt();
+
             }
             onExitMode.close();
             onTheme.close();;
@@ -254,17 +253,13 @@ public class TimeLineControllerImp implements TimeLineController {
             e.printStackTrace();
         }
     }
-    public void setTheme()
-    {
-
-    }
     /**
      * set list view
      */
-   public void initialize()
+    public void initialize()
     {
         getSetting();
-         getTimeLine();
+        getTimeLine();
         toTweetType();
         MainTimeLine.setItems(tweets);
         MainTimeLine.getSelectionModel().selectedItemProperty().
@@ -343,16 +338,16 @@ public class TimeLineControllerImp implements TimeLineController {
         check.clear();
         tweets.clear();
         MainTimeLine.getItems().clear();
-            findFollowings();
-                for (String follower : AFollowings) {
-                    getTweets(follower);
-                    getLikes(follower);
-                    getRetweets(follower);
-                    getComments(follower);
+        findFollowings();
+        for (String follower : AFollowings) {
+            getTweets(follower);
+            getLikes(follower);
+            getRetweets(follower);
+            getComments(follower);
 
-                }
-               getMytweets();
-                sortTimeline();
+        }
+        getMytweets();
+        sortTimeline();
 
 
 
@@ -493,7 +488,7 @@ public class TimeLineControllerImp implements TimeLineController {
                 FileReader filereader = new FileReader(twt);
                 Scanner scanner=new Scanner(filereader).useDelimiter("\n");
                 TWEET T=new TWEET();
-                 T.getTime(scanner.next());
+                T.getTime(scanner.next());
                 T.getOwner(scanner.next());
                 T.getText(scanner.next());
                 T.getStatus("Tweeted");
