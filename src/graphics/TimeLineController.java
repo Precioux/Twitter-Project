@@ -25,6 +25,7 @@ import java.util.*;
 
 public class TimeLineController {
 
+
     public class noFollowerException  extends Exception {}
     private ArrayList<String> AFollowings=new ArrayList<>();
     private ArrayList<HashMap<Long, String>> tweetlist = new ArrayList<HashMap<Long, String>>();
@@ -47,6 +48,31 @@ public class TimeLineController {
     @FXML
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
+
+    /**
+     * to full screen
+     * @param actionEvent e
+     */
+    @FXML
+    public void toFullScreen(ActionEvent actionEvent) {
+        Stage stage=(Stage) area.getScene().getWindow();
+        if(!stage.isFullScreen())
+            stage.setFullScreen(true);
+        else stage.setFullScreen(false);
+    }
+
+    /**
+     * change theme
+     * @param actionEvent e
+     */
+    @FXML
+    public void toChangeTheme(ActionEvent actionEvent) {
+    }
+
+    /**
+     * help
+     * @param actionEvent e
+     */
     @FXML
     public void toHelp(ActionEvent actionEvent) {
         Alert alert=new Alert(Alert.AlertType.INFORMATION);

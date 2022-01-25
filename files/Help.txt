@@ -1,0 +1,26 @@
+"Menu Bar"
+
+Options:
+
+Applicaton:
+-Log Out: to log out from ypur account
+-Exit: to wxit the program ( in a way you have chosed before.)
+
+Help:
+-Help: Here!
+-About: a briet explanaition about program and Me!
+
+View:
+-Toggle Full Screen: Full screen show!
+-Change Theme: you can choose to use program in a light/dark theme.
+LeftSide Bar:
+-Profile: shows your profile.
+-Refresh: Refreshes timeline to show new tweets and other updates.
+-Tweet: to add a new  tweet.
+-Search: to searching other users
+
+"TimeLine"
+-Like: to like a tweet
+-Retweet:to retweet a tweet
+-Comment: to add a comment on a tweet
+-Remove: to remove a tweet(only yours!)
