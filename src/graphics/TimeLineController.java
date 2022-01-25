@@ -15,21 +15,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class TimeLineController {
+
     public class noFollowerException  extends Exception {}
     private ArrayList<String> AFollowings=new ArrayList<>();
     private ArrayList<HashMap<Long, String>> tweetlist = new ArrayList<HashMap<Long, String>>();
@@ -52,6 +47,22 @@ public class TimeLineController {
     @FXML
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
+    @FXML
+    public void toHelp(ActionEvent actionEvent) {
+    }
+
+    /**
+     * about
+     * @param actionEvent e
+     */
+    @FXML
+    public void toAbout(ActionEvent actionEvent)
+    {
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setContentText("Twitter\nAP Project-Fall 2021\nBy Samin Mahdipour\n9839039\nContact me : Uni.mahdipour@gmail.com");
+        Optional<ButtonType> res=alert.showAndWait();
+    }
     /**
      * sets account
      *

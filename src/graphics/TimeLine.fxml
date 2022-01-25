@@ -27,8 +27,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-                  <MenuItem mnemonicParsing="false" text="Help" />
+              <MenuItem fx:id="about" mnemonicParsing="false" onAction="#toAbout" text="About" />
+                  <MenuItem fx:id="Help" mnemonicParsing="false" onAction="#toHelp" text="Help" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="View">
