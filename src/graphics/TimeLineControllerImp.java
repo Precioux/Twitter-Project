@@ -18,6 +18,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -69,6 +71,122 @@ public class TimeLineControllerImp implements TimeLineController {
     @FXML
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
+    /**
+     * keys
+     * @param keyEvent k
+     * @throws IOException e
+     */
+    public void keyPressed(KeyEvent keyEvent) throws IOException {
+        if (keyEvent.getCode().equals(KeyCode.T))   //addtweet
+        {
+
+            Parent signUpRoot= FXMLLoader.load(getClass().getResource("AddTweet.fxml"));
+            Scene signUpview=new Scene(signUpRoot);
+            Stage window=(Stage) ((Node)keyEvent.getSource()).getScene().getWindow();
+            window.setScene(signUpview);
+            window.show();
+        }
+        if(keyEvent.getCode()==KeyCode.R) //refresh
+        {
+
+            initialize();
+        }
+        if(keyEvent.getCode().equals(KeyCode.P)) { //Profile
+            File viewer = new File("./files/View.txt");
+            FileWriter fileWriter = null;
+            try {
+                fileWriter = new FileWriter(viewer);
+                System.out.println(account.ID);
+                fileWriter.write(account.ID);
+                fileWriter.close();
+                Parent signUpRoot = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+                Scene p = new Scene(signUpRoot);
+                Stage window = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
+                window.setScene(p);
+                window.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (keyEvent.getCode().equals(KeyCode.S)) //search
+        {
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("Search.fxml"));
+            Scene p = new Scene(signUpRoot);
+            Stage window = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
+            window.setScene(p);
+            window.show();
+        }
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) //escape
+        {
+            Platform.exit();
+            System.exit(0);
+        }
+        if(keyEvent.getCode().equals(KeyCode.M)) //mode
+        {
+            Parent r= FXMLLoader.load(getClass().getResource("Mode.fxml"));
+            Scene s=new Scene(r);
+            Stage window=(Stage) area.getScene().getWindow();
+            window.setScene(s);
+            window.show();
+        }
+        if(keyEvent.getCode().equals(KeyCode.F)) //fullscreen
+        {  Stage stage=(Stage) area.getScene().getWindow();
+            if(!stage.isFullScreen())
+                stage.setFullScreen(true);
+            else stage.setFullScreen(false);}
+        if (keyEvent.getCode().equals(KeyCode.TAB)){  //Tab
+            Parent r= FXMLLoader.load(getClass().getResource("Theme.fxml"));
+            Scene s=new Scene(r);
+            Stage window=(Stage) area.getScene().getWindow();
+            window.setScene(s);
+            window.show();
+        }
+        if (keyEvent.getCode().equals(KeyCode.H)) //help
+        {
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Help");
+            File file=new File("./files/Help.txt");
+            FileReader fileReader=null;
+            String data="";
+            try {
+                fileReader=new FileReader(file);
+                Scanner scanner=new Scanner(fileReader).useDelimiter("\n");
+                while (scanner.hasNext())
+                {
+                    data+=scanner.next();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            alert.setContentText(data);
+            Optional<ButtonType> res=alert.showAndWait();
+        }
+        if (keyEvent.getCode().equals(KeyCode.L)) //LogOut
+        {
+            File ExitMode=new File("./files/Setting/ExitMode.txt");
+            File Theme=new File("./files/Setting/Theme.txt");
+            ExitMode.delete();
+            Theme.delete();
+            try {
+                Stage window = (Stage) area.getScene().getWindow();
+                Parent Root = FXMLLoader.load(getClass().getResource("Authentication.fxml"));
+                Scene Aview = new Scene(Root);
+                window.setScene(Aview);
+                window.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(keyEvent.getCode().equals(KeyCode.A))
+        {
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("About");
+            alert.setContentText("Twitter\nAP Project-Fall 2021\nBy Samin Mahdipour\n9839039\nContact me : Uni.mahdipour@gmail.com");
+            Optional<ButtonType> res=alert.showAndWait();
+        }
+
+    }
 
     /**
      * exit mode

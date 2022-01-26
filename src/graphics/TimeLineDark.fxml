@@ -43,7 +43,7 @@
     <left>
         <VBox prefHeight="674.0" prefWidth="170.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="profile" mnemonicParsing="false" onAction="#toProfile" prefHeight="59.0" prefWidth="85.0" style="-fx-background-color: #940000;" text="Profile" textFill="WHITE">
+                <Button fx:id="profile" mnemonicParsing="false" onAction="#toProfile" onKeyPressed="#keyPressed" prefHeight="59.0" prefWidth="85.0" style="-fx-background-color: #940000;" text="Profile" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -51,7 +51,7 @@
                         <Insets left="40.0" top="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="refresh" mnemonicParsing="false" onAction="#refreshIt" prefHeight="49.0" prefWidth="78.0" style="-fx-background-color: #616161;" text="Refresh" textFill="WHITE">
+                <Button fx:id="refresh" mnemonicParsing="false" onAction="#refreshIt" onKeyPressed="#keyPressed" prefHeight="49.0" prefWidth="78.0" style="-fx-background-color: #616161;" text="Refresh" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -59,7 +59,7 @@
                         <Insets left="40.0" top="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="tweet" mnemonicParsing="false" onAction="#toTweet" prefHeight="48.0" prefWidth="58.0" style="-fx-background-color: #616161;" text="Tweet" textFill="WHITE">
+                <Button fx:id="tweet" mnemonicParsing="false" onAction="#toTweet" onKeyPressed="#keyPressed" prefHeight="48.0" prefWidth="58.0" style="-fx-background-color: #616161;" text="Tweet" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -67,7 +67,7 @@
                         <Insets left="40.0" top="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="search" mnemonicParsing="false" onAction="#searchforUser" prefHeight="36.0" prefWidth="56.0" style="-fx-background-color: #616161;" text="Search" textFill="WHITE">
+                <Button fx:id="search" mnemonicParsing="false" onAction="#searchforUser" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="56.0" style="-fx-background-color: #616161;" text="Search" textFill="WHITE">
                     <VBox.margin>
                         <Insets left="40.0" top="20.0" />
                     </VBox.margin>

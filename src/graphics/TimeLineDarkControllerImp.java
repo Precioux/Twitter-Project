@@ -1,4 +1,5 @@
 package graphics;
+
 import Tools.JSONtool;
 import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import com.google.gson.Gson;
@@ -17,9 +18,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCharacterCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.Mnemonic;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -34,6 +34,8 @@ import java.util.*;
  * this class defines TimeLine dark controller
  */
 public class TimeLineDarkControllerImp implements TimeLineController {
+
+
     public class noFollowerException  extends Exception {}
     private ArrayList<String> AFollowings=new ArrayList<>();
     private ArrayList<HashMap<Long, String>> tweetlist = new ArrayList<HashMap<Long, String>>();
@@ -73,14 +75,129 @@ public class TimeLineDarkControllerImp implements TimeLineController {
     @FXML
     private Menu help=new Menu();
     @FXML
-    private Button refresh=new Button(); //alt+r
+    private Button refresh=new Button();
     @FXML
-    private Button profile=new Button();//alt+p
+    private Button profile=new Button();
     @FXML
-    private Button tweet=new Button();//alt+t
+    private Button tweet=new Button();
     @FXML
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
+
+    /**
+     * keys
+     * @param keyEvent k
+     * @throws IOException e
+     */
+    public void keyPressed(KeyEvent keyEvent) throws IOException {
+        if (keyEvent.getCode().equals(KeyCode.T))   //addtweet
+        {
+            Parent signUpRoot= FXMLLoader.load(getClass().getResource("AddTweetDark.fxml"));
+            Scene signUpview=new Scene(signUpRoot);
+            Stage window=(Stage) ((Node)keyEvent.getSource()).getScene().getWindow();
+            window.setScene(signUpview);
+            window.show();
+        }
+        if(keyEvent.getCode()==KeyCode.R) //refresh
+        {
+            initialize();
+        }
+        if(keyEvent.getCode().equals(KeyCode.P)) { //Profile
+            File viewer = new File("./files/View.txt");
+            FileWriter fileWriter = null;
+            try {
+                fileWriter = new FileWriter(viewer);
+                System.out.println(account.ID);
+                fileWriter.write(account.ID);
+                fileWriter.close();
+                Parent signUpRoot = FXMLLoader.load(getClass().getResource("ProfileDark.fxml"));
+                Scene p = new Scene(signUpRoot);
+                Stage window = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
+                window.setScene(p);
+                window.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (keyEvent.getCode().equals(KeyCode.S)) //search
+        {
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("SearchDark.fxml"));
+            Scene p = new Scene(signUpRoot);
+            Stage window = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
+            window.setScene(p);
+            window.show();
+        }
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) //escape
+        {
+            Platform.exit();
+            System.exit(0);
+        }
+        if(keyEvent.getCode().equals(KeyCode.M)) //mode
+        {
+            Parent r= FXMLLoader.load(getClass().getResource("ModeDark.fxml"));
+            Scene s=new Scene(r);
+            Stage window=(Stage) area.getScene().getWindow();
+            window.setScene(s);
+            window.show();
+        }
+        if(keyEvent.getCode().equals(KeyCode.F)) //fullscreen
+        {  Stage stage=(Stage) area.getScene().getWindow();
+            if(!stage.isFullScreen())
+                stage.setFullScreen(true);
+            else stage.setFullScreen(false);}
+        if (keyEvent.getCode().equals(KeyCode.TAB)){  //Tab -> theme
+            Parent r= FXMLLoader.load(getClass().getResource("ThemeDark.fxml"));
+            Scene s=new Scene(r);
+            Stage window=(Stage) area.getScene().getWindow();
+            window.setScene(s);
+            window.show();
+        }
+        if (keyEvent.getCode().equals(KeyCode.H)) //help
+        {
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Help");
+            File file=new File("./files/Help.txt");
+            FileReader fileReader=null;
+            String data="";
+            try {
+                fileReader=new FileReader(file);
+                Scanner scanner=new Scanner(fileReader).useDelimiter("\n");
+                while (scanner.hasNext())
+                {
+                    data+=scanner.next();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            alert.setContentText(data);
+            Optional<ButtonType> res=alert.showAndWait();
+        }
+        if (keyEvent.getCode().equals(KeyCode.L)) //LogOut
+        {
+            File ExitMode=new File("./files/Setting/ExitMode.txt");
+            File Theme=new File("./files/Setting/Theme.txt");
+            ExitMode.delete();
+            Theme.delete();
+            try {
+                Stage window = (Stage) area.getScene().getWindow();
+                Parent Root = FXMLLoader.load(getClass().getResource("Authentication.fxml"));
+                Scene Aview = new Scene(Root);
+                window.setScene(Aview);
+                window.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(keyEvent.getCode().equals(KeyCode.A))
+        {
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("About");
+            alert.setContentText("Twitter\nAP Project-Fall 2021\nBy Samin Mahdipour\n9839039\nContact me : Uni.mahdipour@gmail.com");
+            Optional<ButtonType> res=alert.showAndWait();
+        }
+
+    }
 
     /**
      * exit mode
@@ -279,30 +396,12 @@ public class TimeLineDarkControllerImp implements TimeLineController {
             e.printStackTrace();
         }
     }
-    public void getACC(){
-         Scene scene=area.getScene();
-        mode.setAccelerator(KeyCombination.keyCombination("Ctrl+M"));
-        logOut.setAccelerator(KeyCombination.keyCombination("Ctrl+L"));
-        exit.setAccelerator(KeyCombination.keyCombination("Ctrl+E"));
-        about.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
-        Help.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
-        screen.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
-        teme.setAccelerator(KeyCombination.keyCombination("Ctrl+T"));
-        options.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
-        help.setAccelerator(KeyCombination.keyCombination("Ctrl+P"));
-        view.setAccelerator(KeyCombination.keyCombination("Ctrl+V"));
-        applications.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
-//        KeyCombination kc = new KeyCodeCombination(KeyCode.R, KeyCombination.ALT_DOWN);
-        profile.setMnemonicParsing(true);
-        KeyCombination kP = new KeyCharacterCombination("P", KeyCombination.ALT_DOWN);
-        Mnemonic mn = new Mnemonic(profile, kP);
-        scene.addMnemonic(mn);
-    }
     /**
      * set list view
      */
     public void initialize()
     {
+
         getSetting();
         getTimeLine();
         toTweetType();
@@ -313,7 +412,6 @@ public class TimeLineDarkControllerImp implements TimeLineController {
                             @Override
                             public void changed(ObservableValue<? extends TWEET> ov,
                                                 TWEET oldValue, TWEET newValue) {
-                                //????????????????????????????
                             }
                         }
                 );
@@ -323,12 +421,11 @@ public class TimeLineDarkControllerImp implements TimeLineController {
                     @Override
                     public ListCell<TWEET> call(ListView<TWEET> listView) {
                         return new TweetDarkControllerImp();
-                        //return new ImageTextCell();
+
                     }
                 }
         );
     }
-
     /**
      * to user's profile
      * @param event e

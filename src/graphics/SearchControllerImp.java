@@ -113,7 +113,7 @@ public class SearchControllerImp implements SearchController {
         Scene t=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(t);
-        window.showAndWait();
+        window.show();
     }
     /**
      * search
