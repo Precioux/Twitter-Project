@@ -54,7 +54,6 @@ public class AddTweetControllerDarkImp implements addTweetController {
             Scanner scanner=new Scanner(fr);
             String d=scanner.next();
             account.ID=d;
-            System.out.println(account.ID);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -97,7 +96,6 @@ public class AddTweetControllerDarkImp implements addTweetController {
             {
                 theme=scanner.nextInt();
             }
-            System.out.println("Theme :"+theme);
             if(theme==0)
             {
                 toTimeLine();
@@ -146,7 +144,6 @@ public class AddTweetControllerDarkImp implements addTweetController {
             tweetingServiceImp.addAccount(account);
             ForServices forServices =new ForServices(1,txt);
             int est=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
-            System.out.println("sent tweet");
             toDarkTimeLine();
         }
     }

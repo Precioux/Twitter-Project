@@ -7,7 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/**
+ * AP-Project-phase4
+ * @author Samin Mahdipour
+ * @since 1.26.2022
+ * @version 4.0
+ * this class is a viewer
+ */
 public class SearchView extends Application {
 
     @Override

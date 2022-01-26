@@ -14,7 +14,6 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-
 import java.io.*;
 import java.util.Scanner;
 

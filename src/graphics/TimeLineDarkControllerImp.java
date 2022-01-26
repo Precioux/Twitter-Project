@@ -130,8 +130,19 @@ public class TimeLineDarkControllerImp implements TimeLineController {
         }
         if (keyEvent.getCode().equals(KeyCode.ESCAPE)) //escape
         {
-            Platform.exit();
-            System.exit(0);
+            getSetting();
+            Stage window = (Stage) area.getScene().getWindow();
+            if (Emode == 0) {
+
+                Platform.exit();
+                System.exit(0);
+            }
+            else {
+
+                FXTrayIcon trayIcon = new FXTrayIcon(window, getClass().getResource("recources/twitterlogo.png"));
+                trayIcon.show();
+                window.close();
+            }
         }
         if(keyEvent.getCode().equals(KeyCode.M)) //mode
         {
@@ -401,7 +412,6 @@ public class TimeLineDarkControllerImp implements TimeLineController {
      */
     public void initialize()
     {
-
         getSetting();
         getTimeLine();
         toTweetType();

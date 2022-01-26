@@ -119,8 +119,19 @@ public class TimeLineControllerImp implements TimeLineController {
         }
         if (keyEvent.getCode().equals(KeyCode.ESCAPE)) //escape
         {
-            Platform.exit();
-            System.exit(0);
+            getSetting();
+            Stage window = (Stage) area.getScene().getWindow();
+            if (Emode == 0) {
+
+                Platform.exit();
+                System.exit(0);
+            }
+            else {
+
+                FXTrayIcon trayIcon = new FXTrayIcon(window, getClass().getResource("recources/twitterlogo.png"));
+                trayIcon.show();
+                window.close();
+            }
         }
         if(keyEvent.getCode().equals(KeyCode.M)) //mode
         {
@@ -182,7 +193,7 @@ public class TimeLineControllerImp implements TimeLineController {
         {
             Alert alert=new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("About");
-            alert.setContentText("Twitter\nAP Project-Fall 2021\nBy Samin Mahdipour\n9839039\nContact me : Uni.mahdipour@gmail.com");
+            alert.setContentText("Twitter\nAP Project-Fall 2021\nBy Samin Mahdipour\n9839039\nContact Me : Uni.mahdipour@gmail.com");
             Optional<ButtonType> res=alert.showAndWait();
         }
 
@@ -399,7 +410,7 @@ public class TimeLineControllerImp implements TimeLineController {
                     @Override
                     public ListCell<TWEET> call(ListView<TWEET> listView) {
                         return new TweetControllerImp();
-                        //return new ImageTextCell();
+
                     }
                 }
         );
@@ -571,10 +582,6 @@ public class TimeLineControllerImp implements TimeLineController {
         {
             timeline.add(search(arr[i]));
         }
-//        for (long i:arr)
-//        {
-//            timeline.add(search(i));
-//        }
 
     }
     /**
