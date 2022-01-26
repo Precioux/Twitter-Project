@@ -1,23 +1,26 @@
 "Menu Bar"
 
-Options:
+Options:     
+-Change Exit mode: you can choose Exit/Hide on System Tray(alse you can press M)
 
 Applicaton:
--Log Out: to log out from ypur account
--Exit: to wxit the program ( in a way you have chosed before.)
+-Log Out: to log out from your account(alse you can press L)
+-Exit: to wxit the program ( in a way you have chosed before.)(alse you can press ESC for complete exit)
 
 Help:
--Help: Here!
--About: a briet explanaition about program and Me!
+-Help: Here!(alse you can press H)
+-About: a brief explaination about program and Me!(alse you can press A)
 
 View:
--Toggle Full Screen: Full screen show!
--Change Theme: you can choose to use program in a light/dark theme.
-LeftSide Bar:
--Profile: shows your profile.
--Refresh: Refreshes timeline to show new tweets and other updates.
--Tweet: to add a new  tweet.
--Search: to searching other users
+-Toggle Full Screen: Full screen show! (alse you can press F)
+-Change Theme: you can choose to use program in a light/dark theme.(alse you can press tab)
+
+"LeftSide Bar"
+
+-Profile: shows your profile.(alse you can press P)
+-Refresh: Refreshes timeline to show new tweets and other updates.(alse you can press R)
+-Tweet: to add a new  tweet.(alse you can press T)
+-Search: to searching other users(alse you can press S)
 
 "TimeLine"
 -Like: to like a tweet
