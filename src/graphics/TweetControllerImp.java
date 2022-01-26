@@ -208,9 +208,11 @@ public class TweetControllerImp extends ListCell<TWEET> implements TweetControll
     @FXML
     public void removeIt(ActionEvent actionEvent) throws IOException {
         setAccount();
+        System.out.println(account.ID);
         tweetingServiceImp.addAccount(account);
         if(userID.getText().equals(account.ID))
         {
+            System.out.println("yes");
             ForServices forServices =new ForServices(2,tweetText.getText());
             int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
             if(rslt==0)

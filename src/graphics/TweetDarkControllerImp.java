@@ -101,7 +101,7 @@ public class TweetDarkControllerImp extends ListCell<TWEET> implements TweetCont
             System.out.println(userID.getText());
             fileWriter.write(userID.getText());
             fileWriter.close();
-            Parent signUpRoot = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("ProfileDark.fxml"));
             Scene p = new Scene(signUpRoot);
             Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             window.setScene(p);
@@ -207,6 +207,7 @@ public class TweetDarkControllerImp extends ListCell<TWEET> implements TweetCont
      */
     @FXML
     public void removeIt(ActionEvent actionEvent) throws IOException {
+        System.out.println("this is remove");
         setAccount();
         tweetingServiceImp.addAccount(account);
         if(userID.getText().equals(account.ID))

@@ -312,7 +312,7 @@ public class TimeLineControllerImp implements TimeLineController {
         Scene signUpview=new Scene(signUpRoot);
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(signUpview);
-        window.showAndWait();
+        window.show();
     }
     /**
      *

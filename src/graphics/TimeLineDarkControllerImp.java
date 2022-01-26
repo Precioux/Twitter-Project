@@ -86,9 +86,9 @@ public class TimeLineDarkControllerImp implements TimeLineController {
      */
     @FXML
     public void toChangeTheme(ActionEvent actionEvent) throws IOException {
-        Parent r= FXMLLoader.load(getClass().getResource("Theme.fxml"));
+        Parent r= FXMLLoader.load(getClass().getResource("ThemeDark.fxml"));
         Scene s=new Scene(r);
-        Stage window=(Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage window=(Stage) area.getScene().getWindow();
         window.setScene(s);
         window.show();
     }
@@ -195,7 +195,7 @@ public class TimeLineDarkControllerImp implements TimeLineController {
      */
     @FXML
     public void searchforUser(ActionEvent actionEvent) throws IOException {
-        Parent signUpRoot = FXMLLoader.load(getClass().getResource("Search.fxml"));
+        Parent signUpRoot = FXMLLoader.load(getClass().getResource("SearchDark.fxml"));
         Scene p = new Scene(signUpRoot);
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(p);
@@ -299,7 +299,7 @@ public class TimeLineDarkControllerImp implements TimeLineController {
             System.out.println(account.ID);
             fileWriter.write(account.ID);
             fileWriter.close();
-            Parent signUpRoot = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("ProfileDark.fxml"));
             Scene p = new Scene(signUpRoot);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(p);
