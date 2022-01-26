@@ -167,6 +167,8 @@ public class ObserverTool extends Tool {
                      fileWriter.write(String.valueOf(n));
                      fileReader.close();
                      fileWriter.close();
+                     scanner.close();
+
 
                  } catch (IOException e) {
                      e.printStackTrace();

@@ -14,27 +14,27 @@
     <top>
         <MenuBar fx:id="menuBar" prefHeight="0.0" prefWidth="366.0" style="-fx-background-color: #adadad;" BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" text="Options">
+                <Menu fx:id="options" mnemonicParsing="false" text="Options">
                     <items>
                         <MenuItem fx:id="mode" mnemonicParsing="false" onAction="#toExitMode" text="Choose Exit Mode" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Application">
+                <Menu fx:id="applications" mnemonicParsing="false" text="Application">
                     <items>
                         <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#toLogOut" text="Log Out" />
                         <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#toExit" text="Exit" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu fx:id="help" mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem fx:id="about" mnemonicParsing="false" onAction="#toAbout" text="About" />
                         <MenuItem fx:id="Help" mnemonicParsing="false" onAction="#toHelp" text="Help" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="View">
+                <Menu fx:id="view" mnemonicParsing="false" text="View">
                     <items>
                         <MenuItem fx:id="screen" mnemonicParsing="false" onAction="#toFullScreen" text="Toggle Full Screen" />
-                        <MenuItem fx:id="theme" mnemonicParsing="false" onAction="#toChangeTheme" text="Change Theme" />
+                        <MenuItem fx:id="teme" mnemonicParsing="false" onAction="#toChangeTheme" text="Change Theme" />
                     </items>
                 </Menu>
             </menus>

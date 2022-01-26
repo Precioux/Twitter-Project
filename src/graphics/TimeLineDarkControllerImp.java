@@ -1,5 +1,4 @@
 package graphics;
-
 import Tools.JSONtool;
 import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import com.google.gson.Gson;
@@ -18,6 +17,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCharacterCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.Mnemonic;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -48,10 +50,34 @@ public class TimeLineDarkControllerImp implements TimeLineController {
 
     @FXML
     private MenuBar menuBar;
-
     @FXML
-    private Button refresh;
-
+    private MenuItem mode=new MenuItem();
+    @FXML
+    private MenuItem logOut=new MenuItem();
+    @FXML
+    private MenuItem exit=new MenuItem();
+    @FXML
+    private MenuItem about=new MenuItem();
+    @FXML
+    private MenuItem Help=new MenuItem();
+    @FXML
+    private MenuItem screen=new MenuItem();
+    @FXML
+    private MenuItem teme=new MenuItem();
+    @FXML
+    private Menu options=new Menu();
+    @FXML
+    private Menu applications=new Menu();
+    @FXML
+    private Menu view=new Menu();
+    @FXML
+    private Menu help=new Menu();
+    @FXML
+    private Button refresh=new Button(); //alt+r
+    @FXML
+    private Button profile=new Button();//alt+p
+    @FXML
+    private Button tweet=new Button();//alt+t
     @FXML
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
@@ -253,6 +279,25 @@ public class TimeLineDarkControllerImp implements TimeLineController {
             e.printStackTrace();
         }
     }
+    public void getACC(){
+         Scene scene=area.getScene();
+        mode.setAccelerator(KeyCombination.keyCombination("Ctrl+M"));
+        logOut.setAccelerator(KeyCombination.keyCombination("Ctrl+L"));
+        exit.setAccelerator(KeyCombination.keyCombination("Ctrl+E"));
+        about.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
+        Help.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
+        screen.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+        teme.setAccelerator(KeyCombination.keyCombination("Ctrl+T"));
+        options.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
+        help.setAccelerator(KeyCombination.keyCombination("Ctrl+P"));
+        view.setAccelerator(KeyCombination.keyCombination("Ctrl+V"));
+        applications.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
+//        KeyCombination kc = new KeyCodeCombination(KeyCode.R, KeyCombination.ALT_DOWN);
+        profile.setMnemonicParsing(true);
+        KeyCombination kP = new KeyCharacterCombination("P", KeyCombination.ALT_DOWN);
+        Mnemonic mn = new Mnemonic(profile, kP);
+        scene.addMnemonic(mn);
+    }
     /**
      * set list view
      */
@@ -399,7 +444,8 @@ public class TimeLineDarkControllerImp implements TimeLineController {
                 System.out.println("got n");
                 number = scanner.nextInt();
             }
-
+          fileReader.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -448,10 +494,6 @@ public class TimeLineDarkControllerImp implements TimeLineController {
         {
             timeline.add(search(arr[i]));
         }
-//        for (long i:arr)
-//        {
-//            timeline.add(search(i));
-//        }
 
     }
     /**
@@ -500,8 +542,12 @@ public class TimeLineDarkControllerImp implements TimeLineController {
                 addr.add(num);
                 check.add(false);
                 tweetlist.add(ht);
+                filereader.close();
+                scanner.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -530,8 +576,12 @@ public class TimeLineDarkControllerImp implements TimeLineController {
                 addr.add(num);
                 check.add(false);
                 tweetlist.add(ht);
+                filereader.close();
+                scanner.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -622,8 +672,12 @@ public class TimeLineDarkControllerImp implements TimeLineController {
                 addr.add(num);
                 check.add(false);
                 tweetlist.add(ht);
+                filereader.close();
+                scanner.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

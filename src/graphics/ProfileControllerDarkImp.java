@@ -167,6 +167,8 @@ public class ProfileControllerDarkImp implements ProfileController {
                 tweetsToString[i]=jsoNtool.toJSON(data);
                 fileReader.close();
                 i++;
+                fileReader.close();
+                scanner.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -189,6 +191,8 @@ public class ProfileControllerDarkImp implements ProfileController {
             if(scanner.hasNextInt()) {
                 System.out.println("got n");
                 number = scanner.nextInt();
+                fileReader.close();
+                scanner.close();
             }
 
         } catch (FileNotFoundException e) {
@@ -370,8 +374,12 @@ public class ProfileControllerDarkImp implements ProfileController {
                 addr.add(num);
                 check.add(false);
                 tweetlist.add(ht);
+                filereader.close();
+                scanner.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

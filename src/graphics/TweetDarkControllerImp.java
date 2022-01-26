@@ -207,44 +207,25 @@ public class TweetDarkControllerImp extends ListCell<TWEET> implements TweetCont
      */
     @FXML
     public void removeIt(ActionEvent actionEvent) throws IOException {
-        System.out.println("this is remove");
+        System.out.println("this is remove it");
         setAccount();
-        tweetingServiceImp.addAccount(account);
         if(userID.getText().equals(account.ID))
         {
-            ForServices forServices =new ForServices(2,tweetText.getText());
-            int rslt=tweetingServiceImp.begin(jsoNtool.toJSON(forServices));
-            if(rslt==0)
-            {
-                LocalDate localDate=LocalDate.now();
-                LocalTime localTime=LocalTime.now();
-                submitLog(localDate,localTime,"remove","SuccessFul",0);
-            }
-            else
-            {
-                if(rslt==-1)
-                {
+            File file=new File("./files/RemoveSource.txt");
+            FileWriter fileWriter=null;
+            try {
+                fileWriter=new FileWriter(file);
+                fileWriter.write(account.ID+"\n"+tweetText.getText());
+                fileWriter.close();
+                System.out.println("written to remove source");
+                Parent signUpRoot = FXMLLoader.load(getClass().getResource("WaitDark.fxml"));
+                Scene p = new Scene(signUpRoot);
+                Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                window.setScene(p);
+                window.show();
 
-                    Error error=new Error();
-                    error.errorSearch(1000);
-                    alaart(error.getErrorType());
-                    LocalDate localDate=LocalDate.now();
-                    LocalTime localTime=LocalTime.now();
-                    submitLog(localDate,localTime,"remove","Failed",1000);
-                }
-                else
-                {
-                    if(rslt==5 || rslt==999 || rslt==998)
-                    {
-
-                        Error error=new Error();
-                        error.errorSearch(rslt);
-                        alaart(error.getErrorType());
-                        LocalDate localDate=LocalDate.now();
-                        LocalTime localTime=LocalTime.now();
-                        submitLog(localDate,localTime,"remove","Failed",rslt);
-                    }
-                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         else

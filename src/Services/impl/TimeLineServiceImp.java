@@ -143,8 +143,12 @@ public class TimeLineServiceImp implements TimeLineService {
                 addr.add(num);
                 check.add(false);
                 tweetlist.add(ht);
+                filereader.close();
+                scanner.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

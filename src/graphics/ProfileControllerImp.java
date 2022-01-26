@@ -166,6 +166,7 @@ public class ProfileControllerImp implements ProfileController {
                 data.addString(scanner.next());
                 tweetsToString[i]=jsoNtool.toJSON(data);
                 fileReader.close();
+                scanner.close();
                 i++;
 
             } catch (IOException e) {
@@ -190,7 +191,8 @@ public class ProfileControllerImp implements ProfileController {
                 System.out.println("got n");
                 number = scanner.nextInt();
             }
-
+            fileReader.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -370,8 +372,12 @@ public class ProfileControllerImp implements ProfileController {
                 addr.add(num);
                 check.add(false);
                 tweetlist.add(ht);
+                filereader.close();
+                scanner.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -49,7 +49,20 @@ public class TimeLineControllerImp implements TimeLineController {
 
     @FXML
     private MenuBar menuBar;
-
+    @FXML
+    private MenuItem mode=new MenuItem();
+    @FXML
+    private MenuItem logOut=new MenuItem();
+    @FXML
+    private MenuItem exit=new MenuItem();
+    @FXML
+    private MenuItem about=new MenuItem();
+    @FXML
+    private MenuItem Help=new MenuItem();
+    @FXML
+    private MenuItem screen=new MenuItem();
+    @FXML
+    private MenuItem teme=new MenuItem();
     @FXML
     private Button refresh;
 
@@ -389,6 +402,8 @@ public class TimeLineControllerImp implements TimeLineController {
                 System.out.println("got n");
                 number = scanner.nextInt();
             }
+            fileReader.close();
+            scanner.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -490,8 +505,12 @@ public class TimeLineControllerImp implements TimeLineController {
                 addr.add(num);
                 check.add(false);
                 tweetlist.add(ht);
+                filereader.close();
+                scanner.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -520,8 +539,12 @@ public class TimeLineControllerImp implements TimeLineController {
                 addr.add(num);
                 check.add(false);
                 tweetlist.add(ht);
+                filereader.close();
+                scanner.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

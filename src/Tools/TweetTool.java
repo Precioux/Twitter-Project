@@ -86,6 +86,7 @@ public class TweetTool extends Tool {
           String rubbbish=scanner.next();
           rubbbish+=scanner.next();
           twt+=scanner.next();
+          scanner.close();
       } catch (FileNotFoundException e) {
           e.printStackTrace();
       }
@@ -97,32 +98,19 @@ public class TweetTool extends Tool {
 
     /**
      *
-     * @param file file
+     * @param path p
      * @return true if delete is ok
      * @throws IOException check
      */
-    protected boolean deleteDirectoryRecursionJava6(File file) throws IOException {
-        System.out.println(file);
-        int f=0;
+    protected boolean deleteDirectoryRecursionJava6(String path) throws IOException {
+        System.out.println(path);
         boolean action=false;
-        if (file.isDirectory()) {
-            File[] entries = file.listFiles();
-            if (entries != null) {
-                for (File entry : entries) {
-                    deleteDirectoryRecursionJava6(entry);
-                }
-            }
-        }
-        if (!file.delete()) {
-            f=1;
-            System.out.println("failed to delete");
-          //  throw new IOException("Failed to delete " + file);
-        }
-      if (f==0) {
-
-          action=true;
-      }
-        System.out.println(action);
+        Files.delete(Paths.get(path+"/ddu"));
+        Files.delete(Paths.get(path+"/likes"));
+        Files.delete(Paths.get(path));
+        if(!(new File(path)).exists())
+            action=true;
+        System.out.println("action:"+ action);
       return action;
     }
     /**
@@ -329,7 +317,7 @@ return type;
                       if (!rmv.exists())
                           throw new FileNotFoundException();
                       else {
-                          check = deleteDirectoryRecursionJava6(rmv);
+                          check = deleteDirectoryRecursionJava6(rmv.getAbsolutePath());
                           if (check)
                               type=0;
                       }
