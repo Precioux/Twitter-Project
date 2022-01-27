@@ -27,14 +27,14 @@ public interface SignUpController {
     /**
      * choose photo
      * @param actionEvent event
-     * @throws IOException
+     * @throws IOException e
      */
     @FXML
     void toChoose(ActionEvent actionEvent) throws IOException;
 
     /**
      * check
-     * @return
+     * @return result
      */
     boolean nullCheck();
 
@@ -42,6 +42,7 @@ public interface SignUpController {
      * sumbit sign up
      * @param event e
      * @throws NoSuchAlgorithmException e
+     * @throws IOException e
      */
     @FXML
     void toSumbit(ActionEvent event) throws NoSuchAlgorithmException, IOException;
@@ -49,6 +50,7 @@ public interface SignUpController {
     /**
      * alart
      * @param err error
+     * @throws IOException e
      */
     void alaart(String err) throws IOException;
 

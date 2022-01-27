@@ -149,8 +149,8 @@ public class TweetDarkControllerImp extends ListCell<TWEET> implements TweetCont
 
     /**
      * to like
-     * @param event
-     * @throws IOException
+     * @param event e
+     * @throws IOException e
      */
     @FXML
     public void likeIt(ActionEvent event) throws IOException {

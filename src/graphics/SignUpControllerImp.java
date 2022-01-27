@@ -96,7 +96,7 @@ public class SignUpControllerImp implements SignUpController {
     /**
      * choose photo
      * @param actionEvent event
-     * @throws IOException
+     * @throws IOException e
      */
     @FXML
     public void toChoose(ActionEvent actionEvent) throws IOException {

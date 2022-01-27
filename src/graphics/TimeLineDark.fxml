@@ -6,35 +6,57 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="area" maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.TimeLineDarkControllerImp">
+<BorderPane fx:id="area" maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.TimeLineDarkControllerImp">
     <top>
         <MenuBar fx:id="menuBar" prefHeight="0.0" prefWidth="366.0" style="-fx-background-color: #adadad;" BorderPane.alignment="CENTER">
             <menus>
-                <Menu fx:id="options" mnemonicParsing="false" text="Options">
+                <Menu fx:id="options" text="_Options">
                     <items>
-                        <MenuItem fx:id="mode" mnemonicParsing="false" onAction="#toExitMode" text="Choose Exit Mode" />
+                        <MenuItem fx:id="mode" mnemonicParsing="false" onAction="#toExitMode" text="Choose Exit Mode">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="M" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                     </items>
                 </Menu>
-                <Menu fx:id="applications" mnemonicParsing="false" text="Application">
+                <Menu fx:id="applications" text="Appl_ication">
                     <items>
-                        <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#toLogOut" text="Log Out" />
-                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#toExit" text="Exit" />
+                        <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#toLogOut" text="Log Out">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#toExit" text="Exit">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                     </items>
                 </Menu>
-                <Menu fx:id="help" mnemonicParsing="false" text="Help">
+                <Menu fx:id="help" mnemonicParsing="false" text="H_elp">
                     <items>
-                        <MenuItem fx:id="about" mnemonicParsing="false" onAction="#toAbout" text="About" />
-                        <MenuItem fx:id="Help" mnemonicParsing="false" onAction="#toHelp" text="Help" />
+                        <MenuItem fx:id="about" mnemonicParsing="false" onAction="#toAbout" text="About">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                        <MenuItem fx:id="Help" mnemonicParsing="false" onAction="#toHelp" text="Help">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                     </items>
                 </Menu>
-                <Menu fx:id="view" mnemonicParsing="false" text="View">
+                <Menu fx:id="view" mnemonicParsing="false" text="_View">
                     <items>
-                        <MenuItem fx:id="screen" mnemonicParsing="false" onAction="#toFullScreen" text="Toggle Full Screen" />
-                        <MenuItem fx:id="teme" mnemonicParsing="false" onAction="#toChangeTheme" text="Change Theme" />
+                        <MenuItem fx:id="screen" mnemonicParsing="false" onAction="#toFullScreen" text="Toggle Full Screen">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                        <MenuItem fx:id="teme" mnemonicParsing="false" onAction="#toChangeTheme" text="Change Theme">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                     </items>
                 </Menu>
             </menus>
@@ -43,7 +65,7 @@
     <left>
         <VBox prefHeight="674.0" prefWidth="170.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="profile" mnemonicParsing="false" onAction="#toProfile" onKeyPressed="#keyPressed" prefHeight="59.0" prefWidth="85.0" style="-fx-background-color: #940000;" text="Profile" textFill="WHITE">
+                <Button fx:id="profile" onAction="#toProfile" prefHeight="59.0" prefWidth="85.0" style="-fx-background-color: #940000;" text="_Profile" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -51,7 +73,7 @@
                         <Insets left="40.0" top="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="refresh" mnemonicParsing="false" onAction="#refreshIt" onKeyPressed="#keyPressed" prefHeight="49.0" prefWidth="78.0" style="-fx-background-color: #616161;" text="Refresh" textFill="WHITE">
+                <Button fx:id="refresh" onAction="#refreshIt" prefHeight="49.0" prefWidth="78.0" style="-fx-background-color: #616161;" text="_Refresh" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -59,7 +81,7 @@
                         <Insets left="40.0" top="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="tweet" mnemonicParsing="false" onAction="#toTweet" onKeyPressed="#keyPressed" prefHeight="48.0" prefWidth="58.0" style="-fx-background-color: #616161;" text="Tweet" textFill="WHITE">
+                <Button fx:id="tweet" onAction="#toTweet" prefHeight="48.0" prefWidth="58.0" style="-fx-background-color: #616161;" text="_Tweet" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -67,7 +89,7 @@
                         <Insets left="40.0" top="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="search" mnemonicParsing="false" onAction="#searchforUser" onKeyPressed="#keyPressed" prefHeight="36.0" prefWidth="56.0" style="-fx-background-color: #616161;" text="Search" textFill="WHITE">
+                <Button fx:id="search" onAction="#searchforUser" prefHeight="36.0" prefWidth="56.0" style="-fx-background-color: #616161;" text="_Search" textFill="WHITE">
                     <VBox.margin>
                         <Insets left="40.0" top="20.0" />
                     </VBox.margin>

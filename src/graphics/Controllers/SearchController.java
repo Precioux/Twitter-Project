@@ -34,6 +34,7 @@ public interface SearchController {
     /**
      * alart
      * @param err error
+     * @throws IOException e
      */
     void alaart(String err) throws IOException;
 
@@ -48,6 +49,7 @@ public interface SearchController {
     /**
      * search
      * @param event e
+     * @throws IOException e
      */
     @FXML
     void searchIt(ActionEvent event) throws IOException;

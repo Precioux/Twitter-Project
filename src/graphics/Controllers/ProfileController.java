@@ -17,7 +17,7 @@ public interface ProfileController {
 
     /**
      * sets account
-     *
+     * @param user e
      */
     public void setUser(String user);
 
@@ -29,13 +29,16 @@ public interface ProfileController {
 
     /**
      * get likes
+     * @param user u
+     * @param txt t
+     * @return result
      */
     int getlike(String user,String txt);
 
     /**
      * to change profile
-     * @param event
-     * @throws IOException
+     * @param event e
+     * @throws IOException e
      */
     @FXML
     void toChange(ActionEvent event) throws IOException;
@@ -43,6 +46,7 @@ public interface ProfileController {
     /**
      * alart
      * @param err error
+     * @throws IOException e
      */
     void alaart(String err) throws IOException;
 

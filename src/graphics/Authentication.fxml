@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="mainArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AuthenticationControllerImp">
+<GridPane fx:id="mainArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AuthenticationControllerImp">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
@@ -51,7 +51,7 @@
                 <Insets bottom="70.0" left="25.0" />
             </GridPane.margin>
         </Label>
-        <Button fx:id="signIn" mnemonicParsing="false" onAction="#toSignIn" style="-fx-background-color: #00aaff;" text="Sign In" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+        <Button fx:id="signIn" onAction="#toSignIn" style="-fx-background-color: #00aaff;" text="Sign _In" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4">
             <font>
                 <Font size="19.0" />
             </font>
@@ -59,7 +59,7 @@
                 <Insets bottom="100.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="signUp" mnemonicParsing="false" onAction="#toSignUp" style="-fx-background-color: white;" text="Sign Up" textFill="#00aaff" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+        <Button fx:id="signUp" onAction="#toSignUp" style="-fx-background-color: white;" text="Sign _Up" textFill="#00aaff" GridPane.halignment="CENTER" GridPane.rowIndex="5">
             <font>
                 <Font size="19.0" />
             </font>

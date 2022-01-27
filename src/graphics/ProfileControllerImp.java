@@ -202,8 +202,8 @@ public class ProfileControllerImp implements ProfileController {
     }
     /**
      * to change profile
-     * @param event
-     * @throws IOException
+     * @param event e
+     * @throws IOException e
      */
     @FXML
     public void toChange(ActionEvent event) throws IOException {

@@ -13,6 +13,7 @@ import java.io.IOException;
 public interface WaitController {
     /**
      * initialize
+     * @throws IOException e
      */
     public void initialize() throws IOException;
 

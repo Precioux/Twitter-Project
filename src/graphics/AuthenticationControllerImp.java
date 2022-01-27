@@ -227,7 +227,7 @@ public class AuthenticationControllerImp implements AuthenticationController {
     /**
      * to sign up
      * @param event e
-     * @throws IOException
+     * @throws IOException e
      */
         @FXML
         public void toSignUp(ActionEvent event) throws IOException {

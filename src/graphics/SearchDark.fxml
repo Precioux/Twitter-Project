@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainArea" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #616161;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.SearchControllerDarkImp">
+<AnchorPane fx:id="mainArea" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #616161;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.SearchControllerDarkImp">
     <children>
         <Label layoutX="104.0" layoutY="101.0" text="Search for user's ID in below box :" textFill="WHITE">
             <font>
@@ -14,11 +14,11 @@
             </font>
         </Label>
         <TextField fx:id="searchBar" layoutX="106.0" layoutY="140.0" prefHeight="45.0" prefWidth="387.0" />
-        <Button fx:id="searchButton" layoutX="218.0" layoutY="209.0" mnemonicParsing="false" onAction="#searchIt" prefHeight="55.0" prefWidth="162.0" style="-fx-background-color: #940000;" text="Search" textFill="WHITE">
+        <Button fx:id="searchButton" layoutX="218.0" layoutY="209.0" onAction="#searchIt" prefHeight="55.0" prefWidth="162.0" style="-fx-background-color: #940000;" text="_Search" textFill="WHITE">
             <font>
                 <Font size="24.0" />
             </font>
         </Button>
-        <Button fx:id="back" layoutX="256.0" layoutY="284.0" mnemonicParsing="false" onAction="#toTimeLine" prefHeight="27.0" prefWidth="86.0" style="-fx-background-color: black;" text="Back" textFill="WHITE" />
+        <Button fx:id="back" layoutX="256.0" layoutY="284.0" onAction="#toTimeLine" prefHeight="27.0" prefWidth="86.0" style="-fx-background-color: black;" text="_Back" textFill="WHITE" />
     </children>
 </AnchorPane>

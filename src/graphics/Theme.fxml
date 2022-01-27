@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.ThemeControllerImp">
+<AnchorPane prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.ThemeControllerImp">
    <children>
       <ToggleButton fx:id="dark" layoutX="149.0" layoutY="53.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="119.0" selected="true" style="-fx-background-color: white;" text="Dark Theme" textFill="#00aaff">
          <font>
@@ -22,7 +22,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </ToggleButton>
-      <Button fx:id="back" layoutX="26.0" layoutY="53.0" mnemonicParsing="false" onAction="#toTimeLine" prefHeight="103.0" prefWidth="106.0" text="Back" textFill="#00aaff">
+      <Button fx:id="back" layoutX="26.0" layoutY="53.0" onAction="#toTimeLine" prefHeight="103.0" prefWidth="106.0" text="_Back" textFill="#00aaff">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

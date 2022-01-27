@@ -31,6 +31,7 @@ public interface TweetController {
     /**
      * alart
      * @param err error
+     * @throws IOException e
      */
     void alaart(String err) throws IOException;
 
@@ -43,8 +44,8 @@ public interface TweetController {
 
     /**
      * to like
-     * @param event
-     * @throws IOException
+     * @param event e
+     * @throws IOException e
      */
     @FXML
     void likeIt(ActionEvent event) throws IOException;
@@ -68,6 +69,7 @@ public interface TweetController {
     /**
      * to ret
      * @param event e
+     * @throws IOException e
      */
     @FXML
     void toRetweet(ActionEvent event) throws IOException;

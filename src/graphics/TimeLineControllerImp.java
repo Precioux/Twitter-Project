@@ -18,8 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -71,11 +69,7 @@ public class TimeLineControllerImp implements TimeLineController {
     @FXML
     private ListView<TWEET> MainTimeLine;
     private final ObservableList<TWEET> tweets = FXCollections.observableArrayList();
-    /**
-     * keys
-     * @param keyEvent k
-     * @throws IOException e
-     */
+  /*
     public void keyPressed(KeyEvent keyEvent) throws IOException {
         if (keyEvent.getCode().equals(KeyCode.T))   //addtweet
         {
@@ -198,10 +192,10 @@ public class TimeLineControllerImp implements TimeLineController {
         }
 
     }
-
+*/
     /**
      * exit mode
-     * @param actionEvent
+     * @param actionEvent e
      */
     public void toExitMode(ActionEvent actionEvent) throws IOException {
         Parent r= FXMLLoader.load(getClass().getResource("Mode.fxml"));
@@ -419,7 +413,6 @@ public class TimeLineControllerImp implements TimeLineController {
     /**
      * to user's profile
      * @param event e
-     * @throws IOException e
      */
     @FXML
     public void toProfile(ActionEvent event) {

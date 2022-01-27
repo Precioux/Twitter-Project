@@ -15,6 +15,7 @@ public interface ModeController {
 
     /**
      * initialize
+     * @throws FileNotFoundException e
      */
     public void initialize() throws FileNotFoundException;
 

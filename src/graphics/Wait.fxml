@@ -5,19 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="area" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.WaitControllerImp">
+<AnchorPane fx:id="area" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.WaitControllerImp">
     <children>
         <Label layoutX="201.0" layoutY="115.0" prefHeight="126.0" prefWidth="210.0" text="Removing..." textFill="WHITE">
             <font>
                 <Font name="System Bold" size="37.0" />
             </font>
         </Label>
-        <Button fx:id="back" layoutX="322.0" layoutY="299.0" mnemonicParsing="false" onAction="#toDarkTimeLine" prefHeight="51.0" prefWidth="97.0" text="Back" textFill="#00aaff">
+        <Button fx:id="back" layoutX="322.0" layoutY="299.0" onAction="#toDarkTimeLine" prefHeight="51.0" prefWidth="97.0" text="_Back" textFill="#00aaff">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="removButton" layoutX="195.0" layoutY="299.0" mnemonicParsing="false" onAction="#toRemove" prefHeight="51.0" prefWidth="98.0" style="-fx-background-color: white;" text="Remove" textFill="#00aaff">
+        <Button fx:id="removButton" layoutX="195.0" layoutY="299.0" onAction="#toRemove" prefHeight="51.0" prefWidth="98.0" style="-fx-background-color: white;" text="_Remove" textFill="#00aaff">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>

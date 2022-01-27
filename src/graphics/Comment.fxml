@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainArea" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.CommentControllerImp">
+<AnchorPane fx:id="mainArea" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.CommentControllerImp">
    <children>
       <Label layoutX="55.0" layoutY="77.0" text="Enter you comment :" textFill="WHITE">
          <font>
@@ -14,12 +14,12 @@
          </font>
       </Label>
       <TextField fx:id="commentBox" layoutX="83.0" layoutY="119.0" prefHeight="161.0" prefWidth="433.0" />
-      <Button fx:id="back" layoutX="161.0" layoutY="305.0" mnemonicParsing="false" onAction="#backTimeLine" prefHeight="44.0" prefWidth="94.0" text="Back" textFill="#00aaff">
+      <Button fx:id="back" layoutX="161.0" layoutY="305.0" onAction="#backTimeLine" prefHeight="44.0" prefWidth="94.0" text="_Back" textFill="#00aaff">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="comment" layoutX="300.0" layoutY="305.0" mnemonicParsing="false" onAction="#commentIt" prefHeight="44.0" prefWidth="94.0" text="comment" textFill="#00aaff">
+      <Button fx:id="comment" layoutX="300.0" layoutY="305.0" onAction="#commentIt" prefHeight="44.0" prefWidth="94.0" text="_comment" textFill="#00aaff">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

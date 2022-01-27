@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="area" prefHeight="275.0" prefWidth="385.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.ModeControllerImp">
+<AnchorPane fx:id="area" prefHeight="275.0" prefWidth="385.0" style="-fx-background-color: #00aaff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.ModeControllerImp">
    <children>
       <ToggleButton fx:id="complete" layoutX="156.0" layoutY="99.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="177.0" selected="true" style="-fx-background-color: white;" text="Exit Completely" textFill="#00aaff">
          <toggleGroup>
@@ -15,7 +15,7 @@
          </toggleGroup>
       </ToggleButton>
       <ToggleButton fx:id="tray" layoutX="155.0" layoutY="162.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="178.0" selected="true" style="-fx-background-color: white;" text="Hide On System Tray" textFill="#00aaff" toggleGroup="$modeGroup" />
-      <Button fx:id="back" layoutX="39.0" layoutY="99.0" mnemonicParsing="false" onAction="#toTimeLine" prefHeight="114.0" prefWidth="86.0" text="Back" textFill="#00aaff">
+      <Button fx:id="back" layoutX="39.0" layoutY="99.0" onAction="#toTimeLine" prefHeight="114.0" prefWidth="86.0" text="_Back" textFill="#00aaff">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

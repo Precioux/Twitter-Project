@@ -15,7 +15,8 @@ public interface TimeLineController {
 
     /**
      * exit mode
-     * @param actionEvent
+     * @param actionEvent e
+     * @throws IOException o
      */
     public void toExitMode(ActionEvent actionEvent) throws IOException;
 
@@ -29,6 +30,7 @@ public interface TimeLineController {
     /**
      * change theme
      * @param actionEvent e
+     * @throws IOException e
      */
     @FXML
     public void toChangeTheme(ActionEvent actionEvent) throws IOException;
@@ -70,6 +72,7 @@ public interface TimeLineController {
     /**
      * search
      * @param actionEvent e
+     * @throws IOException o
      */
     @FXML
     public void searchforUser(ActionEvent actionEvent) throws IOException;
@@ -99,7 +102,6 @@ public interface TimeLineController {
     /**
      * to user's profile
      * @param event e
-     * @throws IOException e
      */
     @FXML
     void toProfile(ActionEvent event);
@@ -119,7 +121,10 @@ public interface TimeLineController {
     public void getTimeLine();
 
     /**
+     * @param txt t
+     * @param user u
      * get likes
+     * @return result
      */
     int getlike(String user,String txt);
 

@@ -55,6 +55,7 @@ public interface addTweetController {
     /**
          * alart
          * @param err error
+     * @throws IOException e
          */
         void alaart(String err) throws IOException;
 

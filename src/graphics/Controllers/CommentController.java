@@ -47,6 +47,7 @@ public interface CommentController {
     /**
      * alart
      * @param err error
+     * @throws IOException e
      */
     void alaart(String err) throws IOException;
 

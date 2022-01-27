@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="area" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #616161;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AddTweetControllerDarkImp">
+<AnchorPane fx:id="area" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #616161;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AddTweetControllerDarkImp">
     <children>
         <TextField fx:id="textBox" layoutX="50.0" layoutY="100.0" prefHeight="200.0" prefWidth="500.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
         <Label layoutX="36.0" layoutY="45.0" text="Enter your tweet in below box: " textFill="WHITE">
@@ -15,12 +15,12 @@
             </font>
         </Label>
         <Label layoutX="36.0" layoutY="71.0" text="Maximum 256 characters!" textFill="WHITE" />
-        <Button fx:id="enter" layoutX="84.0" layoutY="317.0" mnemonicParsing="false" onAction="#addText" prefHeight="59.0" prefWidth="187.0" style="-fx-background-color: #940000;" text="Tweet" textFill="WHITE">
+        <Button fx:id="enter" layoutX="84.0" layoutY="317.0" onAction="#addText" prefHeight="59.0" prefWidth="187.0" style="-fx-background-color: #940000;" text="_Tweet" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
-        <Button fx:id="cancel" layoutX="314.0" layoutY="317.0" mnemonicParsing="false" onAction="#cancelIt" prefHeight="59.0" prefWidth="187.0" style="-fx-background-color: #940000;" text="Cancel" textFill="WHITE">
+        <Button fx:id="cancel" layoutX="314.0" layoutY="317.0" onAction="#cancelIt" prefHeight="59.0" prefWidth="187.0" style="-fx-background-color: #940000;" text="_Cancel" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
